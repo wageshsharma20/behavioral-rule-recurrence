@@ -1,0 +1,15 @@
+@@ 2 789
+PUT /wire001/dst/caf%C3%A9 HTTP/1.1
+Host: 127.0.0.1:5556
+Accept: */*
+amz-sdk-invocation-id: 13D7571E-2641-4E74-B879-70257731A7A8
+amz-sdk-request: attempt=1
+authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=amz-sdk-invocation-id;amz-sdk-request;content-length;content-type;host;x-amz-api-version;x-amz-content-sha256;x-amz-copy-source;x-amz-date, Signature=0fd5cf461ab9630f9a26fed773dc832c7bc9e4d6fdcf39e89b6125c63505c02c
+content-length: 0
+content-type: application/xml
+user-agent: aws-sdk-cpp/1.8.126/S3/Darwin/25.0.0 x86_64 Clang/12.0.0
+x-amz-api-version: 2006-03-01
+x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+x-amz-copy-source: wire001/src/caf%25C3%25A9
+x-amz-date: 20260930T190323Z
+

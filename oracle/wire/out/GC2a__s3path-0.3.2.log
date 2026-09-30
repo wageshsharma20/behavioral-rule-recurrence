@@ -1,0 +1,34 @@
+@@ 2 523
+POST /wire001/w/caf%C3%A9?uploads HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.17.104 Python/3.9.6 Darwin/25.0.0 Botocore/1.20.104 Resource
+X-Amz-Date: 20260930T190315Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=abebed5a77054a385718b73dce1938e5de392000753f2f33d84fbb7bcb270fdd
+Content-Length: 0
+
+@@ 3 664
+PUT /wire001/w/caf%C3%A9?uploadId=v8DYIAkvR1mePVamghk9uHm4f3UU35fuSf9UoK2iKvmPBisfBg70Dw&partNumber=1 HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.17.104 Python/3.9.6 Darwin/25.0.0 Botocore/1.20.104 Resource
+Content-MD5: njZp0ZtnW9VwWP1GZCBdKg==
+Expect: 100-continue
+X-Amz-Date: 20260930T190315Z
+X-Amz-Content-SHA256: 4c94485e0c21ae6c41ce1dfe7b6bfaceea5ab68e40a2476f50208e526f506080
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=content-md5;host;x-amz-content-sha256;x-amz-date, Signature=a85a90430126a96cac670fe696b37c799e826b1f323981d3aea3b3b92c267800
+Content-Length: 1
+
+@@ 3 1
+v@@ 4 766
+POST /wire001/w/caf%C3%A9?uploadId=v8DYIAkvR1mePVamghk9uHm4f3UU35fuSf9UoK2iKvmPBisfBg70Dw HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.17.104 Python/3.9.6 Darwin/25.0.0 Botocore/1.20.104 Resource
+X-Amz-Date: 20260930T190315Z
+X-Amz-Content-SHA256: 497ebe4f07f8624b5c124c466eaaa10b82bda9a85620d3531e898eded7908120
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=d97d2ee54dbe73b3a55fb6c7c5e00b31ecdfb386833a1f34c4685a3113d6a3dc
+Content-Length: 185
+
+<CompleteMultipartUpload xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Part><ETag>"9e3669d19b675bd57058fd4664205d2a"</ETag><PartNumber>1</PartNumber></Part></CompleteMultipartUpload>

@@ -76,3 +76,12 @@ only as the exact inputs of the reported experiments. The raw GitHub API respons
 (logins, ids, avatar URLs), are not redistributed; `rq3/fetch_histories.py` re-fetches them from the public API. Project
 and commit identifiers refer to public repositories; the evidence log names developers only where public commit
 authorship is itself evidence (lineage checks).
+
+## Request-level check: are the verdicts artifacts of the emulators? (paper §6, "Are the verdicts artifacts of the emulators?")
+- `oracle/wire/run_wire.sh` re-runs the discriminating operation of all 21 Golden-Case/PV1 verification rows with the
+  client connected to a fresh emulator through `oracle/wire/tap.py`, a relay that records the client's requests and
+  forwards them unchanged.
+- `python3 oracle/wire/wire_check.py` decides every row from the recorded requests alone, using only the services'
+  documented API contracts (listed in its header), and compares with the emulator verdict. Recorded traffic is in
+  `oracle/wire/out/`; the result, 21 of 21 agreeing, is in `oracle/wire/out/wire_results.json`. The checker runs
+  without any environment: `python3 oracle/wire/wire_check.py`.

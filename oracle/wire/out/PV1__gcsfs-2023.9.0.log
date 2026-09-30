@@ -1,0 +1,103 @@
+@@ 2 181
+GET /storage/v1/b/wire001/o?delimiter=&prefix=src/&maxResults=5000 HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+
+@@ 2 146
+GET /storage/v1/b/wire001/o/dst HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+
+@@ 2 182
+GET /storage/v1/b/wire001/o?delimiter=/&prefix=dst/&maxResults=5000 HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+
+@@ 2 146
+GET /storage/v1/b/wire001/o/dst HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+
+@@ 2 224
+POST /storage/v1/b/wire001/o/src/rewriteTo/b/wire001/o/dst HTTP/1.1
+Host: localhost:4444
+Content-Type: application/json
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+Content-Length: 0
+
+@@ 4 244
+POST /storage/v1/b/wire001/o/src%2Fsub%2Ff/rewriteTo/b/wire001/o/dst%2Fsub%2Ff HTTP/1.1
+Host: localhost:4444
+Content-Type: application/json
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+Content-Length: 0
+
+@@ 3 232
+POST /storage/v1/b/wire001/o/src%2Fg/rewriteTo/b/wire001/o/dst%2Fg HTTP/1.1
+Host: localhost:4444
+Content-Type: application/json
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+Content-Length: 0
+
+@@ 5 236
+POST /storage/v1/b/wire001/o/src%2Fsub/rewriteTo/b/wire001/o/dst%2Fsub HTTP/1.1
+Host: localhost:4444
+Content-Type: application/json
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+Content-Length: 0
+
+@@ 2 181
+GET /storage/v1/b/wire001/o?delimiter=&prefix=src/&maxResults=5000 HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+
+@@ 3 168
+DELETE /storage/v1/b/wire001/o/src HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+Content-Length: 0
+
+@@ 4 172
+DELETE /storage/v1/b/wire001/o/src%2Fg HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+Content-Length: 0
+
+@@ 5 174
+DELETE /storage/v1/b/wire001/o/src%2Fsub HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+Content-Length: 0
+
+@@ 2 178
+DELETE /storage/v1/b/wire001/o/src%2Fsub%2Ff HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.9.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+Content-Length: 0
+

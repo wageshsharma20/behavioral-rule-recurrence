@@ -1,0 +1,7 @@
+@@ 2 173
+GET /download/storage/v1/b/wire001/o/s%2Fhash%23?alt=media HTTP/1.1
+Host: localhost:4444
+User-Agent: python-gcsfs/2023.1.0
+Accept: */*
+Accept-Encoding: gzip, deflate
+

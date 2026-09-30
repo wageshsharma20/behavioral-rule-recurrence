@@ -1,0 +1,237 @@
+{
+ "semantics": "Parse the recorded client requests of every row and decide each row's verdict from the REQUESTS ALONE,\nusing only the services' documented API semantics (no emulator response is consulted):\n  S3-key   the object key of a REST request is its URI path after the bucket, percent-decoded once;\n  S3-copy  x-amz-copy-source is '<bucket>/<key>', URL-encoded once (CopyObject);\n  S3-del   DeleteObject/DeleteObjects remove exactly the keys named (a missing key is reported as deleted);\n  list     ListObjects(V2) returns the keys that begin with 'prefix' as a string (S3 and GCS);\n  GCS-name a JSON-API object name is one percent-encoded path segment; a '#' ends the URL (RFC 3986 fragment)\n           and is never transmitted.\nWrites out/wire_results.json and prints a table; exit 1 if any request-level verdict differs from the oracle's.",
+ "rows": [
+  {
+   "case": "GC1",
+   "env": "pyarrow-14.0.1",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 4,
+   "evidence": "deletes ['d/', 'd/g', 'd/sub', 'd/sub/f']; never names ['d/sub/']"
+  },
+  {
+   "case": "GC1",
+   "env": "pyarrow-14.0.2",
+   "backend": "s3",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 4,
+   "evidence": "deletes ['d/', 'd/g', 'd/sub/', 'd/sub/f']"
+  },
+  {
+   "case": "GC1",
+   "env": "s3fs-good",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 2,
+   "evidence": "deletes ['d', 'd/g', 'd/sub', 'd/sub/f']; never names ['d/sub/']"
+  },
+  {
+   "case": "GC1",
+   "env": "s3fs-2026.9.0",
+   "backend": "s3",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 2,
+   "evidence": "deletes ['d', 'd/g', 'd/sub', 'd/sub/', 'd/sub/f']"
+  },
+  {
+   "case": "GC2a",
+   "env": "s3path-0.3.1",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 3,
+   "evidence": "PUT key(s) ['w/caf%C3%A9']  [raw ['/wire001/w/caf%25C3%25A9']]"
+  },
+  {
+   "case": "GC2a",
+   "env": "s3path-0.3.2",
+   "backend": "s3",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 3,
+   "evidence": "PUT key(s) ['w/café']  [raw ['/wire001/w/caf%C3%A9']]"
+  },
+  {
+   "case": "GC2a",
+   "env": "gcsfs-2022.8.2",
+   "backend": "gcs",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 1,
+   "evidence": "object name(s) requested ['s/hash']"
+  },
+  {
+   "case": "GC2a",
+   "env": "gcsfs-2023.1.0",
+   "backend": "gcs",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 1,
+   "evidence": "object name(s) requested ['s/hash#']"
+  },
+  {
+   "case": "GC2a",
+   "env": "obstore-0.6.0",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 1,
+   "evidence": "PUT key(s) ['w/caf%C3%A9']  [raw ['/wire001/w/caf%25C3%25A9']]"
+  },
+  {
+   "case": "GC2a",
+   "env": "obstore-0.8.2",
+   "backend": "s3",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 1,
+   "evidence": "PUT key(s) ['w/café']  [raw ['/wire001/w/caf%C3%A9']]"
+  },
+  {
+   "case": "GC2b",
+   "env": "pyarrow-4.0.1",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 1,
+   "evidence": "copy source(s) ['wire001/src/caf%C3%A9']  [header ['wire001/src/caf%25C3%25A9']]"
+  },
+  {
+   "case": "GC2b",
+   "env": "pyarrow-5.0.0",
+   "backend": "s3",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 1,
+   "evidence": "copy source(s) ['wire001/src/café']  [header ['wire001/src/caf%C3%A9']]"
+  },
+  {
+   "case": "GC2b",
+   "env": "obstore-0.9.3",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 1,
+   "evidence": "copy source(s) ['wire001/src/caf%C3%A9']  [header ['wire001/src/caf%25C3%25A9']]"
+  },
+  {
+   "case": "GC2b",
+   "env": "obstore-0.9.4",
+   "backend": "s3",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 1,
+   "evidence": "copy source(s) ['wire001/src/café']  [header ['wire001/src/caf%C3%A9']]"
+  },
+  {
+   "case": "GC3",
+   "env": "cloudpathlib-0.9.0",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 4,
+   "evidence": "list prefixes ['very/similar/prefix', 'very/similar/prefix']; HEAD ['very/similar/prefix', 'very/similar/prefix']"
+  },
+  {
+   "case": "GC3",
+   "env": "cloudpathlib-0.10.0",
+   "backend": "s3",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 4,
+   "evidence": "list prefixes ['very/similar/prefix/', 'very/similar/prefix/']; HEAD ['very/similar/prefix', 'very/similar/prefix']"
+  },
+  {
+   "case": "GC3",
+   "env": "opendal-0.45.9",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 2,
+   "evidence": "list prefixes ['very/similar/prefix']; HEAD ['very/similar/prefix']"
+  },
+  {
+   "case": "GC3",
+   "env": "opendal-0.45.10",
+   "backend": "s3",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 2,
+   "evidence": "list prefixes ['very/similar/prefix/']; HEAD ['very/similar/prefix']"
+  },
+  {
+   "case": "PV1",
+   "env": "gcsfs-2023.6.0",
+   "backend": "gcs",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 15,
+   "evidence": "list prefixes ['src', 'dst/', 'src']; touches objects outside the two directories: ['srcx']"
+  },
+  {
+   "case": "PV1",
+   "env": "gcsfs-2023.9.0",
+   "backend": "gcs",
+   "expected": true,
+   "emulator_verdict": true,
+   "request_level_verdict": true,
+   "agree": true,
+   "n_requests": 13,
+   "evidence": "list prefixes ['src/', 'dst/', 'src/']; touches objects outside the two directories: []"
+  },
+  {
+   "case": "PV1",
+   "env": "s3path-0.6.5",
+   "backend": "s3",
+   "expected": false,
+   "emulator_verdict": false,
+   "request_level_verdict": false,
+   "agree": true,
+   "n_requests": 11,
+   "evidence": "list prefixes ['src/', 'src']; touches objects outside the two directories: ['dstx', 'srcx']"
+  }
+ ],
+ "all_agree": true
+}

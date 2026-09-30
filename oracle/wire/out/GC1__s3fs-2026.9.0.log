@@ -1,0 +1,28 @@
+@@ 2 733
+GET /wire001?list-type=2&prefix=d%2F&delimiter=&encoding-type=url HTTP/1.1
+Host: 127.0.0.1:5556
+User-Agent: aiobotocore/3.9.1 md/Botocore#1.43.75 ua/2.1 os/macos#25.0.0 md/arch#arm64 lang/python#3.12.13 md/pyimpl#CPython m/D,e,b,Z,N cfg/retry-mode#legacy botocore/1.43.75
+X-Amz-Date: 20260930T190312Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=7e76423311d43850d35a8595cf1fc4e82360553d60d8975a250f428f29483521
+amz-sdk-invocation-id: 31537ddf-b79f-4335-b85a-e2aeae396653
+amz-sdk-request: attempt=1
+Accept-Encoding: identity
+Accept: */*
+
+@@ 3 1076
+POST /wire001?delete HTTP/1.1
+Host: 127.0.0.1:5556
+User-Agent: aiobotocore/3.9.1 md/Botocore#1.43.75 ua/2.1 os/macos#25.0.0 md/arch#arm64 lang/python#3.12.13 md/pyimpl#CPython m/D,e,b,U,Z,N cfg/retry-mode#legacy botocore/1.43.75
+x-amz-checksum-crc32: aRQB9w==
+x-amz-sdk-checksum-algorithm: CRC32
+X-Amz-Date: 20260930T190312Z
+X-Amz-Content-SHA256: 3f7f58dccfae3df3de2a6f92fdad4af2da8c9659a9d2d91f926967ee93921f32
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-checksum-crc32;x-amz-content-sha256;x-amz-date;x-amz-sdk-checksum-algorithm, Signature=55f07837a5ff4f5f01562e29ae955136c7dddc8e4320eb359a6178e43524a455
+amz-sdk-invocation-id: ed2423b4-70dd-4376-ad5e-c7cf43b859ab
+amz-sdk-request: attempt=1
+Content-Length: 246
+Accept-Encoding: identity
+Accept: */*
+
+<Delete xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Object><Key>d</Key></Object><Object><Key>d/g</Key></Object><Object><Key>d/sub</Key></Object><Object><Key>d/sub/</Key></Object><Object><Key>d/sub/f</Key></Object><Quiet>true</Quiet></Delete>

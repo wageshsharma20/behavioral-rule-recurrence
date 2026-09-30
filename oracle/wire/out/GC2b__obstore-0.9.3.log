@@ -1,0 +1,10 @@
+@@ 2 502
+PUT /wire001/dst/caf%25C3%25A9 HTTP/1.1
+x-amz-copy-source: wire001/src/caf%25C3%25A9
+host: 127.0.0.1:5556
+x-amz-date: 20260930T190327Z
+x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-copy-source;x-amz-date, Signature=9c2122d476cce8977413ea1aad7041ab7b357b76a9cae91f3f5fcb679adb13de
+accept: */*
+user-agent: object_store/0.13.1
+

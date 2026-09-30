@@ -1,0 +1,16 @@
+@@ 2 360
+HEAD /wire001/very/similar/prefix HTTP/1.1
+authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=3633b74747d8c049a42c961dac7cb9d5f1bb8cc98d46d572981295fc61c927d3
+x-amz-date: 20260930T190332Z
+x-amz-content-sha256: UNSIGNED-PAYLOAD
+accept: */*
+host: 127.0.0.1:5556
+
+@@ 3 393
+GET /wire001?list-type=2&max-keys=1&prefix=very%2Fsimilar%2Fprefix HTTP/1.1
+authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=0b27a63079b90e850f386caa40ca7d7386103df6caa1f7f44fdf95edc43fe49d
+x-amz-date: 20260930T190332Z
+x-amz-content-sha256: UNSIGNED-PAYLOAD
+accept: */*
+host: 127.0.0.1:5556
+

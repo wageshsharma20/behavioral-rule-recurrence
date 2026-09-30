@@ -1,0 +1,68 @@
+@@ 2 675
+HEAD /wire001/d HTTP/1.1
+Host: 127.0.0.1:5556
+Accept: */*
+amz-sdk-invocation-id: 307543E4-17EB-4F78-AB4B-D4A7F41ED613
+amz-sdk-request: attempt=1
+authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=amz-sdk-invocation-id;amz-sdk-request;content-type;host;x-amz-api-version;x-amz-content-sha256;x-amz-date, Signature=9fe1dda034d0339c1c3cc92fc7fa0bbd4845c1fd760cb8a634c51426bb1da652
+content-type: application/xml
+user-agent: aws-sdk-cpp/1.11.4 Darwin/25.0.0 arm64 Clang/15.0.0
+x-amz-api-version: 2006-03-01
+x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+x-amz-date: 20260930T190309Z
+
+@@ 3 710
+GET /wire001?list-type=2&max-keys=1000&prefix=d%2F HTTP/1.1
+Host: 127.0.0.1:5556
+Accept: */*
+amz-sdk-invocation-id: 8E293BBE-BFEE-44C3-BDE6-D2878A7AAFB9
+amz-sdk-request: attempt=1
+authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=amz-sdk-invocation-id;amz-sdk-request;content-type;host;x-amz-api-version;x-amz-content-sha256;x-amz-date, Signature=01983c040d20092f219223231ac4faf6e08c874d11c8bf81c6f75d1aa04018d9
+content-type: application/xml
+user-agent: aws-sdk-cpp/1.11.4 Darwin/25.0.0 arm64 Clang/15.0.0
+x-amz-api-version: 2006-03-01
+x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+x-amz-date: 20260930T190309Z
+
+@@ 4 789
+POST /wire001?delete HTTP/1.1
+Host: 127.0.0.1:5556
+Accept: */*
+amz-sdk-invocation-id: C9B4F489-6636-4729-81AF-4EDA53297D7A
+amz-sdk-request: attempt=1
+authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=amz-sdk-invocation-id;amz-sdk-request;content-length;content-md5;content-type;host;x-amz-api-version;x-amz-content-sha256;x-amz-date, Signature=f7d5891f5ae5814a038140394feafb0ecfe5cda46ffd8dc22327d7cbf8304af1
+content-length: 246
+content-md5: UaWB7akR7TWN5Ie5+1OAxA==
+content-type: application/xml
+user-agent: aws-sdk-cpp/1.11.4 Darwin/25.0.0 arm64 Clang/15.0.0
+x-amz-api-version: 2006-03-01
+x-amz-content-sha256: 83c749952f7aa4a5324e8d852cd39108e9af75c3a0028574edd92292e05320aa
+x-amz-date: 20260930T190309Z
+Expect: 100-continue
+
+@@ 4 246
+<?xml version="1.0"?>
+<Delete xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <Object>
+        <Key>d/g</Key>
+    </Object>
+    <Object>
+        <Key>d/sub/</Key>
+    </Object>
+    <Object>
+        <Key>d/sub/f</Key>
+    </Object>
+</Delete>
+@@ 5 678
+DELETE /wire001/d/ HTTP/1.1
+Host: 127.0.0.1:5556
+Accept: */*
+amz-sdk-invocation-id: EF2891EF-BAF8-48DD-8DB4-F434E7807FED
+amz-sdk-request: attempt=1
+authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=amz-sdk-invocation-id;amz-sdk-request;content-type;host;x-amz-api-version;x-amz-content-sha256;x-amz-date, Signature=d647483a889c6afc2c3c1e116a94aa6697c2fd37c63f57a115df94188683ea68
+content-type: application/xml
+user-agent: aws-sdk-cpp/1.11.4 Darwin/25.0.0 arm64 Clang/15.0.0
+x-amz-api-version: 2006-03-01
+x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+x-amz-date: 20260930T190309Z
+

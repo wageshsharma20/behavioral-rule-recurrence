@@ -1,0 +1,44 @@
+@@ 2 591
+HEAD /wire001/very/similar/prefix HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.24.4 Python/3.10.20 Darwin/25.0.0 Botocore/1.27.4 Resource
+X-Amz-Date: 20260930T190330Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=bf057aff7d85c986682677dbe6e07b28e07e0095e5104623fe3ede7ddf9eb342
+amz-sdk-invocation-id: 5265a41e-d52a-41a6-9a8b-dfb7cc492422
+amz-sdk-request: attempt=1
+
+@@ 3 619
+GET /wire001?prefix=very%2Fsimilar%2Fprefix&encoding-type=url HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.24.4 Python/3.10.20 Darwin/25.0.0 Botocore/1.27.4 Resource
+X-Amz-Date: 20260930T190330Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=0e36ee6009fe7fe1bcd02ffa9818800b9c2e23987f414e155a13d168c590c27c
+amz-sdk-invocation-id: 09a5707f-025a-46f5-88b7-b1eb378f9857
+amz-sdk-request: attempt=1
+
+@@ 4 591
+HEAD /wire001/very/similar/prefix HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.24.4 Python/3.10.20 Darwin/25.0.0 Botocore/1.27.4 Resource
+X-Amz-Date: 20260930T190330Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=bf057aff7d85c986682677dbe6e07b28e07e0095e5104623fe3ede7ddf9eb342
+amz-sdk-invocation-id: 65c784b3-1577-441c-a2df-b378d0b56790
+amz-sdk-request: attempt=1
+
+@@ 5 619
+GET /wire001?prefix=very%2Fsimilar%2Fprefix&encoding-type=url HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.24.4 Python/3.10.20 Darwin/25.0.0 Botocore/1.27.4 Resource
+X-Amz-Date: 20260930T190330Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=0e36ee6009fe7fe1bcd02ffa9818800b9c2e23987f414e155a13d168c590c27c
+amz-sdk-invocation-id: dc7358f9-2ea4-4a5d-847f-c83fda8c4546
+amz-sdk-request: attempt=1
+

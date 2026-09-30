@@ -57,3 +57,16 @@ P1(b) is reported in two forms: dropping unanswered items per condition (B3 0.64
 an unanswered item (8 pairs, 0.50 vs 0.50); the second form was computed on 29 Sep 2026, after R1 was defined.
 Rule-level presentation (Table 9): the frozen plan's per-rule results, shown as paired B1/B3 per rule with the difference;
 added after reviewer feedback, computed by rq3/rule_level.py; no new test.
+
+## W1 — Request-level check of the Golden-Case verdicts (1 Oct 2026; post hoc, outside the frozen plan)
+Reason: reviewers ask whether the verdicts are artifacts of the emulators (moto, fake-gcs-server). No production
+cloud accounts were available. Procedure: `oracle/wire/run_wire.sh` re-runs the discriminating operation of all 21
+verification rows (`oracle/verify_golden.sh`) with the client connected to a fresh emulator through a byte-level
+recording relay (`tap.py`, which forwards traffic unchanged); world set-up and verification bypass the relay.
+`wire_check.py` then decides each row from the recorded client requests alone, using only documented service
+contracts (S3 API Reference: CopyObject, DeleteObjects, ListObjectsV2; GCS request endpoints). The predicates are
+written per case in `wire_check.py`. The first analysis flagged one row (gcsfs 2023.9.0, PV1) because it also deletes
+the non-existent key `src` itself; the predicate was refined to exclude the two directory names and was re-applied
+to all rows.
+Outcome: all 21 request-level verdicts equal the emulator verdicts and the frozen expectations
+(`oracle/wire/out/wire_results.json`). It does not test whether the production services honor their documentation.

@@ -1,0 +1,44 @@
+@@ 2 593
+HEAD /wire001/very/similar/prefix HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.24.57 Python/3.10.20 Darwin/25.0.0 Botocore/1.27.57 Resource
+X-Amz-Date: 20260930T190331Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=3eb142191e6e2014222eb0a8ca97138fb94ccdf3ed1b9e056f453b57c5bc0bcd
+amz-sdk-invocation-id: 7460e0fb-4ac5-4c6a-af65-739e36d56242
+amz-sdk-request: attempt=1
+
+@@ 3 624
+GET /wire001?prefix=very%2Fsimilar%2Fprefix%2F&encoding-type=url HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.24.57 Python/3.10.20 Darwin/25.0.0 Botocore/1.27.57 Resource
+X-Amz-Date: 20260930T190331Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=37966d89d80a41188fc7636b11e0a278c338f0d52cf887e9f3cf8c27f847a944
+amz-sdk-invocation-id: e58fd65c-2c29-4077-87fa-10a05ec249bf
+amz-sdk-request: attempt=1
+
+@@ 4 593
+HEAD /wire001/very/similar/prefix HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.24.57 Python/3.10.20 Darwin/25.0.0 Botocore/1.27.57 Resource
+X-Amz-Date: 20260930T190331Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=3eb142191e6e2014222eb0a8ca97138fb94ccdf3ed1b9e056f453b57c5bc0bcd
+amz-sdk-invocation-id: 097a1aaf-5e02-4f65-821c-f0d9a06e8117
+amz-sdk-request: attempt=1
+
+@@ 5 624
+GET /wire001?prefix=very%2Fsimilar%2Fprefix%2F&encoding-type=url HTTP/1.1
+Host: 127.0.0.1:5556
+Accept-Encoding: identity
+User-Agent: Boto3/1.24.57 Python/3.10.20 Darwin/25.0.0 Botocore/1.27.57 Resource
+X-Amz-Date: 20260930T190331Z
+X-Amz-Content-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Authorization: AWS4-HMAC-SHA256 Credential=x/20260930/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=37966d89d80a41188fc7636b11e0a278c338f0d52cf887e9f3cf8c27f847a944
+amz-sdk-invocation-id: 23404e30-c97a-4e17-9d3b-2cf4f2f606b8
+amz-sdk-request: attempt=1
+
