@@ -92,4 +92,6 @@ authorship is itself evidence (lineage checks).
   client's own API (the predicates are listed in the script's header).
 - Result (`oracle/wire/out/self_consistency_results.json`): all 11 violating releases contradict themselves; none of the
   10 satisfying releases does.
-
+- `evidence/SPECIFICATION_ANCHORS.md`: for every Golden-Case rule, the independent specifications it follows from
+  (POSIX, AWS/GCS documentation, the clients' API documentation), with short verbatim quotes and URLs. For the
+  contested rule, it shows that the clients' own specifications disagree.

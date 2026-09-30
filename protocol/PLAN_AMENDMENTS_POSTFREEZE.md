@@ -82,3 +82,12 @@ Two predicates were refined after a first run, and both refinements were re-appl
 
 Outcome: 11 of 11 violating rows are self-contradictory and 0 of 10 satisfying rows are
 (`oracle/wire/out/self_consistency_results.json`).
+
+## W3: Specification anchors (1 Oct 2026; documentary, no new runs)
+Reason: a reviewer asked why a historical fix, rather than one implementation's design decision, should count as the
+normative oracle. For every Golden-Case rule we looked up independent specifications (POSIX 1003.1-2024; AWS and GCS
+documentation; pyarrow, fsspec, OpenDAL and pathlib API documentation) and recorded short verbatim quotes in
+`evidence/SPECIFICATION_ANCHORS.md`.
+Outcome: every Golden-Case rule follows from at least one such specification. For the contested rule, the clients'
+own specifications disagree: pathlib excludes the directory itself from a listing, while OpenDAL's list documents that
+it includes it.
