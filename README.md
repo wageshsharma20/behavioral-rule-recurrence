@@ -1,4 +1,4 @@
-# Replication package (to be anonymized before upload)
+# Replication package 
 
 ## Quick start
 `./reproduce.sh GC3` rebuilds one Golden Case from a clean checkout: it creates the environments of the case's last
