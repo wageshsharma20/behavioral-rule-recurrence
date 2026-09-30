@@ -137,3 +137,16 @@ pathlib's is_dir are archived since 2014, and CopyObject's URL-encoding since 20
 before its fix; its versioned docs.rs page is used instead. A first run missed three pathlib anchors because the archived
 pages are gzip-compressed; after adding decompression all three were found.
 Definition 3 now requires that the specification was documented before the fixes.
+
+## W8: Reproduction script fix and clean-copy verification (1 Oct 2026; infrastructure only)
+Reason: the co-author found that `reproduce.sh` installs into the system Python when `UV_SYSTEM_PYTHON` is set (Kaggle
+sets it), which leaves empty environments.
+Fix:
+- unset the variable and pass `--python envs/<name>/bin/python` to `uv pip install`;
+- mark finished environments with `.built`, and rebuild empty ones.
+
+No lock, version, oracle or result changed.
+Verification: on macOS arm64 (the frozen-run host), from a clean unzip of the package with `UV_SYSTEM_PYTHON=1`,
+`./reproduce.sh all` built 17 environments from their lock files and gave 21 of 21 rows OK
+(`evidence/reproduce_clean_run_2026-10-01.log`). Still open: the co-author's Kaggle (Linux) host check for the autogen
+experiment. His host check ran before his environment fix, so it is invalid.

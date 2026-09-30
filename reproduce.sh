@@ -10,13 +10,17 @@ command -v uv >/dev/null || { echo "please install uv first: https://docs.astral
 HOST="$(uname -s)-$(uname -m)"
 mkenv(){ # build envs/<name> from oracle/env_locks/<name>.txt unless it exists
   local E=$1 L=oracle/env_locks/$1.txt PYV ARCH SPEC
-  [ -x envs/$E/bin/python ] && return 0
+  # built = marker file, or an environment that already contains installed packages (environments built before the marker)
+  [ -f envs/$E/.built ] && return 0
+  ls -d envs/$E/lib/python*/site-packages/*.dist-info >/dev/null 2>&1 && return 0
+  rm -rf envs/$E   # empty or half-built environment: rebuild it
   [ -f "$L" ] || { echo "no lock file for $E"; return 1; }
   read -r _ _ PYV ARCH < <(grep '^# python' "$L"); SPEC=${PYV%.*}
   [ "$ARCH" = x86_64 ] && [ "$HOST" = Darwin-arm64 ] && SPEC="cpython-${SPEC}-macos-x86_64"   # Rosetta, as in the study
   echo "building envs/$E (python $SPEC)"
-  uv venv -q -p "$SPEC" envs/$E && grep -v '^#' "$L" | VIRTUAL_ENV=$PWD/envs/$E uv pip install -q -r /dev/stdin \
-    || { echo "could not build $E"; rm -rf envs/$E; return 1; }
+  # UV_SYSTEM_PYTHON (set e.g. on Kaggle) would make uv install into the system Python: unset it and name the target
+  uv venv -q -p "$SPEC" envs/$E && grep -v '^#' "$L" | env -u UV_SYSTEM_PYTHON uv pip install -q --python "$PWD/envs/$E/bin/python" -r /dev/stdin \
+    && touch envs/$E/.built || { echo "could not build $E"; rm -rf envs/$E; return 1; }
 }
 ROWS=$(grep -E '^row ' oracle/verify_golden.sh | { [ "$CASE" = all ] && cat || grep -E "^row $CASE"; })
 [ -z "$ROWS" ] && { echo "unknown case $CASE (use GC1, GC2a, GC2b, GC3, PV1 or all)"; exit 1; }

@@ -108,4 +108,9 @@ authorship is itself evidence (lineage checks).
   agreement and Cohen's kappa. The answer key is withheld until an adjudication is complete.
 - `evidence/spec_history.py` → `evidence/spec_history.json`, `evidence/SPEC_HISTORY.md` (paper §5.1): each specification anchor in a
   version dated before the fix (Internet Archive snapshots, docstrings of old releases, POSIX 2018, docs.rs 0.45.0).
+- **Platforms.** `reproduce.sh` needs bash, nc, perl, lsof, curl and `uv`. It runs on macOS and Linux; on Windows, use
+  WSL2. If `UV_SYSTEM_PYTHON` is set (as on Kaggle), the script unsets it and installs into each environment explicitly.
+  It was verified on 1 Oct 2026 from a clean copy of this package with `UV_SYSTEM_PYTHON=1` on macOS arm64 (the
+  frozen-run host). It built 17 environments from their lock files, including pyarrow 4.0.1 under x86 emulation, and all
+  21 rows were OK: `evidence/reproduce_clean_run_2026-10-01.log`.
 
