@@ -126,3 +126,14 @@ candidate rules and 4 Golden Cases. The text-similarity summary table moved to t
   and 2 shared-origin pairs; the different-rule pairs are 3 rejected pairs and 6 different-rule pairs drawn with seed
   20261001, excluding GC2a×GC2b pairs (one family). The key stays outside the package.
 - Status: NOT YET DONE. Nothing in the paper claims an adjudication.
+
+## W7: Temporal check of the specification anchors (1 Oct 2026; documentary)
+Reason: a reviewer asked whether the specifications stated the requirement before the fixes, or only afterwards.
+`evidence/spec_history.py` checks every anchor in a version dated before the earliest fix of its case (for a client's own
+contract, before that client's own fix): Internet Archive snapshots, docstrings shipped in pyarrow 3.0.0 and
+fsspec 2021.06, POSIX 2018, and OpenDAL 0.45.0 on docs.rs.
+Outcome: every anchor is stated before the relevant fix. Several are long-standing; for example, the S3 key definition and
+pathlib's is_dir are archived since 2014, and CopyObject's URL-encoding since 2019. OpenDAL's website was not archived
+before its fix; its versioned docs.rs page is used instead. A first run missed three pathlib anchors because the archived
+pages are gzip-compressed; after adding decompression all three were found.
+Definition 3 now requires that the specification was documented before the fixes.

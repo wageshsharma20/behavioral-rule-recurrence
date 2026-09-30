@@ -1,5 +1,5 @@
 # Specification anchors of the Golden-Case rules (paper §5.1, "Correctness, not a design decision")
-Sources retrieved 1 Oct 2026. Every quote is short and verbatim; the URLs point to the sources. These specifications were
+Current versions retrieved 1 Oct 2026. For versions dated before each fix, see `SPEC_HISTORY.md`. Every quote is short and verbatim; the URLs point to the sources. These specifications were
 written independently of the fixes studied.
 
 | Rule | Independent specification | Quote |

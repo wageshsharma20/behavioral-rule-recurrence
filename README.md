@@ -106,4 +106,6 @@ authorship is itself evidence (lineage checks).
 - `evidence/adjudication/`: a blinded kit for an independent reader to judge rule identity on 17 thread pairs, with
   names removed: 8 same-rule pairs (6 Golden, 2 shared-origin) and 9 different-rule pairs. `score.py` reports
   agreement and Cohen's kappa. The answer key is withheld until an adjudication is complete.
+- `evidence/spec_history.py` → `evidence/spec_history.json`, `evidence/SPEC_HISTORY.md` (paper §5.1): each specification anchor in a
+  version dated before the fix (Internet Archive snapshots, docstrings of old releases, POSIX 2018, docs.rs 0.45.0).
 
