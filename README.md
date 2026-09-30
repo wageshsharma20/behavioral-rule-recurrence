@@ -85,3 +85,11 @@ authorship is itself evidence (lineage checks).
   documented API contracts (listed in its header), and compares with the emulator verdict. Recorded traffic is in
   `oracle/wire/out/`; the result, 21 of 21 agreeing, is in `oracle/wire/out/wire_results.json`. The checker runs
   without any environment: `python3 oracle/wire/wire_check.py`.
+
+## Self-consistency check: is each rule a correctness requirement? (paper §5.1, "Correctness, not only convergence")
+- `oracle/wire/run_self_consistency.sh` runs `oracle/wire/self_consistency.py` on the same 21 rows. It builds the world
+  through the raw API, then uses ONLY the client under test to check whether the operation's outcome contradicts the
+  client's own API (the predicates are listed in the script's header).
+- Result (`oracle/wire/out/self_consistency_results.json`): all 11 violating releases contradict themselves; none of the
+  10 satisfying releases does.
+

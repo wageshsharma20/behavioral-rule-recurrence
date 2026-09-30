@@ -1,0 +1,324 @@
+{
+ "rows": [
+  {
+   "case": "GC1",
+   "env": "pyarrow-14.0.1",
+   "violating": true,
+   "r": {
+    "op": "gc1",
+    "client": "pyarrow",
+    "version": "14.0.1",
+    "delete_error": null,
+    "client_says_exists_after": true,
+    "exists_error": null,
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC1",
+   "env": "pyarrow-14.0.2",
+   "violating": false,
+   "r": {
+    "op": "gc1",
+    "client": "pyarrow",
+    "version": "14.0.2",
+    "delete_error": null,
+    "client_says_exists_after": false,
+    "exists_error": null,
+    "contradiction": false
+   }
+  },
+  {
+   "case": "GC1",
+   "env": "s3fs-good",
+   "violating": true,
+   "r": {
+    "op": "gc1",
+    "client": "s3fs",
+    "version": "2025.12.0",
+    "delete_error": null,
+    "client_says_exists_after": true,
+    "exists_error": null,
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC1",
+   "env": "s3fs-2026.9.0",
+   "violating": false,
+   "r": {
+    "op": "gc1",
+    "client": "s3fs",
+    "version": "2026.9.0",
+    "delete_error": null,
+    "client_says_exists_after": false,
+    "exists_error": null,
+    "contradiction": false
+   }
+  },
+  {
+   "case": "GC2a",
+   "env": "s3path-0.3.1",
+   "violating": true,
+   "r": {
+    "op": "write",
+    "client": "s3path",
+    "version": "0.3.1",
+    "write_error": null,
+    "client_lists": [
+     "self001/w/caf%C3%A9"
+    ],
+    "client_reads_back": true,
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC2a",
+   "env": "s3path-0.3.2",
+   "violating": false,
+   "r": {
+    "op": "write",
+    "client": "s3path",
+    "version": "0.3.2",
+    "write_error": null,
+    "client_lists": [
+     "self001/w/café"
+    ],
+    "client_reads_back": true,
+    "contradiction": false
+   }
+  },
+  {
+   "case": "GC2a",
+   "env": "gcsfs-2022.8.2",
+   "violating": true,
+   "r": {
+    "op": "read",
+    "client": "gcsfs",
+    "version": "2022.8.2",
+    "client_lists": [
+     "self001/s/hash#"
+    ],
+    "read_error": "FileNotFoundError: http://localhost:4443/download/storage/v1/b/self001/o/s%2Fhash#?alt=media",
+    "read_ok": false,
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC2a",
+   "env": "gcsfs-2023.1.0",
+   "violating": false,
+   "r": {
+    "op": "read",
+    "client": "gcsfs",
+    "version": "2023.1.0",
+    "client_lists": [
+     "self001/s/hash#"
+    ],
+    "read_error": null,
+    "read_ok": true,
+    "contradiction": false
+   }
+  },
+  {
+   "case": "GC2a",
+   "env": "obstore-0.6.0",
+   "violating": true,
+   "r": {
+    "op": "write",
+    "client": "obstore",
+    "version": "0.6.0",
+    "write_error": null,
+    "client_lists": [
+     "self001/w/caf%C3%A9"
+    ],
+    "client_reads_back": true,
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC2a",
+   "env": "obstore-0.8.2",
+   "violating": false,
+   "r": {
+    "op": "write",
+    "client": "obstore",
+    "version": "0.8.2",
+    "write_error": null,
+    "client_lists": [
+     "self001/w/café"
+    ],
+    "client_reads_back": true,
+    "contradiction": false
+   }
+  },
+  {
+   "case": "GC2b",
+   "env": "pyarrow-4.0.1",
+   "violating": true,
+   "r": {
+    "op": "copy",
+    "client": "pyarrow",
+    "version": "4.0.1",
+    "client_info_src": "readable",
+    "copy_error": "OSError: When copying key 'src/café' in bucket 'self001' to key 'dst/café' in bucket 'self001': AWS Error [co",
+    "client_finds_copy": false,
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC2b",
+   "env": "pyarrow-5.0.0",
+   "violating": false,
+   "r": {
+    "op": "copy",
+    "client": "pyarrow",
+    "version": "5.0.0",
+    "client_info_src": "readable",
+    "copy_error": null,
+    "client_finds_copy": true,
+    "contradiction": false
+   }
+  },
+  {
+   "case": "GC2b",
+   "env": "obstore-0.9.3",
+   "violating": true,
+   "r": {
+    "op": "copy",
+    "client": "obstore",
+    "version": "0.9.3",
+    "client_info_src": "readable",
+    "copy_error": "FileNotFoundError: Object at location dst/caf%C3%A9 not found: Error performing PUT http://127.0.0.1:5555/self001/dst/c",
+    "client_finds_copy": false,
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC2b",
+   "env": "obstore-0.9.4",
+   "violating": false,
+   "r": {
+    "op": "copy",
+    "client": "obstore",
+    "version": "0.9.4",
+    "client_info_src": "readable",
+    "copy_error": null,
+    "client_finds_copy": true,
+    "contradiction": false
+   }
+  },
+  {
+   "case": "GC3",
+   "env": "cloudpathlib-0.9.0",
+   "violating": true,
+   "r": {
+    "op": "exists",
+    "client": "cloudpathlib",
+    "version": "0.9.0",
+    "client_info": "directory",
+    "client_recursive_listing": [],
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC3",
+   "env": "cloudpathlib-0.10.0",
+   "violating": false,
+   "r": {
+    "op": "exists",
+    "client": "cloudpathlib",
+    "version": "0.10.0",
+    "client_info": "notfound",
+    "client_recursive_listing": [],
+    "contradiction": false
+   }
+  },
+  {
+   "case": "GC3",
+   "env": "opendal-0.45.9",
+   "violating": true,
+   "r": {
+    "op": "exists",
+    "client": "opendal",
+    "version": "0.45.9",
+    "client_info": "directory",
+    "client_recursive_listing": [],
+    "contradiction": true
+   }
+  },
+  {
+   "case": "GC3",
+   "env": "opendal-0.45.10",
+   "violating": false,
+   "r": {
+    "op": "exists",
+    "client": "opendal",
+    "version": "0.45.10",
+    "client_info": "notfound",
+    "client_recursive_listing": [],
+    "contradiction": false
+   }
+  },
+  {
+   "case": "PV1",
+   "env": "gcsfs-2023.6.0",
+   "violating": true,
+   "r": {
+    "op": "movedir",
+    "client": "gcsfs",
+    "version": "2023.6.0",
+    "client_listing_of_src": [
+     "src/g",
+     "src/sub/f"
+    ],
+    "move_error": null,
+    "changed_outside_listing": [
+     "srcx"
+    ],
+    "contradiction": true
+   }
+  },
+  {
+   "case": "PV1",
+   "env": "gcsfs-2023.9.0",
+   "violating": false,
+   "r": {
+    "op": "movedir",
+    "client": "gcsfs",
+    "version": "2023.9.0",
+    "client_listing_of_src": [
+     "src/g",
+     "src/sub/f"
+    ],
+    "move_error": null,
+    "changed_outside_listing": [],
+    "contradiction": false
+   }
+  },
+  {
+   "case": "PV1",
+   "env": "s3path-0.6.5",
+   "violating": true,
+   "r": {
+    "op": "movedir",
+    "client": "s3path",
+    "version": "0.6.5",
+    "client_listing_of_src": [
+     "src/g",
+     "src/sub/f"
+    ],
+    "move_error": null,
+    "changed_outside_listing": [
+     "srcx",
+     "dstx"
+    ],
+    "contradiction": true
+   }
+  }
+ ],
+ "violating_contradictory": 11,
+ "n_violating": 11,
+ "satisfying_contradictory": 0,
+ "n_satisfying": 10
+}

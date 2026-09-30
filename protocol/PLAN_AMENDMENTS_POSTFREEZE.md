@@ -70,3 +70,15 @@ the non-existent key `src` itself; the predicate was refined to exclude the two 
 to all rows.
 Outcome: all 21 request-level verdicts equal the emulator verdicts and the frozen expectations
 (`oracle/wire/out/wire_results.json`). It does not test whether the production services honor their documentation.
+
+## W2: Self-consistency check of the Golden-Case rules (1 Oct 2026; post hoc, outside the frozen plan)
+Reason: a reviewer argued that a rule derived from a fix shows convergence, not correctness. Procedure:
+`oracle/wire/self_consistency.py` runs on the 21 verification rows. It builds the world through the raw API, then uses
+only the client under test to check whether the operation's outcome contradicts the client's own API.
+Two predicates were refined after a first run, and both refinements were re-applied to all rows:
+- copy: the evidence that the source exists is now a successful read by the client, because obstore has no info call;
+- move: "inside src" is now the client's non-recursive listing walked level by level, because gcsfs 2023.6.0's
+  recursive find itself wrongly includes srcx.
+
+Outcome: 11 of 11 violating rows are self-contradictory and 0 of 10 satisfying rows are
+(`oracle/wire/out/self_consistency_results.json`).
