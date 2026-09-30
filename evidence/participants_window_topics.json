@@ -1,0 +1,56 @@
+{
+ "martindurant|apache/arrow|2023-12-05..2026-02-02": {
+  "items": 0,
+  "term_matches": []
+ },
+ "ywilke|apache/arrow|2023-12-05..2026-02-02": {
+  "items": 1,
+  "term_matches": []
+ },
+ "jorisvandenbossche|fsspec/s3fs|2023-12-05..2026-02-02": {
+  "items": 0,
+  "term_matches": []
+ },
+ "pitrou|fsspec/s3fs|2023-12-05..2026-02-02": {
+  "items": 1,
+  "term_matches": []
+ },
+ "martindurant|developmentseed/obstore|2022-10-11..2025-08-07": {
+  "items": 13,
+  "term_matches": [
+   {
+    "url": "https://github.com/developmentseed/obstore/pull/60",
+    "terms": [
+     "%2f"
+    ],
+    "manual_verdict": "'%2F' occurs in a URL inside an error message; not about key encoding"
+   }
+  ]
+ },
+ "kylebarron|apache/arrow|2021-06-14..2026-04-22": {
+  "items": 44,
+  "term_matches": [
+   {
+    "url": "https://github.com/apache/arrow/pull/35780",
+    "terms": [
+     "caf"
+    ],
+    "manual_verdict": "'caf' is part of a benchmark hash"
+   },
+   {
+    "url": "https://github.com/apache/arrow/issues/34996",
+    "terms": [
+     "caf"
+    ],
+    "manual_verdict": "'caf' is the website py.cafe"
+   },
+   {
+    "url": "https://github.com/apache/arrow/issues/32609",
+    "terms": [
+     "percent"
+    ],
+    "manual_verdict": "'percent' is 'percentage' of code; type-checking discussion"
+   }
+  ]
+ }
+}

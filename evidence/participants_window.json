@@ -1,0 +1,307 @@
+{
+ "martindurant|apache/arrow|2023-12-05..2026-02-02": [],
+ "ywilke|apache/arrow|2023-12-05..2026-02-02": [
+  [
+   "2024-06-27",
+   "GH-38012: [python] remove mention of ds creation with recordbatchreader",
+   "https://github.com/apache/arrow/pull/43073"
+  ]
+ ],
+ "jorisvandenbossche|fsspec/s3fs|2023-12-05..2026-02-02": [],
+ "pitrou|fsspec/s3fs|2023-12-05..2026-02-02": [
+  [
+   "2025-01-19",
+   "botocore no longer populates the `Content-MD5` header leading to `MissingContentMD5` error",
+   "https://github.com/fsspec/s3fs/issues/931"
+  ]
+ ],
+ "martindurant|developmentseed/obstore|2022-10-11..2025-08-07": [
+  [
+   "2025-06-19",
+   "Reference in fsspec",
+   "https://github.com/developmentseed/obstore/issues/486"
+  ],
+  [
+   "2025-02-03",
+   "Standardize on obstore's NotFoundError",
+   "https://github.com/developmentseed/obstore/pull/199"
+  ],
+  [
+   "2025-02-03",
+   "[FEAT] Create obstore store in fsspec on demand",
+   "https://github.com/developmentseed/obstore/pull/198"
+  ],
+  [
+   "2025-01-27",
+   "[FEAT] support df.to_parquet and df.read_parquet()",
+   "https://github.com/developmentseed/obstore/pull/165"
+  ],
+  [
+   "2025-01-23",
+   "Support obstore as storage for df.to_parquet()",
+   "https://github.com/developmentseed/obstore/issues/164"
+  ],
+  [
+   "2024-12-11",
+   "Adds to_bytes() to `AsyncFsspecStore` _cat_file method",
+   "https://github.com/developmentseed/obstore/pull/107"
+  ],
+  [
+   "2024-11-02",
+   "Feature request: support exclusive put mode",
+   "https://github.com/developmentseed/obstore/issues/73"
+  ],
+  [
+   "2024-10-31",
+   "fsspec integration",
+   "https://github.com/developmentseed/obstore/pull/63"
+  ],
+  [
+   "2024-10-30",
+   "Kyle/fsspec integration",
+   "https://github.com/developmentseed/obstore/pull/60"
+  ],
+  [
+   "2024-10-23",
+   "Support range in GetOptions",
+   "https://github.com/developmentseed/obstore/pull/40"
+  ],
+  [
+   "2024-10-22",
+   "Readable file around `object_store::BufReader`",
+   "https://github.com/developmentseed/obstore/pull/33"
+  ],
+  [
+   "2024-10-21",
+   "fsspec wrapper",
+   "https://github.com/developmentseed/obstore/pull/32"
+  ],
+  [
+   "2024-10-21",
+   "Required python version",
+   "https://github.com/developmentseed/obstore/issues/31"
+  ]
+ ],
+ "kylebarron|apache/arrow|2021-06-14..2026-04-22": [
+  [
+   "2025-10-28",
+   "GH-47975: [Docs][Python] Remove experimental warning on PyCapsule documentation",
+   "https://github.com/apache/arrow/pull/47976"
+  ],
+  [
+   "2025-10-03",
+   "[Docs][Python] PyCapsule protocol implementation status",
+   "https://github.com/apache/arrow/issues/47696"
+  ],
+  [
+   "2025-09-03",
+   "GH-47472: [Doc] Add third-party implementations section",
+   "https://github.com/apache/arrow/pull/47488"
+  ],
+  [
+   "2025-06-01",
+   "[C++] Exporting an ExtensionType with BinaryView or StringView storage to C does not export ext",
+   "https://github.com/apache/arrow/issues/46659"
+  ],
+  [
+   "2025-05-18",
+   "GH-24833 [JS] Implement IPC RecordBatch body buffer compression",
+   "https://github.com/apache/arrow/pull/46493"
+  ],
+  [
+   "2024-09-25",
+   "[Python] Allow PyCapsule Interface in `pyarrow.scalar` constructor?",
+   "https://github.com/apache/arrow/issues/44232"
+  ],
+  [
+   "2024-08-26",
+   "[Python] PyCapsule interface for Image/Raster Data",
+   "https://github.com/apache/arrow/issues/43831"
+  ],
+  [
+   "2024-08-22",
+   "[Python] Incorrect importing of buffer protocol objects",
+   "https://github.com/apache/arrow/issues/43792"
+  ],
+  [
+   "2024-07-24",
+   "[Python]: Support PyCapsule Interface Objects as input in more places",
+   "https://github.com/apache/arrow/issues/43410"
+  ],
+  [
+   "2024-07-23",
+   "MINOR: [Python] Remove extra import from PyCapsule Interface Doc",
+   "https://github.com/apache/arrow/pull/43399"
+  ],
+  [
+   "2024-07-16",
+   "[Python] Extend PyCapsule interface with support for KeyValueMetadata object",
+   "https://github.com/apache/arrow/issues/43287"
+  ],
+  [
+   "2024-05-09",
+   "Enable updating Parquet key-value metadata of opened ParquetWriter before closing",
+   "https://github.com/apache/arrow/issues/41608"
+  ],
+  [
+   "2024-03-27",
+   "GH-38010: [Python] Construct pyarrow.Field and ChunkedArray through Arrow PyCapsule Protocol",
+   "https://github.com/apache/arrow/pull/40818"
+  ],
+  [
+   "2024-03-18",
+   "[Python] Conventions around PyCapsule Interface and choosing Array/Stream export",
+   "https://github.com/apache/arrow/issues/40648"
+  ],
+  [
+   "2024-01-25",
+   "GH-39788: [Python] Validate max_chunksize in Table.to_batches",
+   "https://github.com/apache/arrow/pull/39796"
+  ],
+  [
+   "2024-01-24",
+   "Python: Check for `max_chunksize > 0` in `Table.to_batches()`",
+   "https://github.com/apache/arrow/issues/39788"
+  ],
+  [
+   "2024-01-18",
+   "[Python] Arrow PyCapsule Protocol: standard way to get the schema of a \"data\" (array of stream)",
+   "https://github.com/apache/arrow/issues/39689"
+  ],
+  [
+   "2024-01-04",
+   "GH-39454: [JS] Support LargeList",
+   "https://github.com/apache/arrow/pull/39457"
+  ],
+  [
+   "2023-12-17",
+   "GH-39257: [JS] LargeBinary",
+   "https://github.com/apache/arrow/pull/39258"
+  ],
+  [
+   "2023-12-12",
+   "[Python] Promote usage of the Arrow PyCapsule Protocol (for the C Data Inteface)",
+   "https://github.com/apache/arrow/issues/39195"
+  ],
+  [
+   "2023-12-06",
+   "[JS] Reading arrow files client-side",
+   "https://github.com/apache/arrow/issues/39114"
+  ],
+  [
+   "2023-12-02",
+   "[JS] Implement LargeBinary type and enable tests",
+   "https://github.com/apache/arrow/issues/39047"
+  ],
+  [
+   "2023-12-01",
+   "GH-39017: [JS] Add `typeId` as attribute",
+   "https://github.com/apache/arrow/pull/39018"
+  ],
+  [
+   "2023-12-01",
+   "[JS] Enable postMessage of `Vector`, `Data`, `DataType` objects",
+   "https://github.com/apache/arrow/issues/39017"
+  ],
+  [
+   "2023-11-14",
+   "[Python] Implement `__arrow_c_stream__` on ChunkedArray",
+   "https://github.com/apache/arrow/issues/38717"
+  ],
+  [
+   "2023-11-02",
+   "Custom data types in arrow array",
+   "https://github.com/apache/arrow/issues/38559"
+  ],
+  [
+   "2023-10-04",
+   "[Python] Public API to consume objects supporting the PyCapsule Arrow C Data Interface",
+   "https://github.com/apache/arrow/issues/38010"
+  ],
+  [
+   "2023-08-24",
+   "IPC Deserialization does not support LargeUtf8 type",
+   "https://github.com/apache/arrow/issues/37356"
+  ],
+  [
+   "2023-08-17",
+   "Update default version in parquet.rst",
+   "https://github.com/apache/arrow/pull/37227"
+  ],
+  [
+   "2023-08-12",
+   "[JS] Crash when reading IPC file with Union types",
+   "https://github.com/apache/arrow/issues/37133"
+  ],
+  [
+   "2023-08-10",
+   "MINOR: [Docs][JS] Update implementation status table",
+   "https://github.com/apache/arrow/pull/37108"
+  ],
+  [
+   "2023-05-26",
+   "GH-15060: [JS] Add LargeUtf8 type",
+   "https://github.com/apache/arrow/pull/35780"
+  ],
+  [
+   "2023-04-10",
+   "[Python] Make pyarrow installable in Jupyterlite",
+   "https://github.com/apache/arrow/issues/34996"
+  ],
+  [
+   "2023-04-05",
+   "[Python][C++] Crash when reading from closed RecordBatchReader backed by C Stream",
+   "https://github.com/apache/arrow/issues/34906"
+  ],
+  [
+   "2023-03-03",
+   "[Python]: Possible to evaluate `pyarrow.compute.Expression` without filter?",
+   "https://github.com/apache/arrow/issues/34433"
+  ],
+  [
+   "2023-02-23",
+   "[Python] Support `mask` in `FixedSizeListArray.from_arrays` ",
+   "https://github.com/apache/arrow/issues/34316"
+  ],
+  [
+   "2023-01-11",
+   "MINOR: [Docs][C++] Fix a typo",
+   "https://github.com/apache/arrow/pull/31446"
+  ],
+  [
+   "2022-12-21",
+   "[JS] Missing support for LargeUtf8 datatype",
+   "https://github.com/apache/arrow/issues/15060"
+  ],
+  [
+   "2022-10-10",
+   "[JS] Update status docs",
+   "https://github.com/apache/arrow/issues/20447"
+  ],
+  [
+   "2022-08-08",
+   "[Python] Type checking support",
+   "https://github.com/apache/arrow/issues/32609"
+  ],
+  [
+   "2022-05-30",
+   "ARROW-16613: [C++][Parquet] Fix performance of repeated calls to AppendRowGroups()",
+   "https://github.com/apache/arrow/pull/13265"
+  ],
+  [
+   "2022-05-06",
+   "ARROW-8674: [JS] Implement IPC RecordBatch body buffer compression",
+   "https://github.com/apache/arrow/pull/13076"
+  ],
+  [
+   "2022-04-22",
+   "MINOR: [Docs] Fix typo in parquet.rst",
+   "https://github.com/apache/arrow/pull/12961"
+  ],
+  [
+   "2022-04-22",
+   "MINOR: [Docs] Update parquet.rst to note support for zstd and lz4",
+   "https://github.com/apache/arrow/pull/12951"
+  ]
+ ]
+}

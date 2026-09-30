@@ -1,0 +1,376 @@
+{
+ "participants": {
+  "GC1/arrow": {
+   "martin-traverse": [
+    "issue author",
+    "issue commenter"
+   ],
+   "kou": [
+    "issue commenter"
+   ],
+   "grumBit": [
+    "issue commenter"
+   ],
+   "felipecrv": [
+    "issue commenter",
+    "review commenter",
+    "reviewer"
+   ],
+   "jorisvandenbossche": [
+    "PR author",
+    "commit author",
+    "issue commenter",
+    "merger",
+    "review commenter",
+    "reviewer"
+   ],
+   "raulcd": [
+    "reviewer"
+   ],
+   "pitrou": [
+    "commit author",
+    "review commenter",
+    "reviewer"
+   ]
+  },
+  "GC1/s3fs": {
+   "LuchiLucs": [
+    "issue author",
+    "issue commenter"
+   ],
+   "martindurant": [
+    "PR commenter",
+    "commit author",
+    "issue commenter",
+    "merger"
+   ],
+   "ywilke": [
+    "PR author",
+    "PR commenter",
+    "issue commenter"
+   ]
+  },
+  "GC2a/s3path": {
+   "realknorke": [
+    "issue author",
+    "issue commenter"
+   ],
+   "maresb": [
+    "PR author",
+    "commit author",
+    "issue commenter"
+   ],
+   "liormizr": [
+    "issue commenter",
+    "merger",
+    "reviewer"
+   ],
+   "JohnHBrock": [
+    "issue commenter"
+   ]
+  },
+  "GC2a/gcsfs": {
+   "kornosk": [
+    "issue author",
+    "issue commenter"
+   ],
+   "martindurant": [
+    "PR commenter",
+    "issue commenter",
+    "merger"
+   ],
+   "simonbohnen": [
+    "PR author",
+    "PR commenter",
+    "commit author",
+    "issue commenter"
+   ]
+  },
+  "GC2a/obstore": {
+   "phschoepf": [
+    "issue author",
+    "issue commenter"
+   ],
+   "kylebarron": [
+    "PR author",
+    "PR commenter",
+    "commit author",
+    "issue commenter",
+    "merger"
+   ],
+   "ion-elgreco": [
+    "PR commenter"
+   ]
+  },
+  "GC2b/arrow": {
+   "lidavidm": [
+    "PR author",
+    "PR commenter",
+    "commit author"
+   ],
+   "steventakeshita": [
+    "PR commenter"
+   ],
+   "pitrou": [
+    "PR commenter",
+    "reviewer"
+   ]
+  },
+  "GC2b/obstore": {
+   "Eric100210": [
+    "issue author"
+   ],
+   "kylebarron": [
+    "PR author",
+    "PR commenter",
+    "commit author",
+    "issue commenter",
+    "merger"
+   ]
+  },
+  "GC3/cloudpathlib": {
+   "maciejb": [
+    "issue author"
+   ],
+   "jayqi": [
+    "issue commenter"
+   ],
+   "pjbull": [
+    "PR commenter",
+    "issue commenter",
+    "merger",
+    "review commenter",
+    "reviewer"
+   ],
+   "frndmg": [
+    "PR author",
+    "PR commenter",
+    "commit author",
+    "issue commenter"
+   ],
+   "codecov-commenter": [
+    "PR commenter"
+   ]
+  },
+  "GC3/opendal": {
+   "meteorgan": [
+    "PR author",
+    "PR commenter",
+    "commit author",
+    "review commenter",
+    "reviewer"
+   ],
+   "Xuanwo": [
+    "PR commenter",
+    "merger",
+    "review commenter",
+    "reviewer"
+   ]
+  }
+ },
+ "pairs": [
+  {
+   "pair": [
+    "GC1/arrow",
+    "GC1/s3fs"
+   ],
+   "shared_participants": [],
+   "n_checked": 10,
+   "cross_activity": {
+    "martindurant (later fix) in apache/arrow": {
+     "commits_before": 0,
+     "issues_prs_involving_before": 12,
+     "examples": [
+      {
+       "url": "https://github.com/apache/arrow/pull/10978",
+       "title": "PARQUET-492: [C++][Parquet] Basic support for reading DELTA_BYTE_ARRAY data.",
+       "created": "2021-08-23"
+      },
+      {
+       "url": "https://github.com/apache/arrow/pull/7545",
+       "title": "ARROW-9139: [Python] Switch parquet.read_table to use new datasets API by defaul",
+       "created": "2020-06-25"
+      },
+      {
+       "url": "https://github.com/apache/arrow/pull/7395",
+       "title": "ARROW-9089: [Python] A PyFileSystem handler for fsspec-based filesystems",
+       "created": "2020-06-10"
+      },
+      {
+       "url": "https://github.com/apache/arrow/pull/4718",
+       "title": "ARROW-5730: [Python][CI] Selectively skip test cases in the dask integration tes",
+       "created": "2019-06-27"
+      },
+      {
+       "url": "https://github.com/apache/arrow/pull/4361",
+       "title": "ARROW-5349: [WIP] Store file-path metadata",
+       "created": "2019-05-21"
+      }
+     ]
+    },
+    "ywilke (later fix) in apache/arrow": {
+     "commits_before": 0,
+     "issues_prs_involving_before": 1,
+     "examples": [
+      {
+       "url": "https://github.com/apache/arrow/pull/43073",
+       "title": "GH-38012: [python] remove mention of ds creation with recordbatchreader",
+       "created": "2024-06-27"
+      }
+     ]
+    },
+    "jorisvandenbossche (earlier fix) in fsspec/s3fs": {
+     "commits_before": 0,
+     "issues_prs_involving_before": 10,
+     "examples": [
+      {
+       "url": "https://github.com/fsspec/s3fs/pull/413",
+       "title": "Add test against #393",
+       "created": "2021-01-15"
+      },
+      {
+       "url": "https://github.com/fsspec/s3fs/pull/412",
+       "title": "Avoid adding parent dir in find",
+       "created": "2021-01-14"
+      },
+      {
+       "url": "https://github.com/fsspec/s3fs/pull/411",
+       "title": "fixes #410",
+       "created": "2021-01-13"
+      },
+      {
+       "url": "https://github.com/fsspec/s3fs/issues/410",
+       "title": "BUG: recursive find (with maxdepth=None) alters directories as side-effect",
+       "created": "2021-01-13"
+      },
+      {
+       "url": "https://github.com/fsspec/s3fs/issues/394",
+       "title": "BUG: mv() a file with recursive=True no longer working",
+       "created": "2020-11-10"
+      }
+     ]
+    },
+    "pitrou (earlier fix) in fsspec/s3fs": {
+     "commits_before": 0,
+     "issues_prs_involving_before": 1,
+     "examples": [
+      {
+       "url": "https://github.com/fsspec/s3fs/issues/931",
+       "title": "botocore no longer populates the `Content-MD5` header leading to `MissingContent",
+       "created": "2025-01-19"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pair": [
+    "GC2a/s3path",
+    "GC2a/gcsfs"
+   ],
+   "shared_participants": [],
+   "n_checked": 7,
+   "cross_activity": {}
+  },
+  {
+   "pair": [
+    "GC2a/s3path",
+    "GC2a/obstore"
+   ],
+   "shared_participants": [],
+   "n_checked": 7,
+   "cross_activity": {}
+  },
+  {
+   "pair": [
+    "GC2a/gcsfs",
+    "GC2a/obstore"
+   ],
+   "shared_participants": [],
+   "n_checked": 6,
+   "cross_activity": {
+    "martindurant (earlier fix) in developmentseed/obstore": {
+     "commits_before": 1,
+     "issues_prs_involving_before": 13,
+     "examples": [
+      {
+       "url": "https://github.com/developmentseed/obstore/issues/486",
+       "title": "Reference in fsspec",
+       "created": "2025-06-19"
+      },
+      {
+       "url": "https://github.com/developmentseed/obstore/pull/199",
+       "title": "Standardize on obstore's NotFoundError",
+       "created": "2025-02-03"
+      },
+      {
+       "url": "https://github.com/developmentseed/obstore/pull/198",
+       "title": "[FEAT] Create obstore store in fsspec on demand",
+       "created": "2025-02-03"
+      },
+      {
+       "url": "https://github.com/developmentseed/obstore/pull/165",
+       "title": "[FEAT] support df.to_parquet and df.read_parquet()",
+       "created": "2025-01-27"
+      },
+      {
+       "url": "https://github.com/developmentseed/obstore/issues/164",
+       "title": "Support obstore as storage for df.to_parquet()",
+       "created": "2025-01-23"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pair": [
+    "GC2b/arrow",
+    "GC2b/obstore"
+   ],
+   "shared_participants": [],
+   "n_checked": 5,
+   "cross_activity": {
+    "kylebarron (later fix) in apache/arrow": {
+     "commits_before": 1,
+     "issues_prs_involving_before": 48,
+     "examples": [
+      {
+       "url": "https://github.com/apache/arrow/pull/47976",
+       "title": "GH-47975: [Docs][Python] Remove experimental warning on PyCapsule documentation",
+       "created": "2025-10-28"
+      },
+      {
+       "url": "https://github.com/apache/arrow/issues/47696",
+       "title": "[Docs][Python] PyCapsule protocol implementation status",
+       "created": "2025-10-03"
+      },
+      {
+       "url": "https://github.com/apache/arrow/pull/47488",
+       "title": "GH-47472: [Doc] Add third-party implementations section",
+       "created": "2025-09-03"
+      },
+      {
+       "url": "https://github.com/apache/arrow/issues/46659",
+       "title": "[C++] Exporting an ExtensionType with BinaryView or StringView storage to C does",
+       "created": "2025-06-01"
+      },
+      {
+       "url": "https://github.com/apache/arrow/pull/46493",
+       "title": "GH-24833 [JS] Implement IPC RecordBatch body buffer compression",
+       "created": "2025-05-18"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pair": [
+    "GC3/cloudpathlib",
+    "GC3/opendal"
+   ],
+   "shared_participants": [],
+   "n_checked": 7,
+   "cross_activity": {}
+  }
+ ]
+}

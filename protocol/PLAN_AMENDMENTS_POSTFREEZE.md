@@ -91,3 +91,20 @@ documentation; pyarrow, fsspec, OpenDAL and pathlib API documentation) and recor
 Outcome: every Golden-Case rule follows from at least one such specification. For the contested rule, the clients'
 own specifications disagree: pathlib excludes the directory itself from a listing, while OpenDAL's list documents that
 it includes it.
+
+## W4: Knowledge flow through people (1 Oct 2026; post hoc, read-only GitHub API)
+Reason: a reviewer noted that lineage independence is not independence of knowledge.
+- `evidence/participants.py` collects all human participants of every Golden-Case fix. Participants are the issue
+  author and commenters, the PR author, reviewers, review commenters, PR commenters, commit authors and the merger.
+- For each of the six pairs, it checks for shared participants and for prior activity in the other project.
+- `evidence/participants_window.py` restricts that activity to the window between the two fixes and scans the full
+  text of every such issue or PR for the rule's terms. Every match was inspected by hand.
+
+Outcome:
+- No participant is shared by the two fixes of any pair.
+- Participants of 3 pairs (GC1; GC2a gcsfs-obstore; GC2b) interacted with the other project 59 times in the windows.
+- 4 term matches, all false positives (a URL inside an error message, a benchmark hash, the website py.cafe, the word
+  "percentage"). None of the 59 contacts is about the rule.
+
+The paper claims lineage independence, not independent rediscovery. Channels not measured: documentation,
+forums, private conversations.

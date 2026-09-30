@@ -95,3 +95,8 @@ authorship is itself evidence (lineage checks).
 - `evidence/SPECIFICATION_ANCHORS.md`: for every Golden-Case rule, the independent specifications it follows from
   (POSIX, AWS/GCS documentation, the clients' API documentation), with short verbatim quotes and URLs. For the
   contested rule, it shows that the clients' own specifications disagree.
+- `evidence/participants.py` and `evidence/participants_window.py` (paper §5.2, "Independent code, shared knowledge"):
+  the knowledge-flow check through people. It gives the participants of every fix, shared participants per pair, and
+  contacts with the other project between the two fixes, with a term scan and hand-inspection notes. Needs the `gh`
+  CLI (read-only GitHub API). Results: `evidence/participants*.json`.
+
