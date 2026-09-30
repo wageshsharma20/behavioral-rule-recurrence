@@ -58,7 +58,7 @@ s3path 0.3.x requires CPython <= 3.9.
 - `PROBE_CATALOG.md` — every probe with the historical artifact it was derived from.
 - `rq3/runs/*.jsonl` — every model call (raw output, verdict, plan hash, model digest, GPU); `rq3/runs/run_meta.json`.
   `rq3/runs/protocol.md` is the plan file the Kaggle run hashed (identical to `protocol/BEHAVIORAL_ABSTRACTION_PROTOCOL.md`).
-- `rq3/analyze.py`, `rq3/results_to_latex.py`, `rq3/exploratory.py` — reproduce Tables 6 and 7 and all RQ3 numbers:
+- `rq3/analyze.py`, `rq3/results_to_latex.py`, `rq3/exploratory.py` — reproduce Table 6 (verdicts and explanations), the item-level paired comparisons (`paper/tab_rq3_main.tex`, in the package only) and all RQ3 numbers:
   `python rq3/results_to_latex.py rq3/runs/ollama_qwen3-coder_30b.jsonl rq3/runs/ollama_gpt-oss_20b.jsonl`
 - `protocol/PLAN_AMENDMENTS_POSTFREEZE.md` — exploratory analyses defined before results (A1, A2) and post hoc ones (P1).
 - `rq2_baseline/` — post hoc text-similarity baseline (§6; per-set statistics in `paper/tab_baseline.tex`): `python rq2_baseline/topic_similarity.py`
@@ -67,7 +67,7 @@ s3path 0.3.x requires CPython <= 3.9.
   budget), defined in `protocol/PLAN_AMENDMENTS_POSTFREEZE.md` before it ran.
 - `rq3/sensitivity.py` -> `rq3/sensitivity_results.json` — P1(b) (balanced accuracy excluding unparsed answers) and
   the R1 analysis (integrity checks, then the frozen analysis code applied to the rerun).
-- `rq3/rule_level.py` -> `rq3/rule_level_results.json`, `paper/tab_rq3_rules.tex` (Table 8): per-rule paired B1/B3
+- `rq3/rule_level.py` -> `rq3/rule_level_results.json`, `paper/tab_rq3_rules.tex` (Table 7): per-rule paired B1/B3
   balanced accuracy and difference for the two frozen runs and the R1 rerun.
 
 ## Third-party content
@@ -113,4 +113,7 @@ authorship is itself evidence (lineage checks).
   It was verified on 1 Oct 2026 from a clean copy of this package with `UV_SYSTEM_PYTHON=1` on macOS arm64 (the
   frozen-run host). It built 17 environments from their lock files, including pyarrow 4.0.1 under x86 emulation, and all
   21 rows were OK: `evidence/reproduce_clean_run_2026-10-01.log`.
+- `evidence/adjudication/answers_filled.csv`, `score_output.txt` and `answer_key_published_after_scoring.json` (paper
+  §5.2): the independent reader's answers, their scoring (11 of 16 decided pairs, κ = 0.38; 1 of 6 Golden pairs judged
+  one rule), and the key, published only after scoring.
 

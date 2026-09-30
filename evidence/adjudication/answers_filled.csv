@@ -1,0 +1,18 @@
+pair,verdict,rule_in_one_sentence,minutes
+P01,different,"Tests for A check that exists() correctly handles partial matches, whereas tests for B check that list() includes the queried path in its results.",3
+P02,different,"Tests for A check that URL-encoded paths are not double-encoded on local storage, whereas tests for B check that exists() correctly rejects partial file name matches.",3
+P03,different,"Tests for A check that find() and ls() do not duplicate directory placeholders in S3, whereas tests for B check that info() consistently returns the correct type for GCS directory markers.",4
+P04,same,"Calling find() must properly populate the directory cache so subsequent shallow listings return accurate results without missing entries.",5
+P05,different,"Tests for A check that recursive deletion properly removes S3 directory markers, whereas tests for B check that copy and rename handle non-ASCII filenames without erroneously URL-encoding them.",2
+P06,same,"Calling find() must not pollute the directory cache and corrupt the results of subsequent ls() calls.",4
+P07,different,"Tests for A check that exists() does not return true for partial prefix matches, whereas tests for B check that filenames with hashtags are properly escaped and accessed in GCS.",3
+P08,different,"Tests for A check that mkdirs() properly handles relative paths instead of making them absolute, whereas tests for B check that _get_file() avoids crashing on os.makedirs() for relative local files.",3
+P09,same,"When recursively deleting a directory in S3, the corresponding zero-byte directory marker object must also be deleted.",5
+P10,different,"Tests for A check that smart_open does not unintentionally URL-encode special characters like =, whereas tests for B check that object_store does not double-encode already percent-encoded paths on local disk.",4
+P11,ambiguous,"The issue description in A is too brief to determine whether it tests for returning the path itself or explicitly prevents it.",2
+P12,different,"Tests for A check that GCS paths with hashtags are properly URL-encoded, whereas tests for B check that S3 paths with equals signs are not inappropriately URL-encoded.",3
+P13,different,"Tests for A check that smart_open prevents improper URL-encoding of S3 keys, whereas tests for B check that recursive deletion properly removes empty directory markers in S3.",2
+P14,different,"Tests for A check that recursive directory removal in S3 correctly deletes directory markers, whereas tests for B check that moving objects with special characters in C++ S3FileSystem avoids double URL-encoding.",3
+P15,different,"Tests for A check that exists() accurately distinguishes exact matches from partial matches, whereas tests for B check that recursive removal deletes the S3 directory marker object.",2
+P16,different,"Tests for A check that C++ S3FileSystem does not double-encode S3 keys during move, whereas tests for B check that Python object_store does not URL-encode non-ASCII characters during local copy and rename.",3
+P17,different,"Tests for A check that GCSFileSystem properly URL-encodes special characters like hashtags, whereas tests for B check that LocalStore does not inappropriately percent-encode user-provided paths.",2

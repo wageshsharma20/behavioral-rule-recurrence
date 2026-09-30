@@ -1,0 +1,8 @@
+pairs 17 | answered same/different 16 | ambiguous 1 | missing 0
+agreement on decided pairs 11/16 (0.69); strict (ambiguous = disagree) 11/17; Cohen's kappa 0.38
+  P01: study=same      reader=different (golden: GC3_cloudpathlib vs GC3_opendal)
+  P10: study=same      reader=different (golden: GC2a_s3path vs GC2a_obstore)
+  P11: study=different reader=ambiguous (rejected: CT_s3path vs GC3_opendal)
+  P12: study=same      reader=different (golden: GC2a_gcsfs vs GC2a_s3path)
+  P16: study=same      reader=different (golden: GC2b_arrow vs GC2b_obstore)
+  P17: study=same      reader=different (golden: GC2a_gcsfs vs GC2a_obstore)

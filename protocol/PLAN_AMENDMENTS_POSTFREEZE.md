@@ -150,3 +150,31 @@ Verification: on macOS arm64 (the frozen-run host), from a clean unzip of the pa
 `./reproduce.sh all` built 17 environments from their lock files and gave 21 of 21 rows OK
 (`evidence/reproduce_clean_run_2026-10-01.log`). Still open: the co-author's Kaggle (Linux) host check for the autogen
 experiment. His host check ran before his environment fix, so it is invalid.
+
+## W9: Independent adjudication of rule identity: result (1 Oct 2026)
+Reader: Rishikant (co-author). He did not derive the probes, but he had worked with the same threads in the automated
+probe-derivation experiment (A3). He took 53 minutes in total. Scored with `evidence/adjudication/score.py`.
+
+Result:
+- 11 of 16 decided pairs agree (κ = 0.38); 1 ambiguous.
+- He never judged two different rules to be one: of the 9 expected different, 8 were marked different and 1 ambiguous.
+- He recognized both shared-origin pairs.
+- He judged only 1 of the 6 Golden pairs (GC1) to be one rule.
+- His one-line rules show that he compared symptoms: encoding versus not encoding a key, and S3 versus obstore's
+  local-disk store, on which obstore's issues were reported. OpenDAL's thread concerns another part of its change.
+
+Paper:
+- §5.2 reports this in full. Historical agreement is stated as our reading, and executable and normative agreement
+  carry the definition.
+- The obstore local-disk context is now stated in GC2a.
+
+Our classification was **not** changed.
+
+Limitation of the kit: the name-blinding missed some identifiers (for example smart_open, LocalStore, GCSFileSystem),
+and the reader's rules mention them. The key was published in the package after scoring.
+
+Also on 1 Oct:
+- Conference metadata from ACM's sample-acmsmall-conf.tex was added (FSE '27, 12–16 July 2027, Shenzhen), so the ACM
+  reference block reads correctly.
+- RQ1 was split into 5.1 cases / 5.2 one correct rule per case / 5.3 characteristics.
+- The RQ3 item-level table moved to the package; its numbers remain in the text.

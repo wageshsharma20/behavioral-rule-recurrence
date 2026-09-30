@@ -1,0 +1,108 @@
+{
+ "seed": 20261001,
+ "note": "different-rule sample excludes GC2a x GC2b pairs (one family, F3)",
+ "key": {
+  "P01": {
+   "A": "GC3_cloudpathlib",
+   "B": "GC3_opendal",
+   "expected": "same",
+   "source": "golden"
+  },
+  "P02": {
+   "A": "GC2a_obstore",
+   "B": "GC3_cloudpathlib",
+   "expected": "different",
+   "source": "different-rule"
+  },
+  "P03": {
+   "A": "C1_s3fs",
+   "B": "C1_gcsfs",
+   "expected": "different",
+   "source": "rejected"
+  },
+  "P04": {
+   "A": "R2_s3fs_2023",
+   "B": "R2_gcsfs_2022",
+   "expected": "same",
+   "source": "shared-origin"
+  },
+  "P05": {
+   "A": "GC1_s3fs",
+   "B": "GC2b_obstore",
+   "expected": "different",
+   "source": "different-rule"
+  },
+  "P06": {
+   "A": "R2_s3fs_2021",
+   "B": "R2_gcsfs_2022",
+   "expected": "same",
+   "source": "shared-origin"
+  },
+  "P07": {
+   "A": "GC3_cloudpathlib",
+   "B": "GC2a_gcsfs",
+   "expected": "different",
+   "source": "different-rule"
+  },
+  "P08": {
+   "A": "REL_sftp",
+   "B": "REL_gcsfs",
+   "expected": "different",
+   "source": "rejected"
+  },
+  "P09": {
+   "A": "GC1_arrow",
+   "B": "GC1_s3fs",
+   "expected": "same",
+   "source": "golden"
+  },
+  "P10": {
+   "A": "GC2a_s3path",
+   "B": "GC2a_obstore",
+   "expected": "same",
+   "source": "golden"
+  },
+  "P11": {
+   "A": "CT_s3path",
+   "B": "GC3_opendal",
+   "expected": "different",
+   "source": "rejected"
+  },
+  "P12": {
+   "A": "GC2a_gcsfs",
+   "B": "GC2a_s3path",
+   "expected": "same",
+   "source": "golden"
+  },
+  "P13": {
+   "A": "GC2a_s3path",
+   "B": "GC1_s3fs",
+   "expected": "different",
+   "source": "different-rule"
+  },
+  "P14": {
+   "A": "GC1_s3fs",
+   "B": "GC2b_arrow",
+   "expected": "different",
+   "source": "different-rule"
+  },
+  "P15": {
+   "A": "GC3_cloudpathlib",
+   "B": "GC1_s3fs",
+   "expected": "different",
+   "source": "different-rule"
+  },
+  "P16": {
+   "A": "GC2b_arrow",
+   "B": "GC2b_obstore",
+   "expected": "same",
+   "source": "golden"
+  },
+  "P17": {
+   "A": "GC2a_gcsfs",
+   "B": "GC2a_obstore",
+   "expected": "same",
+   "source": "golden"
+  }
+ }
+}
