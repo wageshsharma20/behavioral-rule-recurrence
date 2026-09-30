@@ -43,7 +43,7 @@ s3path 0.3.x requires CPython <= 3.9.
 - `oracle/results_v1/` — the frozen full-frame screening run (all RQ1/RQ2 numbers); `oracle/frozen_stats.py` recomputes them.
   Environment names `s3fs-bad` and `s3fs-good` hold s3fs releases 2025.10.0 and 2025.12.0 (names from an early bisection;
   the `version` field inside each result file is authoritative).
-- `oracle/classify_events.py` -> `oracle/event_classification.json` — classification of all 26 events (Table 5), with the
+- `oracle/classify_events.py` -> `oracle/event_classification.json` — classification of all 26 events (Table 5b), with the
   exception types seen on each event's failing side. s3path 0.3.0 is not evaluable: every read/write raises
   NoCredentialsError because it passes its configuration to smart_open 5.0.0 through an interface that release no longer
   accepts; its one event (two '~' probes, 0.3.0 -> 0.3.1) is classified as a failure unrelated to the probes' rule.
@@ -58,16 +58,16 @@ s3path 0.3.x requires CPython <= 3.9.
 - `PROBE_CATALOG.md` — every probe with the historical artifact it was derived from.
 - `rq3/runs/*.jsonl` — every model call (raw output, verdict, plan hash, model digest, GPU); `rq3/runs/run_meta.json`.
   `rq3/runs/protocol.md` is the plan file the Kaggle run hashed (identical to `protocol/BEHAVIORAL_ABSTRACTION_PROTOCOL.md`).
-- `rq3/analyze.py`, `rq3/results_to_latex.py`, `rq3/exploratory.py` — reproduce Tables 7 and 8 and all RQ3 numbers:
+- `rq3/analyze.py`, `rq3/results_to_latex.py`, `rq3/exploratory.py` — reproduce Tables 6 and 7 and all RQ3 numbers:
   `python rq3/results_to_latex.py rq3/runs/ollama_qwen3-coder_30b.jsonl rq3/runs/ollama_gpt-oss_20b.jsonl`
 - `protocol/PLAN_AMENDMENTS_POSTFREEZE.md` — exploratory analyses defined before results (A1, A2) and post hoc ones (P1).
-- `rq2_baseline/` — post hoc text-similarity baseline (Table 6): `python rq2_baseline/topic_similarity.py`
+- `rq2_baseline/` — post hoc text-similarity baseline (§6; per-set statistics in `paper/tab_baseline.tex`): `python rq2_baseline/topic_similarity.py`
   (fetched thread texts are included, so it runs offline).
 - `rq3/kaggle/rq3_kaggle_R1.ipynb`, `rq3/runs_R1/` — configuration-sensitivity rerun R1 of gpt-oss-20b (larger output
   budget), defined in `protocol/PLAN_AMENDMENTS_POSTFREEZE.md` before it ran.
 - `rq3/sensitivity.py` -> `rq3/sensitivity_results.json` — P1(b) (balanced accuracy excluding unparsed answers) and
   the R1 analysis (integrity checks, then the frozen analysis code applied to the rerun).
-- `rq3/rule_level.py` -> `rq3/rule_level_results.json`, `paper/tab_rq3_rules.tex` (Table 9): per-rule paired B1/B3
+- `rq3/rule_level.py` -> `rq3/rule_level_results.json`, `paper/tab_rq3_rules.tex` (Table 8): per-rule paired B1/B3
   balanced accuracy and difference for the two frozen runs and the R1 rerun.
 
 ## Third-party content
