@@ -1,0 +1,9 @@
+\begin{tabular}{@{}ll rrrr rrr rrr@{}}\toprule
+ & & \multicolumn{4}{c}{B3 vs.\ B1 (primary, paired)} & \multicolumn{3}{c}{B3 vs.\ B4 (paired)} & \multicolumn{3}{c}{B5 vs.\ B3 (paired)} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-9}\cmidrule(lr){10-12}
+Model & Dec. & B1 & B3 & W/L & $p$ & B4 & W/L & $p$ & B5 & W/L & $p$ \\ \midrule
+gpt-oss-20b & $T{=}0$ & 0.36 & 0.57 & 3/0 & 0.25 & 0.43 & 2/0 & 0.50 & 0.50 & 0/1 & 1.00 \\
+Qwen3-Coder-30B-A3B & $T{=}0$ & 0.43 & 0.50 & 2/1 & 1.00 & 0.57 & 2/3 & 1.00 & 0.50 & 0/0 & 1.00 \\
+gpt-oss-20b & vote & 0.43 & 0.64 & 3/0 & 0.25 & 0.50 & 3/1 & 0.62 & 0.50 & 0/2 & 0.50 \\
+Qwen3-Coder-30B-A3B & vote & 0.50 & 0.50 & 2/2 & 1.00 & 0.50 & 3/3 & 1.00 & 0.50 & 0/0 & 1.00 \\
+\bottomrule\end{tabular}

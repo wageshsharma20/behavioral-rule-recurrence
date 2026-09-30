@@ -1,0 +1,186 @@
+{
+ "repo": "liormizr/s3path",
+ "searched_at": "2026-09-30T11:17:13+00:00",
+ "method": "all issues and pull requests (titles and bodies) fetched from the GitHub API and searched for keywords",
+ "keywords": [
+  "rmdir",
+  "rename",
+  "prefix",
+  "startswith",
+  "sibling",
+  "replace(",
+  "delete",
+  "unrelated",
+  "other files",
+  "data loss",
+  "similar name",
+  "same prefix"
+ ],
+ "n_issues_and_prs": 209,
+ "matches": [
+  {
+   "number": 209,
+   "title": "feat(S3UriPath): Add S3UriPath class to override __fspath__() for pandas competibility",
+   "state": "open",
+   "is_pr": true,
+   "created": "2026-02-13",
+   "keywords": [
+    "unrelated"
+   ]
+  },
+  {
+   "number": 205,
+   "title": "rmdir deletes non-empty prefixes and buckets",
+   "state": "open",
+   "is_pr": false,
+   "created": "2025-08-12",
+   "keywords": [
+    "rmdir",
+    "prefix",
+    "delete"
+   ]
+  },
+  {
+   "number": 194,
+   "title": "`exists()` returns True when bucket versioning is enabled and object was deleted",
+   "state": "open",
+   "is_pr": false,
+   "created": "2025-04-30",
+   "keywords": [
+    "delete"
+   ]
+  },
+  {
+   "number": 193,
+   "title": "Distinguishing prefixes from objects in `iterdir()` results",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2025-04-19",
+   "keywords": [
+    "prefix"
+   ]
+  },
+  {
+   "number": 146,
+   "title": "missing a forward slash in S3Path object",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2023-08-23",
+   "keywords": [
+    "replace("
+   ]
+  },
+  {
+   "number": 119,
+   "title": "IndexError: pop from an empty deque when using glob in production",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2023-01-14",
+   "keywords": [
+    "prefix"
+   ]
+  },
+  {
+   "number": 118,
+   "title": "Fix issue with deleting buckets using `rmdir`",
+   "state": "closed",
+   "is_pr": true,
+   "created": "2023-01-13",
+   "keywords": [
+    "rmdir"
+   ]
+  },
+  {
+   "number": 117,
+   "title": "The `rmdir` method can not delete buckets",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2023-01-13",
+   "keywords": [
+    "rmdir",
+    "delete"
+   ]
+  },
+  {
+   "number": 107,
+   "title": "Rename to or from FileSystem",
+   "state": "closed",
+   "is_pr": true,
+   "created": "2022-11-02",
+   "keywords": [
+    "rename"
+   ]
+  },
+  {
+   "number": 98,
+   "title": "copy files between S3 locations using S3Path",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2022-01-12",
+   "keywords": [
+    "rename"
+   ]
+  },
+  {
+   "number": 88,
+   "title": "`Path.rename(S3Path)` doesn't work",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2021-08-27",
+   "keywords": [
+    "rename"
+   ]
+  },
+  {
+   "number": 87,
+   "title": "Configuration example not working: NoCredentialsError",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2021-08-10",
+   "keywords": [
+    "prefix"
+   ]
+  },
+  {
+   "number": 77,
+   "title": "URLencoding breakes S3 key",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2021-06-17",
+   "keywords": [
+    "prefix"
+   ]
+  },
+  {
+   "number": 73,
+   "title": "Config arguments such as ACL not passed to copy",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2021-06-14",
+   "keywords": [
+    "rename"
+   ]
+  },
+  {
+   "number": 59,
+   "title": "Pandas compatibility",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2021-02-03",
+   "keywords": [
+    "prefix"
+   ]
+  },
+  {
+   "number": 13,
+   "title": "TypeError: 'NoneType' exception when calling owner() method on a valid path",
+   "state": "closed",
+   "is_pr": false,
+   "created": "2019-05-03",
+   "keywords": [
+    "rename"
+   ]
+  }
+ ],
+ "assessment": "No match reports the defect: deleting or renaming a directory also affects sibling objects that only share a string prefix (e.g. rmdir('tmp') deleting 'tmpfile.txt'), or renaming rewrites every occurrence of the old name. Closest match #205 ('rmdir deletes non-empty prefixes and buckets') concerns rmdir removing the directory's OWN contents (a design question about pathlib semantics), not objects outside the directory. All other matches concern unrelated behaviour (URL encoding #77, bucket deletion #117/#118, iterdir trailing slashes #193, configuration, copy, pandas)."
+}

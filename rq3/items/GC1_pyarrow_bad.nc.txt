@@ -1,0 +1,35 @@
+// file: cpp/src/arrow/filesystem/s3fs.cc
+  Future<> DoDeleteDirContentsAsync(const std::string& bucket, const std::string& key) {
+    return RunInScheduler(
+        [bucket, key](util::AsyncTaskScheduler* scheduler, S3FileSystem::Impl* self) {
+          scheduler->AddSimpleTask(
+              [=] {
+                FileSelector select;
+                select.base_dir = bucket + kSep + key;
+                select.recursive = true;
+                select.allow_not_found = false;
+
+                FileInfoGenerator file_infos = self->GetFileInfoGenerator(select);
+
+                auto handle_file_infos = [=](const std::vector<FileInfo>& file_infos) {
+                  std::vector<std::string> file_paths;
+                  for (const auto& file_info : file_infos) {
+                    DCHECK_GT(file_info.path().size(), bucket.size());
+                    file_paths.push_back(file_info.path().substr(bucket.size() + 1));
+                  }
+                  scheduler->AddSimpleTask(
+                      [=, file_paths = std::move(file_paths)] {
+                        return self->DeleteObjectsAsync(bucket, file_paths);
+                      },
+                      std::string_view("DeleteDirContentsDeleteTask"));
+                  return Status::OK();
+                };
+
+                return VisitAsyncGenerator(
+                    AsyncGenerator<std::vector<FileInfo>>(std::move(file_infos)),
+                    std::move(handle_file_infos));
+              },
+              std::string_view("ListFilesForDelete"));
+          return Status::OK();
+        });
+  }

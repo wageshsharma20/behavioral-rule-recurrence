@@ -1,0 +1,235 @@
+`S3Path.glob()` doesn't work correctly starting from s3path>=0.4
+Hello!
+
+I have observed an `s3path` bug with the glob operation in S3. Have a look at me counting the number of "output" subfolders in a specific S3 folder:
+```bash
+> pip install s3path~=0.3.4
+Successfully installed s3path-0.3.4
+> python -c "from s3path import S3Path; print(len(list(S3Path.from_uri('s3://se-cicd-tests/s3path').glob('**/output/'))))"
+4
+> pip install s3path~=0.4.0
+Successfully installed packaging-23.2 s3path-0.4.2
+> python -c "from s3path import S3Path; print(len(list(S3Path.from_uri('s3://se-cicd-tests/s3path').glob('**/output/'))))"
+0
+> pip install s3path~=0.5.0
+Successfully installed s3path-0.5.2
+> python -c "from s3path import S3Path; print(len(list(S3Path.from_uri('s3://se-cicd-tests/s3path').glob('**/output/'))))"
+0
+
+# And here is the folders structure I use
+> pip install s3path~=0.3.4
+Successfully installed s3path-0.3.4
+> python -c "from s3path import S3Path; print(list(S3Path.from_uri('s3://se-cicd-tests/s3path').glob('**/output/')))"     
+[S3Path('/se-cicd-tests/s3path/output'), S3Path('/se-cicd-tests/s3path/1/output'), S3Path('/se-cicd-tests/s3path/2/output'), S3Path('/se-cicd-tests/s3path/3/output')]
+```
+
+Do you know what this could be due to? Nothing changes other than the version of `s3path` I'm using. Are you able to reproduce? Could you fix the glob?
+Hi   
+We have a new algorithm for the glob that support faster searches
+I'll start checking the bug
+For now you can use the old algo configuration like this [this]( 
+I merged a fix
+This will be released in the next version
+I'll update here when deploying
+Version 0.5.3 deployed with the fix
+Thanks   !
+
+Surprisingly just upgrading to `s3path==0.5.3` breaks `boto3` imports for me (how strange, no?). Have a look.
+
+# s3path==0.5.2
+```
+python -m pytest tests/market_structure/test_predict_scenario.py
+===================================================================== test session starts =====================================================================
+platform darwin -- Python 3.8.19, pytest-7.4.4, pluggy-1.4.0
+Using --randomly-seed=1715445607
+rootdir: git/repo/tests
+configfile: pytest.ini
+plugins: cov-5.0.0, pytest_freezer-0.4.8, randomly-3.15.0, recording-0.12.1
+collected 18 items                                                                                                                                            
+
+tests/market_structure/test_predict_scenario.py ..................                                                                                      [100%]
+
+===================================================================== 18 passed in 2.21s ======================================================================
+```
+
+# s3path==0.5.3
+```
+pip install s3path==0.5.3
+> Successfully installed s3path-0.5.3 [no other changes]
+python -m pytest tests/market_structure/test_predict_scenario.py
+… 
+AttributeError
+=================================================================== short test summary info ===================================================================
+FAILED tests/market_structure/test_predict_scenario.py::test_remove_non_applying_value_drivers[input_df0-expected_df0] - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_remove_non_applying_value_drivers[input_df2-expected_df2] - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_providing_latest_lambda_function - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_get_latest_lambda_function[mock_list_functions_paginator1-se-run-simulation-production-v2-0-1] - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_no_lambda_function_found - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_get_latest_lambda_function[mock_list_functions_paginator0-se-run-simulation-production-v2-0-1] - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_extract_model_weights_file_from_zip - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_get_model_weights_path - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_remove_non_applying_value_drivers[input_df1-expected_df1] - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_get_value_drivers[input_df0-expected_value_drivers0] - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_rename_value_driver_columns[input_df1-expected_df1] - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_rename_value_driver_columns[input_df0-expected_df0] - AttributeError: module 'boto3' has no attribute 'session'
+FAILED tests/market_structure/test_predict_scenario.py::test_get_value_drivers[input_df1-expected_value_drivers1] - AttributeError: module 'boto3' has no attribute 'session'
+ERROR tests/market_structure/test_predict_scenario.py::test_run_simulation_failure - AttributeError: module 'boto3' has no attribute 'session'
+ERROR tests/market_structure/test_predict_scenario.py::TestClassical::test_predict - AttributeError: module 'boto3' has no attribute 'session'
+ERROR tests/market_structure/test_predict_scenario.py::TestClassical::test_run_simulation - AttributeError: module 'boto3' has no attribute 'session'
+ERROR tests/market_structure/test_predict_scenario.py::TestClassical::test_distribute_results_to_input_scenarios - AttributeError: module 'boto3' has no attribute 'session'
+ERROR tests/market_structure/test_predict_scenario.py::TestGeneral::test_predict - AttributeError: module 'boto3' has no attribute 'session'
+================================================================ 13 failed, 5 errors in 0.69s =================================================================
+
+```
+
+And the specific error looks like
+```
+        self._lambda_client = boto3.client("lambda", region_name=REGION)
+>       self._s3_resource = boto3.session.Session().resource("s3")
+E       AttributeError: module 'boto3' has no attribute 'session'
+```
+which can be fixed by replacing `boto3.session.Session()` with `boto3.Session()`, but I'm very perplexed by why would upgrading the `s3path` version overshadow the `boto3.session` module… 
+Does it make any sense to you?
+  
+Sorry about that
+We added a feature that boto3 will be laze loaded and not be loaded for PurePath usages
+This is probably related #164 
+checking...   
+Found the issue
+Fix will be deployed today
+PR #167
+
+  version 0.5.5 was deployed with the fix.
+  Thanks for fixing fast! I'll check when I have a moment.
+Hi  , I am experiencing some weird behavior after updating to 0.5.5 with the new `glob`:
+reproduce script:
+```python
+from s3path import S3Path
+p = S3Path.from_uri("replace-with-s3-uri")
+s3_file = p / "some_dir" / "empty.txt"
+with s3_file.open("w") as fp:
+    fp.write("1")
+print(list(p.glob("*")))
+```
+
+The script above results 2 entries of p / "some_dir"
+Hi   
+
+I just now wrote this test:
+
+``` python
+def test_glob_issue_160_weird_behavior(s3_mock):
+    """
+    from s3path import S3Path
+    p = S3Path.from_uri("replace-with-s3-uri")
+    s3_file = p / "some_dir" / "empty.txt"
+    with s3_file.open("w") as fp:
+        fp.write("1")
+    print(list(p.glob("*")))
+    """
+    s3 = boto3.resource('s3')
+    s3.create_bucket(Bucket='my-bucket')
+
+    path = S3Path.from_uri("s3://my-bucket/")
+    new_file = path / "some_dir" / "empty.txt"
+    new_file.touch()
+
+    assert list(path.glob("*")) == [S3Path('/my-bucket/some_dir')]
+
+```
+
+The test passed properly
+What am I missing? and on which python version are you running?
+> Hi  
+> 
+> I just now wrote this test:
+> 
+> ```python
+> def test_glob_issue_160_weird_behavior(s3_mock):
+>     """
+>     from s3path import S3Path
+>     p = S3Path.from_uri("replace-with-s3-uri")
+>     s3_file = p / "some_dir" / "empty.txt"
+>     with s3_file.open("w") as fp:
+>         fp.write("1")
+>     print(list(p.glob("*")))
+>     """
+>     s3 = boto3.resource('s3')
+>     s3.create_bucket(Bucket='my-bucket')
+> 
+>     path = S3Path.from_uri("s3://my-bucket/")
+>     new_file = path / "some_dir" / "empty.txt"
+>     new_file.touch()
+> 
+>     assert list(path.glob("*")) == [S3Path('/my-bucket/some_dir')]
+> ```
+> 
+> The test passed properly What am I missing? and on which python version are you running?
+
+I am using Python 3.10.13
+You are right it doesn't reproduce in the example you provided, it seems to reproduce for me only in very long prefixes. For example prefix `s3://<bucket>/username/experiment-name/2024/04/11/1342/empty.txt`
+  sounds like a setup issue
+Maybe you have more keys in the bucket
+In any case if you have something that I can reproduce I'm here..
+Here is a reproduce script with minio container 
+
+Run minio:
+```bash
+docker run -d --name minio \
+  -p 9000:9000 \
+  -p 9001:9001 \
+  -e MINIO_ROOT_USER=minioadmin \
+  -e MINIO_ROOT_PASSWORD=minioadmin123 \
+  minio/minio server /data
+```
+
+```python
+# test_s3path.py
+import boto3
+from botocore.client import Config
+from s3path import S3Path, register_configuration_parameter
+
+endpoint_url = " 
+access_key = "minioadmin"
+secret_key = "minioadmin123"
+
+minio_resource = boto3.resource(
+    's3',
+    endpoint_url=endpoint_url ,
+    aws_access_key_id=access_key,
+    aws_secret_access_key=secret_key,
+    config=Config(signature_version='s3v4'),
+    region_name='us-east-1')
+
+
+try:
+    bucket = "my-bucket"
+    minio_resource.create_bucket(Bucket=bucket)
+except:
+    print("bucket already created")
+
+first_dir = S3Path.from_uri(f"s3://{bucket}/first_dir/")
+register_configuration_parameter(first_dir, resource=minio_resource)
+new_file = first_dir / "some_dir" / "empty.txt"
+new_file.touch()
+print(list(first_dir.glob("*")))
+
+second_dir = S3Path.from_uri(f"s3://{bucket}/first_dir/second_dir/")
+register_configuration_parameter(second_dir, resource=minio_resource)
+new_file = second_dir / "some_dir" / "empty.txt"
+new_file.touch()
+print(list(second_dir.glob("*")))
+```
+
+Run:
+`python test_s3path.py`
+
+Results:
+[S3Path('/my-bucket/first_dir/some_dir')]
+[S3Path('/my-bucket/first_dir/second_dir/some_dir'), S3Path('/my-bucket/first_dir/second_dir/some_dir')]
+Hi   
+The issue is fix
+Version: 0.5.6 Deployed
+Hi  ,
+Thanks for the fast response and fix!
+I confirm: v0.5.6 doesn't have the "boto3" import error anymore. Thanks   !

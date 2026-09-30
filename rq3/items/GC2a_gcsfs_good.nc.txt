@@ -1,0 +1,141 @@
+# file: gcsfs/core.py
+def quote(s):
+
+    return quote_urllib(s, safe="")
+
+    def _format_path(self, path, args):
+        if not path.startswith("http"):
+            path = self.base + path
+
+        if args:
+            path = path.format(*[quote(p) for p in args])
+        return path
+
+    def url(self, path):
+        u = "{}/download/storage/v1/b/{}/o/{}?alt=media"
+        bucket, object = self.split_path(path)
+        object = quote(object)
+        return u.format(self._location, bucket, object)
+
+    async def _rm_files(self, paths):
+        template = (
+            "\n--===============7330845974216740156==\n"
+            "Content-Type: application/http\n"
+            "Content-Transfer-Encoding: binary\n"
+            "Content-ID: <b29c5de2-0db4-490b-b421-6a51b598bd11+{i}>"
+            "\n\nDELETE /storage/v1/b/{bucket}/o/{key} HTTP/1.1\n"
+            "Content-Type: application/json\n"
+            "accept: application/json\ncontent-length: 0\n"
+        )
+        errors = []
+
+        for chunk in _chunks(paths, 100):
+            body = "".join(
+                [
+                    template.format(
+                        i=i + 1,
+                        bucket=p.split("/", 1)[0],
+                        key=quote(p.split("/", 1)[1]),
+                    )
+                    for i, p in enumerate(chunk)
+                ]
+            )
+            headers, content = await self._call(
+                "POST",
+                f"{self._location}/batch/storage/v1",
+                headers={
+                    "Content-Type": 'multipart/mixed; boundary="=========='
+                    '=====7330845974216740156=="'
+                },
+                data=body + "\n--===============7330845974216740156==--",
+            )
+
+            boundary = headers["Content-Type"].split("=", 1)[1]
+            parents = [self._parent(p) for p in paths]
+            [self.invalidate_cache(parent) for parent in parents + list(paths)]
+            txt = content.decode()
+            if any(
+                not ("200 OK" in c or "204 No Content" in c)
+                for c in txt.split(boundary)[1:-1]
+            ):
+                pattern = '"message": "([^"]+)"'
+                out = set(re.findall(pattern, txt))
+                errors.extend(out)
+
+        if errors:
+            raise OSError(errors)
+
+    def discard(self):
+        if self.location is None:
+            return
+        uid = re.findall("upload_id=([^&=?]+)", self.location)
+        self.gcsfs.call(
+            "DELETE",
+            f"{self.fs._location}/upload/storage/v1/b/{quote(self.bucket)}/o",
+            params={"uploadType": "resumable", "upload_id": uid},
+            json_out=True,
+        )
+
+async def initiate_upload(
+    fs,
+    bucket,
+    key,
+    content_type="application/octet-stream",
+    metadata=None,
+    fixed_key_metadata=None,
+):
+    j = {"name": key}
+    if metadata:
+        j["metadata"] = metadata
+    j.update(_convert_fixed_key_metadata(fixed_key_metadata))
+    headers, _ = await fs._call(
+        method="POST",
+        path=f"{fs._location}/upload/storage/v1/b/{quote(bucket)}/o",
+        uploadType="resumable",
+        json=j,
+        headers={"X-Upload-Content-Type": content_type},
+    )
+    loc = headers["Location"]
+    out = loc[0] if isinstance(loc, list) else loc
+    if len(str(loc)) < 20:
+        logger.error("Location failed: %s" % headers)
+    return out
+
+async def simple_upload(
+    fs,
+    bucket,
+    key,
+    datain,
+    metadatain=None,
+    consistency=None,
+    content_type="application/octet-stream",
+    fixed_key_metadata=None,
+):
+    checker = get_consistency_checker(consistency)
+    path = f"{fs._location}/upload/storage/v1/b/{quote(bucket)}/o"
+    metadata = {"name": key}
+    if metadatain is not None:
+        metadata["metadata"] = metadatain
+    metadata.update(_convert_fixed_key_metadata(fixed_key_metadata))
+    metadata = json.dumps(metadata)
+    template = (
+        "--==0=="
+        "\nContent-Type: application/json; charset=UTF-8"
+        "\n\n"
+        + metadata
+        + "\n--==0=="
+        + "\nContent-Type: {0}".format(content_type)
+        + "\n\n"
+    )
+
+    data = template.encode() + datain + b"\n--==0==--"
+    j = await fs._call(
+        "POST",
+        path,
+        uploadType="multipart",
+        headers={"Content-Type": 'multipart/related; boundary="==0=="'},
+        data=data,
+        json_out=True,
+    )
+    checker.update(datain)
+    checker.validate_json_response(j)

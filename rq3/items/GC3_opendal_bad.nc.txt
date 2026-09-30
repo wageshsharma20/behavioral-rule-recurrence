@@ -1,0 +1,97 @@
+// file: core/src/layers/complete.rs
+    async fn complete_stat(&self, path: &str, args: OpStat) -> Result<RpStat> {
+        let capability = self.meta.full_capability();
+        if !capability.stat {
+            return Err(self.new_unsupported_error(Operation::Stat));
+        }
+
+        if path == "/" {
+            return Ok(RpStat::new(Metadata::new(EntryMode::DIR)));
+        }
+
+        if path.ends_with('/') && capability.create_dir {
+            let meta = self.inner.stat(path, args).await?.into_metadata();
+
+            if meta.is_file() {
+                return Err(Error::new(
+                    ErrorKind::NotFound,
+                    "stat expected a directory, but found a file",
+                ));
+            }
+
+            return Ok(RpStat::new(Metadata::new(EntryMode::DIR)));
+        }
+
+        if path.ends_with('/') && capability.list_with_recursive {
+            let (_, mut l) = self
+                .inner
+                .list(
+                    path.trim_end_matches('/'),
+                    OpList::default().with_recursive(true).with_limit(1),
+                )
+                .await?;
+
+            return if oio::List::next(&mut l).await?.is_some() {
+                Ok(RpStat::new(Metadata::new(EntryMode::DIR)))
+            } else {
+                Err(Error::new(
+                    ErrorKind::NotFound,
+                    "the directory is not found",
+                ))
+            };
+        }
+
+        self.inner.stat(path, args).await.map(|v| {
+            v.map_metadata(|m| {
+                let bit = m.metakey();
+                m.with_metakey(bit | Metakey::Complete)
+            })
+        })
+    }
+
+    fn complete_blocking_stat(&self, path: &str, args: OpStat) -> Result<RpStat> {
+        let capability = self.meta.full_capability();
+        if !capability.stat {
+            return Err(self.new_unsupported_error(Operation::Stat));
+        }
+
+        if path == "/" {
+            return Ok(RpStat::new(Metadata::new(EntryMode::DIR)));
+        }
+
+        if path.ends_with('/') && capability.create_dir {
+            let meta = self.inner.blocking_stat(path, args)?.into_metadata();
+
+            if meta.is_file() {
+                return Err(Error::new(
+                    ErrorKind::NotFound,
+                    "stat expected a directory, but found a file",
+                ));
+            }
+
+            return Ok(RpStat::new(Metadata::new(EntryMode::DIR)));
+        }
+
+        if path.ends_with('/') && capability.list_with_recursive {
+            let (_, mut l) = self.inner.blocking_list(
+                path.trim_end_matches('/'),
+                OpList::default().with_recursive(true).with_limit(1),
+            )?;
+
+            return if oio::BlockingList::next(&mut l)?.is_some() {
+                Ok(RpStat::new(Metadata::new(EntryMode::DIR)))
+            } else {
+                Err(Error::new(
+                    ErrorKind::NotFound,
+                    "the directory is not found",
+                ))
+            };
+        }
+
+        self.inner.blocking_stat(path, args).map(|v| {
+            v.map_metadata(|m| {
+                let bit = m.metakey();
+                m.with_metakey(bit | Metakey::Complete)
+            })
+        })
+    }

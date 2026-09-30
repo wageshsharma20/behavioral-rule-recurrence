@@ -1,0 +1,220 @@
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.
+_request non-retriable exception: Metadata in the request couldn't decode, 400
+Traceback (most recent call last):
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 153, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/core.py", line 537, in _request
+    validate_response(status, contents, path, args)
+  File "./envs/gcsfs-2026.8.1-era/lib/python3.11/site-packages/gcsfs/retry.py", line 140, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Metadata in the request couldn't decode, 400
+Failed to move file using moveTo API: Metadata in the request couldn't decode, 400. Falling back to copy/delete.

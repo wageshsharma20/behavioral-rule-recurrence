@@ -1,0 +1,92 @@
+{
+ "golden": {
+  "GC1_arrow|GC1_s3fs": 0.19686614474028724,
+  "GC2a_s3path|GC2a_gcsfs": 0.10089424597258703,
+  "GC2a_s3path|GC2a_obstore": 0.10473542031198128,
+  "GC2a_gcsfs|GC2a_obstore": 0.1272348426546979,
+  "GC2b_arrow|GC2b_obstore": 0.09034880124640493,
+  "GC3_cloudpathlib|GC3_opendal": 0.05252872428150725
+ },
+ "rejected": {
+  "C1_gcsfs|C1_s3fs": 0.12881957705167008,
+  "R2_s3fs_2021|R2_gcsfs_2022": 0.02810435269347348,
+  "R2_s3fs_2023|R2_gcsfs_2022": 0.12911224415708886,
+  "REL_gcsfs|REL_sftp": 0.04933308877115131,
+  "CT_s3path|GC3_opendal": 0.0,
+  "GLOB_s3path|GLOB_cloudpathlib": 0.08419356918179255
+ },
+ "different_rule": {
+  "GC1_arrow|GC2a_s3path": 0.06210722343761065,
+  "GC1_arrow|GC2a_gcsfs": 0.0831695098145526,
+  "GC1_arrow|GC2a_obstore": 0.08370779208309298,
+  "GC1_arrow|GC2b_arrow": 0.0922624913541834,
+  "GC1_arrow|GC2b_obstore": 0.06271513041376364,
+  "GC1_arrow|GC3_cloudpathlib": 0.052983994917526596,
+  "GC1_arrow|GC3_opendal": 0.08360444856118512,
+  "GC1_s3fs|GC2a_s3path": 0.08298201422604119,
+  "GC1_s3fs|GC2a_gcsfs": 0.10742949981487253,
+  "GC1_s3fs|GC2a_obstore": 0.08676105102426838,
+  "GC1_s3fs|GC2b_arrow": 0.07781067863743622,
+  "GC1_s3fs|GC2b_obstore": 0.0422512947263425,
+  "GC1_s3fs|GC3_cloudpathlib": 0.0853161440181963,
+  "GC1_s3fs|GC3_opendal": 0.08354730941166628,
+  "GC2a_s3path|GC2b_arrow": 0.06649468031638542,
+  "GC2a_s3path|GC2b_obstore": 0.06021832247408891,
+  "GC2a_s3path|GC3_cloudpathlib": 0.05821772212186202,
+  "GC2a_s3path|GC3_opendal": 0.06341485690799023,
+  "GC2a_gcsfs|GC2b_arrow": 0.06069164727517135,
+  "GC2a_gcsfs|GC2b_obstore": 0.06457650230517939,
+  "GC2a_gcsfs|GC3_cloudpathlib": 0.04425450054927791,
+  "GC2a_gcsfs|GC3_opendal": 0.07837468370331153,
+  "GC2a_obstore|GC2b_arrow": 0.09084313051356252,
+  "GC2a_obstore|GC2b_obstore": 0.17891891801406679,
+  "GC2a_obstore|GC3_cloudpathlib": 0.0506717301818093,
+  "GC2a_obstore|GC3_opendal": 0.06621553863978931,
+  "GC2b_arrow|GC3_cloudpathlib": 0.0565594849446099,
+  "GC2b_arrow|GC3_opendal": 0.034383649059010285,
+  "GC2b_obstore|GC3_cloudpathlib": 0.02439043115182154,
+  "GC2b_obstore|GC3_opendal": 0.02719866582197186
+ },
+ "summary": {
+  "threshold_admitting_all_golden": 0.05252872428150725,
+  "rejected_at_or_above": [
+   "C1_gcsfs|C1_s3fs",
+   "R2_s3fs_2023|R2_gcsfs_2022",
+   "GLOB_s3path|GLOB_cloudpathlib"
+  ],
+  "different_rule_at_or_above": 24,
+  "n_different_rule": 30,
+  "auc_golden_vs_all_other": 0.7962962962962963,
+  "max_rejected": [
+   "R2_s3fs_2023|R2_gcsfs_2022",
+   0.12911224415708886
+  ],
+  "min_golden": [
+   "GC3_cloudpathlib|GC3_opendal",
+   0.05252872428150725
+  ],
+  "n_pairs": 42,
+  "ranks_of_golden": [
+   1,
+   5,
+   7,
+   8,
+   11,
+   33
+  ],
+  "top6_counts": {
+   "G": 2,
+   "R": 2,
+   "D": 2
+  },
+  "second_most_similar_pair": "GC2a_obstore|GC2b_obstore",
+  "rejected_more_similar_than_n_golden": {
+   "C1_gcsfs|C1_s3fs": 5,
+   "R2_s3fs_2021|R2_gcsfs_2022": 0,
+   "R2_s3fs_2023|R2_gcsfs_2022": 5,
+   "REL_gcsfs|REL_sftp": 0,
+   "CT_s3path|GC3_opendal": 0,
+   "GLOB_s3path|GLOB_cloudpathlib": 1
+  }
+ }
+}

@@ -1,0 +1,47 @@
+
+def rename(path, target):
+    source_bucket_name = path.bucket
+    source_key_name = path.key
+    target_bucket_name = target.bucket
+    target_key_name = target.key
+
+    resource, config = configuration_map.get_configuration(path)
+    allowed_copy_args = boto3.s3.transfer.TransferManager.ALLOWED_COPY_ARGS
+
+    if not is_dir(path):
+        target_bucket = resource.Bucket(target_bucket_name)
+        object_summary = resource.ObjectSummary(source_bucket_name, source_key_name)
+        old_source = {'Bucket': object_summary.bucket_name, 'Key': object_summary.key}
+        _boto3_method_with_extraargs(
+            target_bucket.copy,
+            config=config,
+            args=(old_source, target_key_name),
+            allowed_extra_args=allowed_copy_args)
+        _boto3_method_with_parameters(object_summary.delete)
+        return
+
+    bucket = resource.Bucket(source_bucket_name)
+    target_bucket = resource.Bucket(target_bucket_name)
+    source_dir = source_key_name.rstrip('/') + '/'
+    target_dir = target_key_name.rstrip('/') + '/'
+    for object_summary in bucket.objects.filter(Prefix=source_dir):
+        old_source = {'Bucket': object_summary.bucket_name, 'Key': object_summary.key}
+        new_key = target_dir + object_summary.key[len(source_dir):]
+        _, config = configuration_map.get_configuration(type(path)(target_bucket_name, new_key))
+        _boto3_method_with_extraargs(
+            target_bucket.copy,
+            config=config,
+            args=(old_source, new_key),
+            allowed_extra_args=allowed_copy_args)
+        _boto3_method_with_parameters(object_summary.delete)
+
+def rmdir(path):
+    bucket_name = path.bucket
+    key_name = path.key
+    resource, config = configuration_map.get_configuration(path)
+    bucket = resource.Bucket(bucket_name)
+    prefix = key_name.rstrip('/') + '/' if key_name else ''
+    for object_summary in bucket.objects.filter(Prefix=prefix):
+        _boto3_method_with_parameters(object_summary.delete, config=config)
+    if path.is_bucket:
+        _boto3_method_with_parameters(bucket.delete, config=config)

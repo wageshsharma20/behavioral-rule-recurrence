@@ -1,0 +1,261 @@
+{
+ "P1b": {
+  "ollama:gpt-oss:20b": {
+   "paired_items": 14,
+   "unparsed_B3": 1,
+   "unparsed_B1": 6,
+   "unparsed_all_T0": 23,
+   "n_T0": 78,
+   "as_errors": {
+    "B3": 0.5714285714285714,
+    "B1": 0.35714285714285715
+   },
+   "drop_per_condition": {
+    "B3": 0.6428571428571428,
+    "B1": 0.5
+   },
+   "drop_pairs": {
+    "n": 8,
+    "B3": 0.5,
+    "B1": 0.5
+   }
+  },
+  "ollama:qwen3-coder:30b": {
+   "paired_items": 14,
+   "unparsed_B3": 0,
+   "unparsed_B1": 0,
+   "unparsed_all_T0": 1,
+   "n_T0": 78,
+   "as_errors": {
+    "B3": 0.5,
+    "B1": 0.4285714285714286
+   },
+   "drop_per_condition": {
+    "B3": 0.5,
+    "B1": 0.4285714285714286
+   },
+   "drop_pairs": {
+    "n": 14,
+    "B3": 0.5,
+    "B1": 0.4285714285714286
+   }
+  }
+ },
+ "R1": {
+  "integrity": {
+   "files": [
+    "rq3/runs_R1/runs/ollama_gpt-oss_20b_R1_budget16k.jsonl"
+   ],
+   "records": 78,
+   "ids_match_frozen_T0": true,
+   "unique_ids": true,
+   "plan_hash_ok": true,
+   "temperature_0": true,
+   "run_config": [
+    "R1: num_predict=16384, num_ctx=24576, T=0 only"
+   ],
+   "model_digest_same_as_frozen": true,
+   "prompt_sha_same_as_frozen": true,
+   "hit_budget": 8,
+   "max_eval_count": 16384
+  },
+  "unparsed": 8,
+  "frozen_unparsed": 23,
+  "cond": {
+   "B1": {
+    "balacc": 0.4444444444444444,
+    "n": 18
+   },
+   "B3": {
+    "balacc": 0.5714285714285714,
+    "n": 14
+   },
+   "B4": {
+    "balacc": 0.6111111111111112,
+    "n": 18
+   },
+   "B5": {
+    "balacc": 0.5714285714285714,
+    "n": 14
+   }
+  },
+  "B3_vs_B1": {
+   "wins": 2,
+   "losses": 0,
+   "paired": 14,
+   "p": 0.5,
+   "balacc_1": 0.5714285714285714,
+   "balacc_2": 0.42857142857142855
+  },
+  "B3_vs_B4": {
+   "wins": 0,
+   "losses": 1,
+   "paired": 14,
+   "p": 1.0,
+   "balacc_1": 0.5714285714285714,
+   "balacc_2": 0.6428571428571428
+  },
+  "B5_vs_B3": {
+   "wins": 0,
+   "losses": 0,
+   "paired": 10,
+   "p": 1.0,
+   "balacc_1": 0.6,
+   "balacc_2": 0.6
+  },
+  "delta_B3_B1_ci": [
+   0.0,
+   0.33333333333333326
+  ],
+  "rules": {
+   "GC1": {
+    "B1": {
+     "balacc": 0.5,
+     "n": 4
+    },
+    "B3": {
+     "balacc": 0.5,
+     "n": 4
+    },
+    "B4": {
+     "balacc": 0.5,
+     "n": 4
+    },
+    "B5": {
+     "balacc": 0.5,
+     "n": 4
+    }
+   },
+   "GC2a": {
+    "B1": {
+     "balacc": 0.5,
+     "n": 6
+    },
+    "B3": {
+     "balacc": 0.6666666666666666,
+     "n": 6
+    },
+    "B4": {
+     "balacc": 0.6666666666666666,
+     "n": 6
+    },
+    "B5": {
+     "balacc": 0.6666666666666666,
+     "n": 6
+    }
+   },
+   "GC2b": {
+    "B1": {
+     "balacc": 0.25,
+     "n": 4
+    },
+    "B3": {
+     "balacc": 0.5,
+     "n": 2
+    },
+    "B4": {
+     "balacc": 0.25,
+     "n": 4
+    },
+    "B5": {
+     "balacc": 0.5,
+     "n": 2
+    }
+   },
+   "GC3": {
+    "B1": {
+     "balacc": 0.5,
+     "n": 4
+    },
+    "B3": {
+     "balacc": 0.5,
+     "n": 2
+    },
+    "B4": {
+     "balacc": 1.0,
+     "n": 4
+    },
+    "B5": {
+     "balacc": 0.5,
+     "n": 2
+    }
+   }
+  },
+  "holdout": {
+   "set": [
+    "GC1/s3fs",
+    "GC2a/obstore",
+    "GC2b/obstore",
+    "GC3/opendal"
+   ],
+   "B3_vs_B1": {
+    "wins": 1,
+    "losses": 0,
+    "paired": 8,
+    "p": 1.0,
+    "balacc_1": 0.5,
+    "balacc_2": 0.375
+   }
+  },
+  "prospective": {
+   "B1:bad": "DEFECT",
+   "B3cpl:bad": "DEFECT",
+   "B3gcsfs:bad": "DEFECT",
+   "B4:bad": "DEFECT",
+   "B1:good": "DEFECT",
+   "B3cpl:good": "DEFECT",
+   "B3gcsfs:good": "DEFECT",
+   "B4:good": "DEFECT"
+  },
+  "constructed_recall": {
+   "B1": [
+    1,
+    2
+   ],
+   "B4": [
+    2,
+    2
+   ],
+   "B5": [
+    2,
+    2
+   ]
+  },
+  "verdict_changes_vs_frozen": {
+   "UNPARSED->DEFECT": 8,
+   "UNPARSED->CORRECT": 7
+  },
+  "defect_on_violating_B1_B3_B4_B5": [
+   7,
+   6,
+   7,
+   7
+  ],
+  "defect_on_satisfying_B1_B3_B4_B5": [
+   4,
+   5,
+   5,
+   5
+  ],
+  "unparsed_sensitivity": {
+   "paired_items": 14,
+   "unparsed_B3": 0,
+   "unparsed_B1": 5,
+   "unparsed_all_T0": 8,
+   "n_T0": 78,
+   "as_errors": {
+    "B3": 0.5714285714285714,
+    "B1": 0.42857142857142855
+   },
+   "drop_per_condition": {
+    "B3": 0.5714285714285714,
+    "B1": 0.5
+   },
+   "drop_pairs": {
+    "n": 9,
+    "B3": 0.5,
+    "B1": 0.5
+   }
+  }
+ }
+}

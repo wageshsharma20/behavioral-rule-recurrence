@@ -1,0 +1,52 @@
+--- rq3/pv1_accessor_ORIGINAL.py	2026-09-29 01:28:03
++++ envs/s3path-pv1/lib/python3.10/site-packages/s3path/accessor.py	2026-09-29 01:28:03
+@@ -117,9 +117,11 @@
+ 
+     bucket = resource.Bucket(source_bucket_name)
+     target_bucket = resource.Bucket(target_bucket_name)
+-    for object_summary in bucket.objects.filter(Prefix=source_key_name):
++    source_dir = source_key_name.rstrip('/') + '/'
++    target_dir = target_key_name.rstrip('/') + '/'
++    for object_summary in bucket.objects.filter(Prefix=source_dir):
+         old_source = {'Bucket': object_summary.bucket_name, 'Key': object_summary.key}
+-        new_key = object_summary.key.replace(source_key_name, target_key_name)
++        new_key = target_dir + object_summary.key[len(source_dir):]
+         _, config = configuration_map.get_configuration(type(path)(target_bucket_name, new_key))
+         _boto3_method_with_extraargs(
+             target_bucket.copy,
+@@ -137,7 +139,8 @@
+     key_name = path.key
+     resource, config = configuration_map.get_configuration(path)
+     bucket = resource.Bucket(bucket_name)
+-    for object_summary in bucket.objects.filter(Prefix=key_name):
++    prefix = key_name.rstrip('/') + '/' if key_name else ''
++    for object_summary in bucket.objects.filter(Prefix=prefix):
+         _boto3_method_with_parameters(object_summary.delete, config=config)
+     if path.is_bucket:
+         _boto3_method_with_parameters(bucket.delete, config=config)
+--- rq3/pv1_old_versions_ORIGINAL.py	2026-09-29 01:28:30
++++ envs/s3path-pv1/lib/python3.10/site-packages/s3path/old_versions.py	2026-09-29 01:28:30
+@@ -302,9 +302,11 @@
+             return
+         bucket = resource.Bucket(source_bucket_name)
+         target_bucket = resource.Bucket(target_bucket_name)
+-        for object_summary in bucket.objects.filter(Prefix=source_key_name):
++        source_dir = source_key_name.rstrip('/') + '/'
++        target_dir = target_key_name.rstrip('/') + '/'
++        for object_summary in bucket.objects.filter(Prefix=source_dir):
+             old_source = {'Bucket': object_summary.bucket_name, 'Key': object_summary.key}
+-            new_key = object_summary.key.replace(source_key_name, target_key_name)
++            new_key = target_dir + object_summary.key[len(source_dir):]
+             _, config = self.configuration_map.get_configuration(S3Path(target_bucket_name, new_key))
+             self._boto3_method_with_extraargs(
+                 target_bucket.copy,
+@@ -322,7 +324,8 @@
+         key_name = path.key
+         resource, config = self.configuration_map.get_configuration(path)
+         bucket = resource.Bucket(bucket_name)
+-        for object_summary in bucket.objects.filter(Prefix=key_name):
++        prefix = key_name.rstrip('/') + '/' if key_name else ''
++        for object_summary in bucket.objects.filter(Prefix=prefix):
+             self._boto3_method_with_parameters(object_summary.delete, config=config)
+         if path.is_bucket:
+             self._boto3_method_with_parameters(bucket.delete, config=config)

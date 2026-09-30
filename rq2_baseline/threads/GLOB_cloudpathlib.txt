@@ -1,0 +1,61 @@
+Globbing top-level bucket returns malformed CloudPaths
+As I understand, simple code like this is supposed to work just fine, but it's not:
+```
+root = AnyPath(f's3://')
+gen = root.glob('*')
+buckets = list(gen)
+files = list(buckets[0].glob('*'))
+pp(files)
+```
+
+So, in bucket S3Paths I have malformed url like: "s3:////bucket1":
+The error happens here:  
+It happens when `s3://` gets joined with `/bucket1` via slash in 
+ 
+
+Next problem is that these "bucket" entries don't actually have a bucket attribute set, it causes confusion inside, so the next `bucket.glob('*')` causes havoc inside, it pulls 2nd bucket into the 1st one somehow:
+`    raise ValueError("{!r} is not in the subpath of {!r}"
+ValueError: '/bucket2' is not in the subpath of '/bucket1' OR one path is relative and the other is absolute.`
+
+Moreover, using library like this:
+`files = list(AnyPath('s3://bucket1').glob('*'))` produces next: `S3Path('s3://bucket1/bucket1/root_folder')`
+which is obviously incorrect with bucket name twice in the path (and consequent .glob('*') failing as well).
+
+Is it me doing something horribly wrong, or S3 is broken right now?
+
+
+Thanks for the report  . There are 2 separate issues here, both of which just affect `.glob`, not any other methods.
+
+### Issue 1 - Globbing across buckets 
+Globbing across buckets is not currently implemented, and likely will not be since it would need to be specially handled.
+
+```python
+CloudPath("s3://").glob("*")  # this throws an error
+```
+
+To get all of the buckets that a user can see, you can use `iterdir`:
+
+```python
+CloudPath("s3://").iterdir()  # this lists buckets
+```
+
+In this case, we should at least raise a user-friendly error that indicates that globbing across buckets is not supported.
+
+### Issue 2 - Globbing at bucket-level results in malformed paths
+
+Your second issue, `CloudPath("s3://bucket").glob("*")` is a bug that looks like it was just introduced by #304. You can try version 0.11.0 and see if it reproduces or not. It likely will not reproduce but be substantially slower. To work around for now, you could use `iterdir` at the top level to have equivalent behavior to `glob("*")`. Also, `.glob` should work as expected within folders, e.g. `CloudPath("s3://bucket/folder").glob("*")`.
+
+The fix here should be to properly form paths at the top level so this doesn't happen.
+
+
+
+  as of #312, Issue 1 now raises a helpful error, and Issue 2 should be fixed. You can get it by upgrading to 0.12.1, which is on PyPI now.
+Fix globbing top level buckets and
+#304 introduced a regression when globbing at the top level (`CloudPath("s3://bucket").glob("*")`) where the bucket was duplicated in the paths that glob yielded (`CloudPath("s3://bucket/bucket/file1.txt")` is retruned), which was reported in #311. Additionally, #311 mentions that `CloudPath("s3://").glob("*")` does not work as expected.
+
+This PR adds two fixes:
+ - Fix the path construction logic in `glob` to not duplicate the bucket at the top level.
+ - Raise a not implemented error if globbing above a bucket level. Because of the way boto3 works, we would need to repeat our calls for each of the buckets to make globbing above a bucket work. This adds too much complexity. Instead, we give a friendly error that buckets can be listed with `iterdir` and `.glob` works within buckets.
+
+Additionally we add a regression test and update setup.py and changelog to make a patch release to fix this bug.
+

@@ -1,0 +1,664 @@
+{
+ "T0": {
+  "ollama:gpt-oss:20b": {
+   "unparsed": 23,
+   "cond": {
+    "B1": {
+     "balacc": 0.3333333333333333,
+     "n": 18
+    },
+    "B3": {
+     "balacc": 0.5714285714285714,
+     "n": 14
+    },
+    "B4": {
+     "balacc": 0.33333333333333337,
+     "n": 18
+    },
+    "B5": {
+     "balacc": 0.5,
+     "n": 14
+    }
+   },
+   "pairs": {
+    "B3_vs_B1": {
+     "wins": 3,
+     "losses": 0,
+     "paired": 14,
+     "p": 0.25,
+     "balacc_1": 0.5714285714285714,
+     "balacc_2": 0.35714285714285715
+    },
+    "B3_vs_B4": {
+     "wins": 2,
+     "losses": 0,
+     "paired": 14,
+     "p": 0.5,
+     "balacc_1": 0.5714285714285714,
+     "balacc_2": 0.4285714285714286
+    },
+    "B5_vs_B3": {
+     "wins": 0,
+     "losses": 1,
+     "paired": 10,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.6
+    }
+   },
+   "rules": {
+    "GC1": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 4
+     }
+    },
+    "GC2a": {
+     "B1": {
+      "balacc": 0.3333333333333333,
+      "n": 6
+     },
+     "B3": {
+      "balacc": 0.6666666666666666,
+      "n": 6
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 6
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 6
+     }
+    },
+    "GC2b": {
+     "B1": {
+      "balacc": 0.25,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 2
+     },
+     "B4": {
+      "balacc": 0.25,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 2
+     }
+    },
+    "GC3": {
+     "B1": {
+      "balacc": 0.25,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 2
+     },
+     "B4": {
+      "balacc": 0.0,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 2
+     }
+    }
+   },
+   "holdout": {
+    "set": [
+     "GC1/s3fs",
+     "GC2a/obstore",
+     "GC2b/obstore",
+     "GC3/opendal"
+    ],
+    "B3_vs_B1": {
+     "wins": 1,
+     "losses": 0,
+     "paired": 8,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.375
+    }
+   },
+   "delta_B3_B1_ci": [
+    0.0,
+    0.375
+   ],
+   "prospective": {
+    "B1:bad": "DEFECT",
+    "B3cpl:bad": "DEFECT",
+    "B3gcsfs:bad": "DEFECT",
+    "B4:bad": "DEFECT",
+    "B1:good": "DEFECT",
+    "B3cpl:good": "UNPARSED",
+    "B3gcsfs:good": "UNPARSED",
+    "B4:good": "DEFECT"
+   },
+   "constructed_recall": {
+    "B1": [
+     0,
+     2
+    ],
+    "B4": [
+     2,
+     2
+    ],
+    "B5": [
+     2,
+     2
+    ]
+   }
+  },
+  "ollama:qwen3-coder:30b": {
+   "unparsed": 1,
+   "cond": {
+    "B1": {
+     "balacc": 0.4444444444444444,
+     "n": 18
+    },
+    "B3": {
+     "balacc": 0.5,
+     "n": 14
+    },
+    "B4": {
+     "balacc": 0.5,
+     "n": 18
+    },
+    "B5": {
+     "balacc": 0.5,
+     "n": 14
+    }
+   },
+   "pairs": {
+    "B3_vs_B1": {
+     "wins": 2,
+     "losses": 1,
+     "paired": 14,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.4285714285714286
+    },
+    "B3_vs_B4": {
+     "wins": 2,
+     "losses": 3,
+     "paired": 14,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.5714285714285714
+    },
+    "B5_vs_B3": {
+     "wins": 0,
+     "losses": 0,
+     "paired": 10,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.5
+    }
+   },
+   "rules": {
+    "GC1": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 4
+     }
+    },
+    "GC2a": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 6
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 6
+     },
+     "B4": {
+      "balacc": 0.6666666666666666,
+      "n": 6
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 6
+     }
+    },
+    "GC2b": {
+     "B1": {
+      "balacc": 0.25,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 2
+     },
+     "B4": {
+      "balacc": 0.25,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 2
+     }
+    },
+    "GC3": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 2
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 2
+     }
+    }
+   },
+   "holdout": {
+    "set": [
+     "GC1/s3fs",
+     "GC2a/obstore",
+     "GC2b/obstore"
+    ],
+    "B3_vs_B1": {
+     "wins": 2,
+     "losses": 1,
+     "paired": 6,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.3333333333333333
+    }
+   },
+   "delta_B3_B1_ci": [
+    0.0,
+    0.3
+   ],
+   "prospective": {
+    "B1:bad": "DEFECT",
+    "B3cpl:bad": "DEFECT",
+    "B3gcsfs:bad": "DEFECT",
+    "B4:bad": "DEFECT",
+    "B1:good": "DEFECT",
+    "B3cpl:good": "DEFECT",
+    "B3gcsfs:good": "DEFECT",
+    "B4:good": "DEFECT"
+   },
+   "constructed_recall": {
+    "B1": [
+     2,
+     2
+    ],
+    "B4": [
+     2,
+     2
+    ],
+    "B5": [
+     2,
+     2
+    ]
+   }
+  }
+ },
+ "vote": {
+  "ollama:gpt-oss:20b": {
+   "unparsed": 2,
+   "cond": {
+    "B1": {
+     "balacc": 0.4444444444444444,
+     "n": 18
+    },
+    "B3": {
+     "balacc": 0.6428571428571428,
+     "n": 14
+    },
+    "B4": {
+     "balacc": 0.5,
+     "n": 18
+    },
+    "B5": {
+     "balacc": 0.5,
+     "n": 14
+    }
+   },
+   "pairs": {
+    "B3_vs_B1": {
+     "wins": 3,
+     "losses": 0,
+     "paired": 14,
+     "p": 0.25,
+     "balacc_1": 0.6428571428571428,
+     "balacc_2": 0.42857142857142855
+    },
+    "B3_vs_B4": {
+     "wins": 3,
+     "losses": 1,
+     "paired": 14,
+     "p": 0.625,
+     "balacc_1": 0.6428571428571428,
+     "balacc_2": 0.5
+    },
+    "B5_vs_B3": {
+     "wins": 0,
+     "losses": 2,
+     "paired": 10,
+     "p": 0.5,
+     "balacc_1": 0.5,
+     "balacc_2": 0.7
+    }
+   },
+   "rules": {
+    "GC1": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 4
+     }
+    },
+    "GC2a": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 6
+     },
+     "B3": {
+      "balacc": 0.8333333333333333,
+      "n": 6
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 6
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 6
+     }
+    },
+    "GC2b": {
+     "B1": {
+      "balacc": 0.25,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 2
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 2
+     }
+    },
+    "GC3": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 2
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 2
+     }
+    }
+   },
+   "holdout": {
+    "set": [
+     "GC1/s3fs",
+     "GC2a/obstore",
+     "GC2b/obstore",
+     "GC3/opendal"
+    ],
+    "B3_vs_B1": {
+     "wins": 2,
+     "losses": 0,
+     "paired": 8,
+     "p": 0.5,
+     "balacc_1": 0.625,
+     "balacc_2": 0.375
+    }
+   },
+   "delta_B3_B1_ci": [
+    0.0,
+    0.375
+   ],
+   "prospective": {
+    "B1:bad": "DEFECT",
+    "B3cpl:bad": "DEFECT",
+    "B3gcsfs:bad": "DEFECT",
+    "B4:bad": "DEFECT",
+    "B1:good": "DEFECT",
+    "B3cpl:good": "DEFECT",
+    "B3gcsfs:good": "DEFECT",
+    "B4:good": "DEFECT"
+   },
+   "constructed_recall": {
+    "B1": [
+     2,
+     2
+    ],
+    "B4": [
+     2,
+     2
+    ],
+    "B5": [
+     2,
+     2
+    ]
+   }
+  },
+  "ollama:qwen3-coder:30b": {
+   "unparsed": 0,
+   "cond": {
+    "B1": {
+     "balacc": 0.5,
+     "n": 18
+    },
+    "B3": {
+     "balacc": 0.5,
+     "n": 14
+    },
+    "B4": {
+     "balacc": 0.4444444444444444,
+     "n": 18
+    },
+    "B5": {
+     "balacc": 0.5,
+     "n": 14
+    }
+   },
+   "pairs": {
+    "B3_vs_B1": {
+     "wins": 2,
+     "losses": 2,
+     "paired": 14,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.5
+    },
+    "B3_vs_B4": {
+     "wins": 3,
+     "losses": 3,
+     "paired": 14,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.5
+    },
+    "B5_vs_B3": {
+     "wins": 0,
+     "losses": 0,
+     "paired": 10,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.5
+    }
+   },
+   "rules": {
+    "GC1": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 4
+     }
+    },
+    "GC2a": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 6
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 6
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 6
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 6
+     }
+    },
+    "GC2b": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 2
+     },
+     "B4": {
+      "balacc": 0.25,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 2
+     }
+    },
+    "GC3": {
+     "B1": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B3": {
+      "balacc": 0.5,
+      "n": 2
+     },
+     "B4": {
+      "balacc": 0.5,
+      "n": 4
+     },
+     "B5": {
+      "balacc": 0.5,
+      "n": 2
+     }
+    }
+   },
+   "holdout": {
+    "set": [
+     "GC1/s3fs",
+     "GC2a/obstore",
+     "GC2b/obstore"
+    ],
+    "B3_vs_B1": {
+     "wins": 2,
+     "losses": 2,
+     "paired": 6,
+     "p": 1.0,
+     "balacc_1": 0.5,
+     "balacc_2": 0.5
+    }
+   },
+   "delta_B3_B1_ci": [
+    0.0,
+    0.0
+   ],
+   "prospective": {
+    "B1:bad": "DEFECT",
+    "B3cpl:bad": "DEFECT",
+    "B3gcsfs:bad": "DEFECT",
+    "B4:bad": "DEFECT",
+    "B1:good": "DEFECT",
+    "B3cpl:good": "DEFECT",
+    "B3gcsfs:good": "DEFECT",
+    "B4:good": "DEFECT"
+   },
+   "constructed_recall": {
+    "B1": [
+     2,
+     2
+    ],
+    "B4": [
+     2,
+     2
+    ],
+    "B5": [
+     2,
+     2
+    ]
+   }
+  }
+ }
+}

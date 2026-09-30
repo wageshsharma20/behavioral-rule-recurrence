@@ -1,0 +1,32 @@
+Pull request: Test to cp/get/put directory with files with same name prefix
+[One test case in `gcsfs`]([link] has a weird behavior where copying a folder also copy files that have the same name prefix as the folder name. For example:
+
+```python
+
+# Files
+# -- subdir.txt
+# -- subdir
+# ---- subfile.txt
+
+fs.cp("subdir", "target")
+
+# Expected target folder content: ["subfile.txt"]
+
+# Content with gcsfs: ["subdir.txt", "subdir/subfile.txt"]
+```
+
+This PR adds tests to cover this use case.
+Also, [a PR in `gcsfs`]([link] adds a fix for this issue.
+
+TODO:
+
+Pull request: Avoid copying files with same name prefix when copying folder
+As described [here]([link] when copying a folder, the files with the same name prefix are also copied.
+
+This PR fixes this behavior. I guess there's probably a better way to fix this though.
+
+TODO:
+
+Comment: @user , if you have time
+
+Comment: Will be releasing tomorrow :)

@@ -1,0 +1,63 @@
+Issue: How do I access a file with an URL-encoded name on a LocalStore?
+I'm trying to read a file `/foo/hello%20world.txt` on my local disk. However, no matter how I format the url, obstore never actually finds the file.
+
+```python
+import obstore.store
+store = obstore.store.from_url("file://")
+result = obstore.get(store, "/foo/hello%20world.txt")
+
+>>> FileNotFoundError: Object at location /foo/hello%2520world.txt not found: No such file or directory (os error 2)
+```
+
+So it seems like in this case, the file name is URL-encoded again before the local file system is accessed.
+However, trying to decode the `%20` before calling obstore also does not work:
+
+```python
+import obstore.store
+store = obstore.store.from_url("file://")
+result = obstore.get(store, "/foo/hello world.txt")
+
+>>> FileNotFoundError: Object at location /foo/hello world.txt not found: No such file or directory (os error 2)
+```
+
+In that case (no special characters present), obstore doesn't do anything to the filename, which leave the (literal) filename `hello%20world.txt` completely unaccessible.
+
+Any advice on how to make this work apart from double-encoding all files containing special URL characters?
+
+Pull request: fix!: Don't percent-encode paths
+- Use `Path::parse` instead of `Path::from` for converting Python strings to `object_store::path::Path`
+- See upstream documentation here: [link]
+
+
+Closes [link] closes [link] closes [link]
+
+Comment: Hmm it's possible we may need to add a new API for this that wraps the upstream `Path::parse`: [link]
+
+We currently always use [`Path::from(String)`]([link] which will always re-encode the string.
+
+Comment: I wouldn't have a problem with re-encoding as long as it's consistent - I would just decode my filenames before calling `obstore`. The root of the problem seems to be the handling of the space character - it's an unsafe character according to RFC 1738 and thus I would expect it to behave the same as a `%` character. 
+
+But:
+
+`obstore.get(store, "/a b")` tries to open `/a b` on disk  
+`obstore.get(store, "/a%b")` tries to open `/a%25b` on disk
+
+Comment: But local file paths can have spaces in their name, so it seems to make sense that `object_store` allows that.
+
+I think the best way to solve this would be to export a `Path` class. 99% of users will never have to touch it, but for these url-encoded names you can pass in `Path.parse(string)` to obstore APIs
+
+Comment: You can look at [link] I'm not sure that's the best approach. See new test here: [link]
+
+Comment: [link] proposes an alternate solution: Always use `Path::parse`, so that percent-encoded filenames will always work. Though that requires users to manually percent-encode paths in some cases.
+
+Comment: @user this implies you have to percent-encode your paths before providing them to object-store?
+
+Comment: @user I'd be happy to get feedback on this. Essentially this moves from ["encode"]([link] (`Path::from`) to ["parse"]([link]
+
+#496 shows that our current behavior isn't suitable for all path inputs. You can also read [link] where perhaps `Path::parse` is a better default?
+
+Comment: @user yeah this is the correct way, we shouldn't encode provided paths, but assume the provided path is correct, this should be handle the end-user of the library.
+
+Also ran some tests and this indeed fixes some issue we ran into. So we should use Path::parse indeed.
+
+Might be good to release sooner than later, since it made obstore not usable at moment for strange filepaths

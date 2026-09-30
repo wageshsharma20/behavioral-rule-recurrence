@@ -1,0 +1,17 @@
+s3fs-2021.6.0-era done
+s3fs-2021.6.1-era done
+s3fs-2025.10.0-era done
+s3fs-2025.12.0-era xfam FAILED
+s3fs-2025.12.0-era xfam2 FAILED
+s3fs-2025.12.0-era f2 FAILED
+s3fs-2025.12.0-era done
+gcsfs-2022.2.0-era done
+gcsfs-2022.3.0-era done
+gcsfs-2022.7.1-era done
+gcsfs-2022.8.2-era done
+gcsfs-2023.1.0-era done
+gcsfs-2023.9.0-era done
+gcsfs-2024.6.1-era done
+gcsfs-2026.8.1-era done
+oracle/run_era_check.sh: line 44: S: unbound variable
+ERA CHECK DONE — note: the script's final line was misread ("S: unbound variable") because the script file was edited while running (boto3 fix); all 28 oracle runs completed and are compared by oracle/compare_era.py

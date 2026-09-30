@@ -1,0 +1,24 @@
+Pull request: feat(core)!: make list return path itself
+Closes [link]
+
+Comment: hi, @user I have finished the work for FS and S3, but I’m not sure if the implementation is elegant, especially for S3. Do you have any advice? If you think it’s okay, I’ll continue to complete the others.
+
+Comment: The HDFS tests seem flaky. In the latest commit, they failed, but the changes aren’t related to them.
+
+Comment: > The HDFS tests seem flaky. In the latest commit, they failed, but the changes aren’t related to them.
+
+Yes. The ASF download CDN returns 502. Please ignore it. Maybe we can try cache them if you are interested.
+
+Comment: > > The HDFS tests seem flaky. In the latest commit, they failed, but the changes aren’t related to them.
+> 
+> Yes. The ASF download CDN returns 502. Please ignore it. Maybe we can try cache them if you are interested.
+
+not this one. [link] here only `test_list_empty_dir` failed
+
+Comment: > not this one. [apache/opendal/actions/runs/10486150908/job/29043772467]([link] here only `test_list_empty_dir` failed
+
+No idea so far. The test and the code seems correct.
+
+Comment: Thank you very much for this PR. I will take a review tomorrow.
+
+Comment: This PR looks good to me overall. We will merge it after the release of version 0.49.2.

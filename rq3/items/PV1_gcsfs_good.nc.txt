@@ -1,0 +1,81 @@
+# file: gcsfs/core.py
+    async def _find(
+        self,
+        path,
+        withdirs=False,
+        detail=False,
+        prefix="",
+        versions=False,
+        maxdepth=None,
+        **kwargs,
+    ):
+        path = self._strip_protocol(path)
+
+        if maxdepth is not None and maxdepth < 1:
+            raise ValueError("maxdepth must be at least 1")
+
+        objects, _ = await self._do_list_objects(
+            path, delimiter="", prefix=prefix, versions=versions
+        )
+
+        if not objects:
+
+            bucket, key, _ = self.split_path(path)
+            if prefix:
+                _path = "" if not key else key.rstrip("/") + "/"
+                _prefix = f"{_path}{prefix}"
+            else:
+                _prefix = key
+            objects, _ = await self._do_list_objects(
+                bucket, delimiter="", prefix=_prefix, versions=versions
+            )
+
+        dirs = {}
+        cache_entries = {}
+
+        for obj in objects:
+            parent = self._parent(obj["name"])
+            previous = obj
+
+            while parent:
+                dir_key = self.split_path(parent)[1]
+                if not dir_key or len(parent) < len(path):
+                    break
+
+                dirs[parent] = {
+                    "Key": dir_key,
+                    "Size": 0,
+                    "name": parent,
+                    "StorageClass": "DIRECTORY",
+                    "type": "directory",
+                    "size": 0,
+                }
+
+                listing = cache_entries.setdefault(parent, {})
+                name = previous["name"]
+                if name not in listing:
+                    listing[name] = previous
+
+                previous = dirs[parent]
+                parent = self._parent(parent)
+
+        if not prefix:
+            cache_entries_list = {k: list(v.values()) for k, v in cache_entries.items()}
+            self.dircache.update(cache_entries_list)
+
+        if withdirs:
+            objects = sorted(objects + list(dirs.values()), key=lambda x: x["name"])
+
+        if maxdepth:
+
+            depth = path.rstrip("/").count("/") + maxdepth
+            objects = list(filter(lambda o: o["name"].count("/") <= depth, objects))
+
+        if detail:
+            if versions:
+                return {f"{o['name']}#{o['generation']}": o for o in objects}
+            return {o["name"]: o for o in objects}
+
+        if versions:
+            return [f"{o['name']}#{o['generation']}" for o in objects]
+        return [o["name"] for o in objects]

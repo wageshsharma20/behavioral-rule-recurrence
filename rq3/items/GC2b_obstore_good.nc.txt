@@ -1,0 +1,192 @@
+// file: obstore/src/copy.rs
+pub(crate) fn copy(
+    py: Python,
+    store: PyObjectStore,
+    from_: PyPath,
+    to: PyPath,
+    overwrite: bool,
+) -> PyObjectStoreResult<()> {
+    let runtime = get_runtime();
+    let from_ = from_.into();
+    let to = to.into();
+    py.detach(|| {
+        let fut: Pin<Box<dyn Future<Output = _> + Send>> = if overwrite {
+            Box::pin(store.as_ref().copy(&from_, &to))
+        } else {
+            Box::pin(store.as_ref().copy_if_not_exists(&from_, &to))
+        };
+        runtime.block_on(fut)?;
+        Ok::<_, PyObjectStoreError>(())
+    })
+}
+
+pub(crate) fn copy_async(
+    py: Python,
+    store: PyObjectStore,
+    from_: PyPath,
+    to: PyPath,
+    overwrite: bool,
+) -> PyResult<Bound<PyAny>> {
+    let from_ = from_.into();
+    let to = to.into();
+    pyo3_async_runtimes::tokio::future_into_py(py, async move {
+        let fut: Pin<Box<dyn Future<Output = _> + Send>> = if overwrite {
+            Box::pin(store.as_ref().copy(&from_, &to))
+        } else {
+            Box::pin(store.as_ref().copy_if_not_exists(&from_, &to))
+        };
+        fut.await.map_err(PyObjectStoreError::ObjectStoreError)?;
+        Ok(PyNone)
+    })
+}
+
+// file: obstore/src/get.rs
+pub(crate) fn get(
+    py: Python,
+    store: PyObjectStore,
+    path: PyPath,
+    options: Option<PyGetOptions>,
+) -> PyObjectStoreResult<PyGetResult> {
+    let runtime = get_runtime();
+    py.detach(|| {
+        let path = path.as_ref();
+        let fut = if let Some(options) = options {
+            store.as_ref().get_opts(path, options.into())
+        } else {
+            Box::pin(store.as_ref().get(path))
+        };
+        let out = runtime.block_on(fut)?;
+        Ok::<_, PyObjectStoreError>(PyGetResult::new(out))
+    })
+}
+
+pub(crate) fn get_async(
+    py: Python,
+    store: PyObjectStore,
+    path: PyPath,
+    options: Option<PyGetOptions>,
+) -> PyResult<Bound<PyAny>> {
+    pyo3_async_runtimes::tokio::future_into_py(py, async move {
+        let path = path.as_ref();
+        let fut = if let Some(options) = options {
+            store.as_ref().get_opts(path, options.into())
+        } else {
+            Box::pin(store.as_ref().get(path))
+        };
+        let out = fut.await.map_err(PyObjectStoreError::ObjectStoreError)?;
+        Ok(PyGetResult::new(out))
+    })
+}
+
+// file: obstore/src/list.rs
+pub(crate) fn list(
+    py: Python,
+    store: PyObjectStore,
+    prefix: Option<PyPath>,
+    offset: Option<PyPath>,
+    chunk_size: usize,
+    return_arrow: bool,
+) -> PyObjectStoreResult<PyListStream> {
+    if return_arrow {
+
+        let msg = concat!(
+            "arro3.core is a required dependency for returning results as arrow.\n",
+            "\nInstall with `pip install arro3-core`."
+        );
+        py.import(intern!(py, "arro3.core"))
+            .map_err(|err| PyImportError::new_err(format!("{msg}\n\n{err}")))?;
+    }
+
+    let store = store.into_inner().clone();
+    let prefix = prefix.map(|s| s.into());
+    let stream = if let Some(offset) = offset {
+        store.list_with_offset(prefix.as_ref(), offset.as_ref())
+    } else {
+        store.list(prefix.as_ref())
+    };
+    Ok(PyListStream::new(stream, chunk_size, return_arrow))
+}
+
+pub(crate) fn list_with_delimiter(
+    py: Python,
+    store: PyObjectStore,
+    prefix: Option<PyPath>,
+    return_arrow: bool,
+) -> PyObjectStoreResult<PyListResult> {
+    let runtime = get_runtime();
+    py.detach(|| {
+        let out = runtime.block_on(list_with_delimiter_materialize(
+            store.into_inner(),
+            prefix.as_ref(),
+            return_arrow,
+        ))?;
+        Ok::<_, PyObjectStoreError>(out)
+    })
+}
+
+pub(crate) fn list_with_delimiter_async(
+    py: Python,
+    store: PyObjectStore,
+    prefix: Option<PyPath>,
+    return_arrow: bool,
+) -> PyResult<Bound<PyAny>> {
+    pyo3_async_runtimes::tokio::future_into_py(py, async move {
+        let out =
+            list_with_delimiter_materialize(store.into_inner(), prefix.as_ref(), return_arrow)
+                .await?;
+        Ok(out)
+    })
+}
+
+async fn list_with_delimiter_materialize(
+    store: Arc<dyn ObjectStore>,
+    prefix: Option<&PyPath>,
+    return_arrow: bool,
+) -> PyObjectStoreResult<PyListResult> {
+    let list_result = store
+        .list_with_delimiter(prefix.map(|s| s.as_ref()))
+        .await?;
+    Ok(PyListResult::new(list_result, return_arrow))
+}
+
+// file: obstore/src/rename.rs
+pub(crate) fn rename(
+    py: Python,
+    store: PyObjectStore,
+    from_: PyPath,
+    to: PyPath,
+    overwrite: bool,
+) -> PyObjectStoreResult<()> {
+    let runtime = get_runtime();
+    let from_ = from_.into();
+    let to = to.into();
+    py.detach(|| {
+        let fut: Pin<Box<dyn Future<Output = _> + Send>> = if overwrite {
+            Box::pin(store.as_ref().rename(&from_, &to))
+        } else {
+            Box::pin(store.as_ref().rename_if_not_exists(&from_, &to))
+        };
+        runtime.block_on(fut)?;
+        Ok::<_, PyObjectStoreError>(())
+    })
+}
+
+pub(crate) fn rename_async(
+    py: Python,
+    store: PyObjectStore,
+    from_: PyPath,
+    to: PyPath,
+    overwrite: bool,
+) -> PyResult<Bound<PyAny>> {
+    let from_ = from_.into();
+    let to = to.into();
+    pyo3_async_runtimes::tokio::future_into_py(py, async move {
+        let fut: Pin<Box<dyn Future<Output = _> + Send>> = if overwrite {
+            Box::pin(store.as_ref().rename(&from_, &to))
+        } else {
+            Box::pin(store.as_ref().rename_if_not_exists(&from_, &to))
+        };
+        fut.await.map_err(PyObjectStoreError::ObjectStoreError)?;
+        Ok(PyNone)
+    })
+}

@@ -1,0 +1,13 @@
+// file: cpp/src/arrow/filesystem/s3fs.cc
+  Status CopyObject(const S3Path& src_path, const S3Path& dest_path) {
+    S3Model::CopyObjectRequest req;
+    req.SetBucket(ToAwsString(dest_path.bucket));
+    req.SetKey(ToAwsString(dest_path.key));
+
+    req.SetCopySource(src_path.ToURLEncodedAwsString());
+    return OutcomeToStatus(
+        std::forward_as_tuple("When copying key '", src_path.key, "' in bucket '",
+                              src_path.bucket, "' to key '", dest_path.key,
+                              "' in bucket '", dest_path.bucket, "': "),
+        client_->CopyObject(req));
+  }

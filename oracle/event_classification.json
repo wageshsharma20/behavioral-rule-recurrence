@@ -1,0 +1,552 @@
+{
+ "counts": {
+  "golden": 11,
+  "interaction": 2,
+  "single": 6,
+  "glob_excluded": 4,
+  "contested": 2,
+  "unrelated_failure": 1
+ },
+ "golden_by_case": {
+  "GC1": 3,
+  "GC2a": 4,
+  "GC2b": 2,
+  "GC3": 2
+ },
+ "fix_events": 19,
+ "golden_fix_events": 10,
+ "not_evaluable_releases": {
+  "s3path|s3|0.3.0": "NoCredentialsError on every read/write (see event note)"
+ },
+ "events": [
+  {
+   "client": "pyarrow",
+   "backend": "s3",
+   "from": "13.0.0",
+   "to": "14.0.0",
+   "direction": "P->F",
+   "n_transitions": 3,
+   "category": "golden",
+   "case": "GC1",
+   "note": "Arrow regression: batch delete names d/sub instead of marker d/sub/",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "f2:v-nested:A_nothing_under_d",
+    "f2:v-emptysub:A_nothing_under_d",
+    "f2:v-full:A_nothing_under_d"
+   ]
+  },
+  {
+   "client": "pyarrow",
+   "backend": "s3",
+   "from": "14.0.1",
+   "to": "14.0.2",
+   "direction": "F->P",
+   "n_transitions": 3,
+   "category": "golden",
+   "case": "GC1",
+   "note": "Arrow repair (GH-38618 / PR 38845)",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "f2:v-nested:A_nothing_under_d",
+    "f2:v-emptysub:A_nothing_under_d",
+    "f2:v-full:A_nothing_under_d"
+   ]
+  },
+  {
+   "client": "s3fs",
+   "backend": "s3",
+   "from": "2025.12.0",
+   "to": "2026.9.0",
+   "direction": "F->P",
+   "n_transitions": 4,
+   "category": "golden",
+   "case": "GC1",
+   "note": "s3fs fix (issue 918 / PR 1005)",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "f2:v-top:A_nothing_under_d",
+    "f2:v-nested:A_nothing_under_d",
+    "f2:v-emptysub:A_nothing_under_d",
+    "f2:v-full:A_nothing_under_d"
+   ]
+  },
+  {
+   "client": "gcsfs",
+   "backend": "gcs",
+   "from": "2022.7.1",
+   "to": "2022.8.2",
+   "direction": "P->F",
+   "n_transitions": 9,
+   "category": "interaction",
+   "case": null,
+   "note": "gcsfs find() rewrite lists by string prefix: copy/move/delete cross the segment boundary",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:F15_move_dir_complete[markers]",
+    "xfam2:F15b_move_dir_sibling_untouched[markers]",
+    "xfam2:F15_move_dir_complete[implicit]",
+    "xfam2:F15b_move_dir_sibling_untouched[implicit]",
+    "xfam2:F16_copy_dir_boundary",
+    "xfam2:F16b_copy_dir_sibling_not_copied",
+    "xfam:F1_find_boundary",
+    "xfam:F1_delete_boundary",
+    "xfam:F9_delete_dir_with_double_slash_key"
+   ]
+  },
+  {
+   "client": "gcsfs",
+   "backend": "gcs",
+   "from": "2023.6.0",
+   "to": "2023.9.0",
+   "direction": "F->P",
+   "n_transitions": 10,
+   "category": "interaction",
+   "case": null,
+   "note": "gcsfs repair of the segment boundary (attributed at commit level)",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:F15_move_dir_complete[markers]",
+    "xfam2:F15b_move_dir_sibling_untouched[markers]",
+    "xfam2:F15_move_dir_complete[implicit]",
+    "xfam2:F15b_move_dir_sibling_untouched[implicit]",
+    "xfam2:F16_copy_dir_boundary",
+    "xfam2:F16b_copy_dir_sibling_not_copied",
+    "xfam2:G2_glob_doublestar_recursive",
+    "xfam:F1_find_boundary",
+    "xfam:F1_delete_boundary",
+    "xfam:F9_delete_dir_with_double_slash_key"
+   ]
+  },
+  {
+   "client": "gcsfs",
+   "backend": "gcs",
+   "from": "2022.2.0",
+   "to": "2022.3.0",
+   "direction": "F->P",
+   "n_transitions": 1,
+   "category": "single",
+   "case": null,
+   "note": "trailing slash on a file",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:F17_file_with_trailing_slash_not_file"
+   ]
+  },
+  {
+   "client": "gcsfs",
+   "backend": "gcs",
+   "from": "2024.6.1",
+   "to": "2026.8.1",
+   "direction": "P->F",
+   "n_transitions": 1,
+   "category": "single",
+   "case": null,
+   "note": "trailing slash on a file",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:F17_file_with_trailing_slash_not_file"
+   ]
+  },
+  {
+   "client": "s3fs",
+   "backend": "s3",
+   "from": "2025.12.0",
+   "to": "2026.9.0",
+   "direction": "P->F",
+   "n_transitions": 1,
+   "category": "single",
+   "case": null,
+   "note": "move of an implicit directory",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:F15_move_dir_complete[implicit]"
+   ]
+  },
+  {
+   "client": "s3fs",
+   "backend": "s3",
+   "from": "2023.4.0",
+   "to": "2023.9.0",
+   "direction": "F->P",
+   "n_transitions": 1,
+   "category": "glob_excluded",
+   "case": null,
+   "note": "glob; flip in inherited fsspec code",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:G2_glob_doublestar_recursive"
+   ]
+  },
+  {
+   "client": "s3path",
+   "backend": "s3",
+   "from": "0.3.4",
+   "to": "0.4.1",
+   "direction": "P->F",
+   "n_transitions": 3,
+   "category": "glob_excluded",
+   "case": null,
+   "note": "glob; 44-commit refactoring",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:G1_glob_star_one_level",
+    "xfam2:G2_glob_doublestar_recursive",
+    "xfam2:G3_glob_prefix_boundary"
+   ]
+  },
+  {
+   "client": "s3path",
+   "backend": "s3",
+   "from": "0.4.1",
+   "to": "0.5.0",
+   "direction": "F->P",
+   "n_transitions": 3,
+   "category": "glob_excluded",
+   "case": null,
+   "note": "glob; 44-commit refactoring",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:G1_glob_star_one_level",
+    "xfam2:G2_glob_doublestar_recursive",
+    "xfam2:G3_glob_prefix_boundary"
+   ]
+  },
+  {
+   "client": "cloudpathlib",
+   "backend": "s3",
+   "from": "0.10.0",
+   "to": "0.11.0",
+   "direction": "F->P",
+   "n_transitions": 3,
+   "category": "contested",
+   "case": null,
+   "note": "cloudpathlib changes towards excluding the marker",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:F13c_rmdir_empty_marker_removes_it",
+    "xfam:F7_ls_marker_dir_empty",
+    "xfam:F7_ls_dir_excludes_own_marker"
+   ]
+  },
+  {
+   "client": "cloudpathlib",
+   "backend": "s3",
+   "from": "0.11.0",
+   "to": "0.12.0",
+   "direction": "P->F",
+   "n_transitions": 1,
+   "category": "single",
+   "case": null,
+   "note": "trailing slash on a file",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:F17_file_with_trailing_slash_not_file"
+   ]
+  },
+  {
+   "client": "cloudpathlib",
+   "backend": "s3",
+   "from": "0.12.0",
+   "to": "0.12.1",
+   "direction": "F->P",
+   "n_transitions": 3,
+   "category": "glob_excluded",
+   "case": null,
+   "note": "glob",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam2:G1_glob_star_one_level",
+    "xfam2:G2_glob_doublestar_recursive",
+    "xfam2:G3_glob_prefix_boundary"
+   ]
+  },
+  {
+   "client": "gcsfs",
+   "backend": "gcs",
+   "from": "2022.8.2",
+   "to": "2023.1.0",
+   "direction": "F->P",
+   "n_transitions": 2,
+   "category": "golden",
+   "case": "GC2a",
+   "note": "gcsfs fix (issue 447 / PR 502): '#' and '?' escaped in URLs",
+   "failing_side_exceptions": {
+    "FileNotFoundError": 2
+   },
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F3_read[hash#]",
+    "xfam:F3_read[q?mark]"
+   ]
+  },
+  {
+   "client": "gcsfs",
+   "backend": "gcs",
+   "from": "2024.6.1",
+   "to": "2026.8.1",
+   "direction": "F->P",
+   "n_transitions": 1,
+   "category": "single",
+   "case": null,
+   "note": "marker-only directory reported as directory",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F7_marker_is_dir"
+   ]
+  },
+  {
+   "client": "pyarrow",
+   "backend": "s3",
+   "from": "4.0.1",
+   "to": "5.0.0",
+   "direction": "F->P",
+   "n_transitions": 10,
+   "category": "golden",
+   "case": "GC2b",
+   "note": "Arrow fix (GH-28758 / PR 10526): copy source no longer double-encoded",
+   "failing_side_exceptions": {
+    "OSError": 10
+   },
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F3b_copy[eq=1]",
+    "xfam:F3b_move[eq=1]",
+    "xfam:F3b_copy[pl+us]",
+    "xfam:F3b_move[pl+us]",
+    "xfam:F3b_copy[sp ace]",
+    "xfam:F3b_move[sp ace]",
+    "xfam:F3b_copy[pct%]",
+    "xfam:F3b_move[pct%]",
+    "xfam:F3b_copy[café]",
+    "xfam:F3b_move[café]"
+   ]
+  },
+  {
+   "client": "pyarrow",
+   "backend": "s3",
+   "from": "13.0.0",
+   "to": "14.0.0",
+   "direction": "F->P",
+   "n_transitions": 1,
+   "category": "single",
+   "case": null,
+   "note": "delete of a directory containing a key with '//' (GH-38821 family)",
+   "failing_side_exceptions": {
+    "OSError": 1
+   },
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F9_delete_dir_with_double_slash_key"
+   ]
+  },
+  {
+   "client": "opendal",
+   "backend": "s3",
+   "from": "0.45.9",
+   "to": "0.45.10",
+   "direction": "F->P",
+   "n_transitions": 7,
+   "category": "golden",
+   "case": "GC3",
+   "note": "OpenDAL change (PR 4959): list(path) keeps separator",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F1_info_prefix_notfound",
+    "xfam:F1_stat_string_prefix_notfound[very/similar/prefix]",
+    "xfam:F1_stat_string_prefix_slash_notfound[very/similar/prefix]",
+    "xfam:F1_stat_string_prefix_notfound[very/similar/prefi]",
+    "xfam:F1_stat_string_prefix_slash_notfound[very/similar/prefi]",
+    "xfam:F1_stat_string_prefix_notfound[very/similar/prefix3/some]",
+    "xfam:F1_stat_string_prefix_slash_notfound[very/similar/prefix3/some]"
+   ]
+  },
+  {
+   "client": "opendal",
+   "backend": "s3",
+   "from": "0.45.9",
+   "to": "0.45.10",
+   "direction": "P->F",
+   "n_transitions": 2,
+   "category": "contested",
+   "case": null,
+   "note": "OpenDAL changes towards including the marker",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F7_ls_marker_dir_empty",
+    "xfam:F7_ls_dir_excludes_own_marker"
+   ]
+  },
+  {
+   "client": "s3path",
+   "backend": "s3",
+   "from": "0.3.1",
+   "to": "0.3.2",
+   "direction": "F->P",
+   "n_transitions": 26,
+   "category": "golden",
+   "case": "GC2a",
+   "note": "s3path fix (issue 77 / PR 78): as_uri() encoding removed; the same window also changes the contested rule (listing excludes the directory's own marker; commit 33e6d17, PR 81)",
+   "failing_side_exceptions": {
+    "OSError": 12
+   },
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F3_read[sp ace]",
+    "xfam:F3_read[pl+us]",
+    "xfam:F3_read[per%25cent]",
+    "xfam:F3_read[pct%]",
+    "xfam:F3_read[hash#]",
+    "xfam:F3_read[eq=1]",
+    "xfam:F3_read[café]",
+    "xfam:F3_read[semi;colon]",
+    "xfam:F3_read[amp&]",
+    "xfam:F3_read[colon:x]",
+    "xfam:F3_read[star*]",
+    "xfam:F3_read[brack[1]]",
+    "xfam:F3_write_key_exact[sp ace]",
+    "xfam:F3_write_key_exact[pl+us]",
+    "xfam:F3_write_key_exact[per%25cent]",
+    "xfam:F3_write_key_exact[pct%]",
+    "xfam:F3_write_key_exact[hash#]",
+    "xfam:F3_write_key_exact[eq=1]",
+    "xfam:F3_write_key_exact[café]",
+    "xfam:F3_write_key_exact[semi;colon]",
+    "xfam:F3_write_key_exact[amp&]",
+    "xfam:F3_write_key_exact[colon:x]",
+    "xfam:F3_write_key_exact[star*]",
+    "xfam:F3_write_key_exact[brack[1]]",
+    "xfam:F7_ls_marker_dir_empty",
+    "xfam:F7_ls_dir_excludes_own_marker"
+   ]
+  },
+  {
+   "client": "s3path",
+   "backend": "s3",
+   "from": "0.3.2",
+   "to": "0.3.3",
+   "direction": "F->P",
+   "n_transitions": 2,
+   "category": "golden",
+   "case": "GC2a",
+   "note": "s3path: '?' in keys no longer dropped",
+   "failing_side_exceptions": {
+    "OSError": 1
+   },
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F3_read[q?mark]",
+    "xfam:F3_write_key_exact[q?mark]"
+   ]
+  },
+  {
+   "client": "s3path",
+   "backend": "s3",
+   "from": "0.3.0",
+   "to": "0.3.1",
+   "direction": "F->P",
+   "n_transitions": 2,
+   "category": "unrelated_failure",
+   "case": null,
+   "note": "s3path 0.3.0 passes its endpoint configuration to smart_open via session/resource_kwargs, which smart_open 5.0.0 (resolved as of the release date) no longer accepts; every read and write fails with NoCredentialsError. 0.3.1 passes client=...; the two '~' probes then pass. Not a flip of the probes' rule.",
+   "failing_side_exceptions": {
+    "NoCredentialsError": 2
+   },
+   "failing_side_not_evaluable": "NoCredentialsError on every read/write (see event note)",
+   "probes": [
+    "xfam:F3_read[tilde~]",
+    "xfam:F3_write_key_exact[tilde~]"
+   ]
+  },
+  {
+   "client": "obstore",
+   "backend": "s3",
+   "from": "0.6.0",
+   "to": "0.8.2",
+   "direction": "F->P",
+   "n_transitions": 16,
+   "category": "golden",
+   "case": "GC2a",
+   "note": "obstore fix (issue 496 / PR 524): Path::from -> Path::parse",
+   "failing_side_exceptions": {
+    "FileNotFoundError": 8
+   },
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F3_read[per%25cent]",
+    "xfam:F3_read[pct%]",
+    "xfam:F3_read[hash#]",
+    "xfam:F3_read[q?mark]",
+    "xfam:F3_read[tilde~]",
+    "xfam:F3_read[café]",
+    "xfam:F3_read[star*]",
+    "xfam:F3_read[brack[1]]",
+    "xfam:F3_write_key_exact[per%25cent]",
+    "xfam:F3_write_key_exact[pct%]",
+    "xfam:F3_write_key_exact[hash#]",
+    "xfam:F3_write_key_exact[q?mark]",
+    "xfam:F3_write_key_exact[tilde~]",
+    "xfam:F3_write_key_exact[café]",
+    "xfam:F3_write_key_exact[star*]",
+    "xfam:F3_write_key_exact[brack[1]]"
+   ]
+  },
+  {
+   "client": "obstore",
+   "backend": "s3",
+   "from": "0.9.3",
+   "to": "0.9.4",
+   "direction": "F->P",
+   "n_transitions": 4,
+   "category": "golden",
+   "case": "GC2b",
+   "note": "obstore fix (issue 671 / PR 672): copy/rename source not percent-encoded",
+   "failing_side_exceptions": {
+    "FileNotFoundError": 4
+   },
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F3b_copy[pct%]",
+    "xfam:F3b_move[pct%]",
+    "xfam:F3b_copy[café]",
+    "xfam:F3b_move[café]"
+   ]
+  },
+  {
+   "client": "cloudpathlib",
+   "backend": "s3",
+   "from": "0.9.0",
+   "to": "0.10.0",
+   "direction": "F->P",
+   "n_transitions": 4,
+   "category": "golden",
+   "case": "GC3",
+   "note": "cloudpathlib fix (issue 208 / PR 244): prefix listing keeps separator",
+   "failing_side_exceptions": {},
+   "failing_side_not_evaluable": null,
+   "probes": [
+    "xfam:F1_info_prefix_notfound",
+    "xfam:F1_stat_string_prefix_notfound[very/similar/prefix]",
+    "xfam:F1_stat_string_prefix_notfound[very/similar/prefi]",
+    "xfam:F1_stat_string_prefix_notfound[very/similar/prefix3/some]"
+   ]
+  }
+ ]
+}

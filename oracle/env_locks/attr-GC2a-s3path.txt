@@ -1,0 +1,11 @@
+# environment attr-GC2a-s3path
+# python 3.9.6 arm64
+boto3==1.17.100
+botocore==1.20.100
+jmespath==0.10.0
+python-dateutil==2.8.1
+s3path @ git+https://github.com/liormizr/s3path@643c25b37b90ff57a72ecb0a64f442e7e019a0b0
+s3transfer==0.4.2
+six==1.16.0
+smart-open==5.1.0
+urllib3==1.26.5

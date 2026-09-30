@@ -1,0 +1,21 @@
+# file: cloudpathlib/s3/s3client.py
+    def _s3_file_query(self, cloud_path: S3Path):
+        """Boto3 query used for quick checks of existence and if path is file/dir"""
+
+        try:
+            obj = self.s3.Object(cloud_path.bucket, cloud_path.key)
+            obj.load()
+            return obj
+
+        except ClientError:
+            return next(
+                (
+                    obj
+                    for obj in (
+                        self.s3.Bucket(cloud_path.bucket)
+                        .objects.filter(Prefix=cloud_path.key)
+                        .limit(1)
+                    )
+                ),
+                None,
+            )

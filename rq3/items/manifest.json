@@ -1,0 +1,201 @@
+[
+ {
+  "case": "GC1",
+  "impl": "pyarrow",
+  "lang": "cpp",
+  "repo": "apache/arrow",
+  "pr": 38845,
+  "bad_sha": "501b291abd4eeec06083504d7d89f52a6092187a",
+  "good_sha": "cf80bd1135bbd9cee7c0ae3e6370f93270cba250",
+  "functions": {
+   "cpp/src/arrow/filesystem/s3fs.cc": [
+    "DoDeleteDirContentsAsync"
+   ]
+  },
+  "bad_lines": 35,
+  "good_lines": 44,
+  "identical": false
+ },
+ {
+  "case": "GC1",
+  "impl": "s3fs",
+  "lang": "python",
+  "repo": "fsspec/s3fs",
+  "pr": 1005,
+  "bad_sha": "56402cd2565c5fa2aa84020c716560b3db27e8cd",
+  "good_sha": "5e5f7ea0b979667b1b1fffe371575b2d34a27a71",
+  "functions": {
+   "s3fs/core.py": [
+    "S3FileSystem.split_path"
+   ]
+  },
+  "bad_lines": 30,
+  "good_lines": 32,
+  "identical": false
+ },
+ {
+  "case": "GC2a",
+  "impl": "gcsfs",
+  "lang": "python",
+  "repo": "fsspec/gcsfs",
+  "pr": 502,
+  "bad_sha": "c186d378d7b0995864aa948505c2a2e89d244e71",
+  "good_sha": "56281f4de8c08c4f9348c082f4a51e0d3949fdb3",
+  "functions": {
+   "gcsfs/core.py": [
+    "GCSFile.discard",
+    "GCSFileSystem._format_path",
+    "GCSFileSystem._rm_files",
+    "GCSFileSystem.url",
+    "initiate_upload",
+    "quote",
+    "quote_plus",
+    "simple_upload"
+   ]
+  },
+  "bad_lines": 160,
+  "good_lines": 159,
+  "identical": false
+ },
+ {
+  "case": "GC2a",
+  "impl": "obstore",
+  "lang": "rust",
+  "repo": "developmentseed/obstore",
+  "pr": 524,
+  "bad_sha": "cafb35a249484bf227e941a64d80414c5b3f683b",
+  "good_sha": "fbd87190f199a005431ffe1069a193907b8af2b5",
+  "functions": {
+   "obstore/src/path.rs": [
+    "extract_bound"
+   ],
+   "pyo3-object_store/src/path.rs": [
+    "extract_bound",
+    "into_inner"
+   ]
+  },
+  "bad_lines": 18,
+  "good_lines": 24,
+  "identical": false
+ },
+ {
+  "case": "GC2a",
+  "impl": "s3path",
+  "lang": "python",
+  "repo": "liormizr/s3path",
+  "pr": 78,
+  "bad_sha": "c0062653a3d8c7dd3dc5c4f24555ba1e1cd3b62c",
+  "good_sha": "4e8c20b497aa8e7618bc0226e3326978ba13f570",
+  "functions": {
+   "s3path.py": [
+    "_S3Accessor.open"
+   ]
+  },
+  "bad_lines": 31,
+  "good_lines": 31,
+  "identical": false
+ },
+ {
+  "case": "GC2b",
+  "impl": "obstore",
+  "lang": "rust",
+  "repo": "developmentseed/obstore",
+  "pr": 672,
+  "bad_sha": "8874812b96f6dcd5863d7c6a9137dd02a6df1a75",
+  "good_sha": "cb88ed286faef3bc84585164d0b03745c8251a43",
+  "functions": {
+   "obstore/src/copy.rs": [
+    "copy",
+    "copy_async"
+   ],
+   "obstore/src/get.rs": [
+    "get",
+    "get_async"
+   ],
+   "obstore/src/list.rs": [
+    "list",
+    "list_with_delimiter",
+    "list_with_delimiter_async",
+    "list_with_delimiter_materialize"
+   ],
+   "obstore/src/rename.rs": [
+    "rename",
+    "rename_async"
+   ]
+  },
+  "bad_lines": 192,
+  "good_lines": 191,
+  "identical": false
+ },
+ {
+  "case": "GC2b",
+  "impl": "pyarrow",
+  "lang": "cpp",
+  "repo": "apache/arrow",
+  "pr": 10526,
+  "bad_sha": "a22fc67e6e8fd78e2d612b99733f47c48630e663",
+  "good_sha": "68679b896d70a710f27bab8f23f85377408c0d78",
+  "functions": {
+   "cpp/src/arrow/filesystem/s3fs.cc": [
+    "CopyObject",
+    "ToAwsString"
+   ]
+  },
+  "bad_lines": 13,
+  "good_lines": 22,
+  "identical": false
+ },
+ {
+  "case": "GC3",
+  "impl": "cloudpathlib",
+  "lang": "python",
+  "repo": "drivendataorg/cloudpathlib",
+  "pr": 244,
+  "bad_sha": "2e52c0515547e998e0b7c84e667627df4ac332b6",
+  "good_sha": "e781f1fa226c86712e3d8e09979117fd9f15b687",
+  "functions": {
+   "cloudpathlib/s3/s3client.py": [
+    "S3Client._s3_file_query"
+   ]
+  },
+  "bad_lines": 23,
+  "good_lines": 23,
+  "identical": false
+ },
+ {
+  "case": "GC3",
+  "impl": "opendal",
+  "lang": "rust",
+  "repo": "apache/opendal",
+  "pr": 4959,
+  "bad_sha": "74b4b0aabbce63ec394d701201c58cd1d5e966dd",
+  "good_sha": "74a3e294946aae933530d97b7fa650b1a85b7920",
+  "functions": {
+   "core/src/layers/complete.rs": [
+    "complete_blocking_stat",
+    "complete_stat"
+   ]
+  },
+  "bad_lines": 103,
+  "good_lines": 99,
+  "identical": false
+ },
+ {
+  "case": "PV1",
+  "impl": "gcsfs",
+  "lang": "python",
+  "repo": "fsspec/gcsfs",
+  "pr": 576,
+  "bad_sha": "e64ede3d15b2995cc004dd35b76302910c3ef7e9",
+  "good_sha": "5b970875848fb6c7e8483c5b1f862607820aedcd",
+  "functions": {
+   "gcsfs/core.py": [
+    "GCSFileSystem._find",
+    "GCSFileSystem._glob"
+   ]
+  },
+  "bad_lines": 88,
+  "good_lines": 82,
+  "identical": false
+ }
+]

@@ -1,0 +1,25 @@
+// file: obstore/src/path.rs
+    fn extract_bound(ob: &Bound<'py, PyAny>) -> PyResult<Self> {
+        if let Ok(path) = ob.extract::<PyPath>() {
+            Ok(Self::One(path.into_inner()))
+        } else if let Ok(paths) = ob.extract::<Vec<PyPath>>() {
+            Ok(Self::Many(
+                paths.into_iter().map(|path| path.into_inner()).collect(),
+            ))
+        } else {
+            Err(PyTypeError::new_err(
+                "Expected string path or sequence of string paths.",
+            ))
+        }
+    }
+
+// file: pyo3-object_store/src/path.rs
+    fn extract_bound(ob: &Bound<'py, PyAny>) -> PyResult<Self> {
+        let path = Path::parse(ob.extract::<PyBackedStr>()?)
+            .map_err(|err| PyValueError::new_err(format!("Could not parse path: {err}")))?;
+        Ok(Self(path))
+    }
+
+    pub fn into_inner(self) -> Path {
+        self.0
+    }

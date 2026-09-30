@@ -1,0 +1,73 @@
+[
+ {
+  "case": "GC1",
+  "impl": "pyarrow",
+  "repo": "apache/arrow",
+  "pr": 38845,
+  "lang": "cpp"
+ },
+ {
+  "case": "GC1",
+  "impl": "s3fs",
+  "repo": "fsspec/s3fs",
+  "pr": 1005,
+  "lang": "python"
+ },
+ {
+  "case": "GC2a",
+  "impl": "s3path",
+  "repo": "liormizr/s3path",
+  "pr": 78,
+  "lang": "python"
+ },
+ {
+  "case": "GC2a",
+  "impl": "gcsfs",
+  "repo": "fsspec/gcsfs",
+  "pr": 502,
+  "lang": "python"
+ },
+ {
+  "case": "GC2a",
+  "impl": "obstore",
+  "repo": "developmentseed/obstore",
+  "pr": 524,
+  "lang": "rust"
+ },
+ {
+  "case": "GC2b",
+  "impl": "pyarrow",
+  "repo": "apache/arrow",
+  "pr": 10526,
+  "lang": "cpp",
+  "sha_override": "68679b896d70"
+ },
+ {
+  "case": "GC2b",
+  "impl": "obstore",
+  "repo": "developmentseed/obstore",
+  "pr": 672,
+  "lang": "rust"
+ },
+ {
+  "case": "GC3",
+  "impl": "cloudpathlib",
+  "repo": "drivendataorg/cloudpathlib",
+  "pr": 244,
+  "lang": "python"
+ },
+ {
+  "case": "GC3",
+  "impl": "opendal",
+  "repo": "apache/opendal",
+  "pr": 4959,
+  "lang": "rust"
+ },
+ {
+  "case": "PV1",
+  "impl": "gcsfs",
+  "repo": "fsspec/gcsfs",
+  "pr": 576,
+  "lang": "python"
+ }
+]

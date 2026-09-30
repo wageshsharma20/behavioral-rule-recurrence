@@ -1,0 +1,65 @@
+{
+ "source": "./rq3/mutants/GC3_cloudpathlib/ORIGINAL.py",
+ "functions": [
+  "S3Client._s3_file_query"
+ ],
+ "n_sites": 7,
+ "mutants": [
+  {
+   "id": "m00_BD__s3_file_query_L159",
+   "op": "BD",
+   "line": 159,
+   "col": 18,
+   "kind": "BinOp",
+   "function": "_s3_file_query"
+  },
+  {
+   "id": "m01_SD__s3_file_query_L154",
+   "op": "SD",
+   "line": 154,
+   "col": 12,
+   "kind": "Expr",
+   "function": "_s3_file_query"
+  },
+  {
+   "id": "m02_SD__s3_file_query_L153",
+   "op": "SD",
+   "line": 153,
+   "col": 12,
+   "kind": "Assign",
+   "function": "_s3_file_query"
+  },
+  {
+   "id": "m03_SL__s3_file_query_L149",
+   "op": "SL",
+   "line": 149,
+   "col": 8,
+   "kind": "Constant",
+   "function": "_s3_file_query"
+  },
+  {
+   "id": "m04_SL__s3_file_query_L159",
+   "op": "SL",
+   "line": 159,
+   "col": 47,
+   "kind": "Constant",
+   "function": "_s3_file_query"
+  },
+  {
+   "id": "m05_SD__s3_file_query_L159",
+   "op": "SD",
+   "line": 159,
+   "col": 12,
+   "kind": "Assign",
+   "function": "_s3_file_query"
+  },
+  {
+   "id": "m06_SL__s3_file_query_L159",
+   "op": "SL",
+   "line": 159,
+   "col": 40,
+   "kind": "Constant",
+   "function": "_s3_file_query"
+  }
+ ]
+}

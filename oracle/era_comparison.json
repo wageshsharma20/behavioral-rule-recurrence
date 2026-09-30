@@ -1,0 +1,174 @@
+{
+ "envs": {
+  "f2__s3/s3fs-2021.6.0": {
+   "compared": 10,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "f2__s3/s3fs-2021.6.1": {
+   "compared": 10,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "f2__s3/s3fs-2025.10.0": {
+   "compared": 10,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "f2__s3/s3fs-2025.12.0": {
+   "compared": 10,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__gcs/gcsfs-2022.2.0": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__gcs/gcsfs-2022.3.0": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__gcs/gcsfs-2022.7.1": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__gcs/gcsfs-2022.8.2": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__gcs/gcsfs-2023.1.0": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__gcs/gcsfs-2023.9.0": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__gcs/gcsfs-2024.6.1": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__gcs/gcsfs-2026.8.1": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__s3/s3fs-2021.6.0": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__s3/s3fs-2021.6.1": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__s3/s3fs-2025.10.0": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam2__s3/s3fs-2025.12.0": {
+   "compared": 14,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__gcs/gcsfs-2022.2.0": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__gcs/gcsfs-2022.3.0": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__gcs/gcsfs-2022.7.1": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__gcs/gcsfs-2022.8.2": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__gcs/gcsfs-2023.1.0": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__gcs/gcsfs-2023.9.0": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__gcs/gcsfs-2024.6.1": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__gcs/gcsfs-2026.8.1": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__s3/s3fs-2021.6.0": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__s3/s3fs-2021.6.1": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__s3/s3fs-2025.10.0": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  },
+  "xfam__s3/s3fs-2025.12.0": {
+   "compared": 70,
+   "differ": {},
+   "only_frozen": [],
+   "only_era": []
+  }
+ },
+ "total_compared": 1048,
+ "total_differ": 0
+}

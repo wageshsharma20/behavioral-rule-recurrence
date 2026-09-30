@@ -1,0 +1,63 @@
+Issue: rm does not delete the directory if its input is a directory with recursive True
+As stated in the title, it seems to me, that the API `rm` does not remove the directory itself if the input path its a directory and the `recursive `flag is set to `True`:
+```
+  await self.fs._rm(
+      path=f"{self.bucket_name}/{remote_path}",
+      recursive=True,
+      **kwargs,
+  )
+```
+
+I checked by s3 bucket from the dashboard and the directory does still exists, while its content does not. The [documentation ]([link] says that:
+
+> recursive (bool) – If file(s) are directories, recursively delete contents and then also remove the directory
+
+I guess the implementation does not follow the documentation and a direct `rmdir` API call is needed in order to delete also the directory.
+
+Comment: In the debugger I saw that:
+```
+    async def _rm(self, path, recursive=False, **kwargs):
+        if recursive and isinstance(path, str):
+            bucket, key, _ = self.split_path(path)
+            if not key and await self._is_bucket_versioned(bucket):
+                # special path to completely remove versioned bucket
+                await self._rm_versioned_bucket_contents(bucket)
+        paths = await self._expand_path(path, recursive=recursive)
+        files = [p for p in paths if self.split_path(p)[1]]
+        dirs = [p for p in paths if not self.split_path(p)[1]]
+```
+In this code, all the paths (real dirs and files) are detected in the `files `variable hwile the `dirs `variable is an empty list
+
+Comment: It seems expand_path is not recovering the zero-length directory placeholder with "/" suffix. We could arbitarily add it here, since attempting to remove it if it doesn't exist shouldn't have an cost, or fix expand_path. I think I prefer the former: "path/" isn't really a member of "path".
+
+Comment: If I try a direct call to the empy dir:
+```
+await self.fs._rmdir(
+   path=f"{self.bucket_name}/{remote_path}",
+)
+```
+
+There is the exception "FileExistsError". The path is empty though.
+
+Comment: It is 
+```
+await self.fs._rm_file(
+   path=f"{self.bucket_name}/{remote_path}/",
+)
+```
+(with the "/" suffix) that you want. This is a **FILE**, which is exactly the problem.
+
+Comment: > It is
+> 
+> ```
+> await self.fs._rm_file(
+>    path=f"{self.bucket_name}/{remote_path}/",
+> )
+> ```
+> 
+> (with the "/" suffix) that you want. This is a **FILE**, which is exactly the problem.
+
+I tried without success. If I use as value for the path either a "file path" as `.../remote_path` or a "dir path" as `.../remote_path/` using either the `_rm` or the `_rm_file` API, the folder is not deleted, only its content is.
+Is there a workaround to force the deletion of the folder itself too? Should I use aiobotocore directly?
+
+Thanks

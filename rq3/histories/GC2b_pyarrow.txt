@@ -1,0 +1,58 @@
+Issue: [C++] S3FileSystem fails moving filepaths containing = or +
+Hi Arrow team,
+
+we have the very common use-case of having partitioned parquet tables on S3, written by Spark. These include equals (=) to denote the partition value per folder.
+
+ 
+
+In trying to use PyArrows S3FileSystem `move` function, it's not possible to move these objects in the bucket underneath a path which contains `=` somewhere: 
+```java
+
+OSError: When copying key 'table/date=202007/part-00000-e39069c2-0ea6-4a62-85ea-8011047cd4f4.c000.snappy.parquet' in bucket 'bucket' to key 'table2/date=202007/part-00000-e39069c2-0ea6-4a62-85ea-8011047cd4f4.c000.snappy.parquet' in bucket 'bucket': AWS Error [code 133]: The specified key does not exist.
+```
+
+It is also not possible to move, using preemptively URL-quoted paths, like these:
+
+ 
+```java
+
+OSError: When copying key 'table/date%3D202007/part-00000-e39069c2-0ea6-4a62-85ea-8011047cd4f4.c000.snappy.parquet' in bucket 'bucket' to key 'table2/date%3D202007/part-00000-e39069c2-0ea6-4a62-85ea-8011047cd4f4.c000.snappy.parquet' in bucket 'bucket': AWS Error [code 133]: The specified key does not exist.
+```
+ 
+
+The source object does definitely exist, it has in fact been returned by a FileSelector from PyArrow itself and is just passed to move.
+
+
+Is there any configuration option to be set, or special quoting to be used?
+
+Thanks in advance.
+Joerg
+
+ 
+
+ 
+
+ 
+
+**Reporter**: [Joerg Schneider]([link]
+**Assignee**: [David Li]([link] / @user
+#### PRs and other links:
+- [GitHub Pull Request #10526]([link]
+
+<sub>**Note**: *This issue was originally created as [ARROW-13048]([link] Please see the [migration documentation]([link] for further details.*</sub>
+
+Pull request: ARROW-13048: [C++] Fix copying objects with special characters on S3FS
+Although the AWS SDK docs claim the caller must URL-encode the source path, the actual SDK source URL-encodes the path for you. This double-encoding was causing CopyFile to fail with a 404 not found as a result.
+
+Comment: [David Li]([link] / @user:
+I can confirm this with both 4.0.1 and the latest master. Turning on debug logging, I see that the source key has been double-encoded: "x-amz-copy-source: foo/a\*%253D\*1/foo.parquet". I also see that Arrow is URL-encoding the source key as required by the SDK. But the SDK itself URL-encodes the source again! ([source]([link]
+
+Comment: Reference for AWS encoding the path for you: [link]
+
+Comment: [David Li]([link] / @user:
+Issue resolved by pull request 10526
+<[link]
+
+Comment: @user @user Can you merge this change? It says fixed and closed on the issue but I'm still facing this issue in 5.0.0 when moving an S3 object that has special characters in the key.
+
+Comment: @user It was merged. If it still fails for you, can you open a new JIRA?

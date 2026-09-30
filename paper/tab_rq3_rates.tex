@@ -1,0 +1,14 @@
+\begin{tabular}{@{}l l rrr rr@{}}\toprule
+ & & \multicolumn{3}{c}{DEFECT verdicts (natural items)} & \multicolumn{2}{c}{names mechanism} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-7}
+Model & Cond. & on violating & on satisfying & unparsed & hits$^{a}$ & false alarms$^{b}$ \\ \midrule
+gpt-oss-20b & B1 & 6/9 & 4/9 & 8 & 3/6 & 2/4 \\
+gpt-oss-20b & B3 & 6/7 & 5/7 & 1 & 3/6 & 3/5 \\
+gpt-oss-20b & B4 & 5/9 & 4/9 & 7 & 1/5 & 1/4 \\
+gpt-oss-20b & B5 & 7/7 & 4/7 & 3 & 6/7 & 4/4 \\
+\midrule
+Qwen3-Coder-30B-A3B & B1 & 7/9 & 7/9 & 1 & 3/7 & 3/7 \\
+Qwen3-Coder-30B-A3B & B3 & 7/7 & 7/7 & 0 & 7/7 & 6/7 \\
+Qwen3-Coder-30B-A3B & B4 & 6/9 & 6/9 & 0 & 1/6 & 0/6 \\
+Qwen3-Coder-30B-A3B & B5 & 7/7 & 7/7 & 0 & 6/7 & 7/7 \\
+\bottomrule\end{tabular}

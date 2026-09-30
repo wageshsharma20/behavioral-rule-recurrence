@@ -1,0 +1,121 @@
+{
+ "source": "./rq3/mutants/GC1_s3fs/ORIGINAL.py",
+ "functions": [
+  "S3FileSystem.split_path"
+ ],
+ "n_sites": 14,
+ "mutants": [
+  {
+   "id": "m00_SD_split_path_L474",
+   "op": "SD",
+   "line": 474,
+   "col": 8,
+   "kind": "Assign",
+   "function": "split_path"
+  },
+  {
+   "id": "m01_SL_split_path_L476",
+   "op": "SL",
+   "line": 476,
+   "col": 11,
+   "kind": "Constant",
+   "function": "split_path"
+  },
+  {
+   "id": "m02_SL_split_path_L475",
+   "op": "SL",
+   "line": 475,
+   "col": 27,
+   "kind": "Constant",
+   "function": "split_path"
+  },
+  {
+   "id": "m03_CR_split_path_L476",
+   "op": "CR",
+   "line": 476,
+   "col": 11,
+   "kind": "Compare",
+   "function": "split_path"
+  },
+  {
+   "id": "m04_SL_split_path_L480",
+   "op": "SL",
+   "line": 480,
+   "col": 51,
+   "kind": "Constant",
+   "function": "split_path"
+  },
+  {
+   "id": "m05_SD_split_path_L475",
+   "op": "SD",
+   "line": 475,
+   "col": 8,
+   "kind": "Assign",
+   "function": "split_path"
+  },
+  {
+   "id": "m06_NC_split_path_L476",
+   "op": "NC",
+   "line": 476,
+   "col": 8,
+   "kind": "If",
+   "function": "split_path"
+  },
+  {
+   "id": "m07_SD_split_path_L480",
+   "op": "SD",
+   "line": 480,
+   "col": 12,
+   "kind": "Assign",
+   "function": "split_path"
+  },
+  {
+   "id": "m08_SD_split_path_L481",
+   "op": "SD",
+   "line": 481,
+   "col": 12,
+   "kind": "AugAssign",
+   "function": "split_path"
+  },
+  {
+   "id": "m09_SL_split_path_L457",
+   "op": "SL",
+   "line": 457,
+   "col": 8,
+   "kind": "Constant",
+   "function": "split_path"
+  },
+  {
+   "id": "m10_SD_split_path_L473",
+   "op": "SD",
+   "line": 473,
+   "col": 8,
+   "kind": "Assign",
+   "function": "split_path"
+  },
+  {
+   "id": "m11_NC_split_path_L485",
+   "op": "NC",
+   "line": 485,
+   "col": 16,
+   "kind": "IfExp",
+   "function": "split_path"
+  },
+  {
+   "id": "m12_SD_split_path_L479",
+   "op": "SD",
+   "line": 479,
+   "col": 12,
+   "kind": "Assign",
+   "function": "split_path"
+  },
+  {
+   "id": "m13_SL_split_path_L473",
+   "op": "SL",
+   "line": 473,
+   "col": 37,
+   "kind": "Constant",
+   "function": "split_path"
+  }
+ ]
+}

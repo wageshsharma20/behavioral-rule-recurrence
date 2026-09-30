@@ -1,0 +1,7 @@
+obstore-0.2.0	no S3Store constructor in harness API
+opendal-0.40.0	blocking list unsupported for s3
+gcsfs-2022.8.1	uninstallable
+gcsfs-bad	alias
+gcsfs-good	alias
+GCS: obstore (writes need a token with skip_signature; copy uses XML API unsupported by fake-gcs-server), OpenDAL (auth/backoff hangs on emulator)
+pyarrow-2.0.0	no installable wheel for macOS (sdist build fails: numpy CCompiler)

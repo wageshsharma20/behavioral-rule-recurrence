@@ -1,0 +1,12 @@
+{
+ "GC1_pyarrow":      {"repo":"apache/arrow","threads":[38618,38845]},
+ "GC1_s3fs":         {"repo":"fsspec/s3fs","threads":[918,1005]},
+ "GC2a_s3path":      {"repo":"liormizr/s3path","threads":[77,78]},
+ "GC2a_gcsfs":       {"repo":"fsspec/gcsfs","threads":[447,502]},
+ "GC2a_obstore":     {"repo":"developmentseed/obstore","threads":[496,524]},
+ "GC2b_pyarrow":     {"repo":"apache/arrow","threads":[28758,10526]},
+ "GC2b_obstore":     {"repo":"developmentseed/obstore","threads":[671,672]},
+ "GC3_cloudpathlib": {"repo":"drivendataorg/cloudpathlib","threads":[208,244]},
+ "GC3_opendal":      {"repo":"apache/opendal","threads":[4959]},
+ "PV1_gcsfs":        {"repo":"fsspec/filesystem_spec","threads":[1340],"extra":[["fsspec/gcsfs",576]]}
+}

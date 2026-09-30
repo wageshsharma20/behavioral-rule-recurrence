@@ -1,0 +1,78 @@
+{
+ "ollama:gpt-oss:20b": {
+  "A1_mechanism_named": {
+   "B1": {
+    "named": 3,
+    "correct_defects": 6
+   },
+   "B3": {
+    "named": 3,
+    "correct_defects": 6
+   },
+   "B4": {
+    "named": 1,
+    "correct_defects": 5
+   },
+   "B5": {
+    "named": 6,
+    "correct_defects": 7
+   },
+   "PV1-B1": {
+    "named": 1,
+    "correct_defects": 1
+   },
+   "PV1-B3cpl": {
+    "named": 1,
+    "correct_defects": 1
+   },
+   "PV1-B3gcsfs": {
+    "named": 1,
+    "correct_defects": 1
+   },
+   "PV1-B4": {
+    "named": 1,
+    "correct_defects": 1
+   }
+  },
+  "A2_unanimous_items": 47,
+  "A2_items_sampled": 78
+ },
+ "ollama:qwen3-coder:30b": {
+  "A1_mechanism_named": {
+   "B1": {
+    "named": 3,
+    "correct_defects": 7
+   },
+   "B3": {
+    "named": 7,
+    "correct_defects": 7
+   },
+   "B4": {
+    "named": 1,
+    "correct_defects": 6
+   },
+   "B5": {
+    "named": 6,
+    "correct_defects": 7
+   },
+   "PV1-B1": {
+    "named": 1,
+    "correct_defects": 1
+   },
+   "PV1-B3cpl": {
+    "named": 1,
+    "correct_defects": 1
+   },
+   "PV1-B3gcsfs": {
+    "named": 1,
+    "correct_defects": 1
+   },
+   "PV1-B4": {
+    "named": 0,
+    "correct_defects": 1
+   }
+  },
+  "A2_unanimous_items": 75,
+  "A2_items_sampled": 78
+ }
+}

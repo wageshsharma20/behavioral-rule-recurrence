@@ -1,0 +1,10 @@
+# environment attr-GC3-cloudpathlib
+# python 3.10.20 arm64
+boto3==1.24.50
+botocore==1.27.50
+cloudpathlib @ git+https://github.com/drivendataorg/cloudpathlib@e781f1fa226c86712e3d8e09979117fd9f15b687
+jmespath==1.0.1
+python-dateutil==2.8.2
+s3transfer==0.6.0
+six==1.16.0
+urllib3==1.26.11

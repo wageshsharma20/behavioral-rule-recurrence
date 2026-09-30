@@ -1,0 +1,33 @@
+# environment attr-PV1-source-gcsfs
+# python 3.10.20 arm64
+aiohttp==3.8.4
+aiosignal==1.3.1
+async-timeout==4.0.2
+attrs==23.1.0
+cachetools==5.3.1
+certifi==2023.5.7
+charset-normalizer==3.1.0
+decorator==5.1.1
+frozenlist==1.3.3
+fsspec==2023.6.0
+gcsfs @ git+https://github.com/fsspec/gcsfs@5b970875848fb6c7e8483c5b1f862607820aedcd
+google-api-core==2.11.1
+google-auth==2.20.0
+google-auth-oauthlib==1.0.0
+google-cloud-core==2.3.2
+google-cloud-storage==2.9.0
+google-crc32c==1.5.0
+google-resumable-media==2.5.0
+googleapis-common-protos==1.59.1
+idna==3.4
+multidict==6.0.4
+oauthlib==3.2.2
+protobuf==4.23.3
+pyasn1==0.5.0
+pyasn1-modules==0.3.0
+requests==2.31.0
+requests-oauthlib==1.3.1
+rsa==4.9
+six==1.16.0
+urllib3==1.26.16
+yarl==1.9.2

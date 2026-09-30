@@ -1,0 +1,256 @@
+{
+ "source": "./rq3/mutants/GC2a_gcsfs/ORIGINAL.py",
+ "functions": [
+  "GCSFile.discard",
+  "GCSFileSystem._format_path",
+  "GCSFileSystem._rm_files",
+  "GCSFileSystem.url",
+  "initiate_upload",
+  "quote",
+  "quote_plus",
+  "simple_upload"
+ ],
+ "n_sites": 108,
+ "mutants": [
+  {
+   "id": "m00_SD__rm_files_L954",
+   "op": "SD",
+   "line": 954,
+   "col": 16,
+   "kind": "Assign",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m01_SL_simple_upload_L1598",
+   "op": "SL",
+   "line": 1598,
+   "col": 10,
+   "kind": "Constant",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m02_SD__format_path_L359",
+   "op": "SD",
+   "line": 359,
+   "col": 12,
+   "kind": "Assign",
+   "function": "_format_path"
+  },
+  {
+   "id": "m03_SL_initiate_upload_L1564",
+   "op": "SL",
+   "line": 1564,
+   "col": 29,
+   "kind": "Constant",
+   "function": "initiate_upload"
+  },
+  {
+   "id": "m04_SL_discard_L1469",
+   "op": "SL",
+   "line": 1469,
+   "col": 34,
+   "kind": "Constant",
+   "function": "discard"
+  },
+  {
+   "id": "m05_SD_discard_L1465",
+   "op": "SD",
+   "line": 1465,
+   "col": 8,
+   "kind": "Assign",
+   "function": "discard"
+  },
+  {
+   "id": "m06_SD__rm_files_L955",
+   "op": "SD",
+   "line": 955,
+   "col": 16,
+   "kind": "Assign",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m07_BD_simple_upload_L1594",
+   "op": "BD",
+   "line": 1594,
+   "col": 8,
+   "kind": "BinOp",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m08_SD_simple_upload_L1592",
+   "op": "SD",
+   "line": 1592,
+   "col": 4,
+   "kind": "Assign",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m09_BD__rm_files_L948",
+   "op": "BD",
+   "line": 948,
+   "col": 57,
+   "kind": "BinOp",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m10_SL_simple_upload_L1588",
+   "op": "SL",
+   "line": 1588,
+   "col": 16,
+   "kind": "Constant",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m11_SL_initiate_upload_L1560",
+   "op": "SL",
+   "line": 1560,
+   "col": 10,
+   "kind": "Constant",
+   "function": "initiate_upload"
+  },
+  {
+   "id": "m12_BD_simple_upload_L1603",
+   "op": "BD",
+   "line": 1603,
+   "col": 11,
+   "kind": "BinOp",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m13_BD_simple_upload_L1594",
+   "op": "BD",
+   "line": 1594,
+   "col": 8,
+   "kind": "BinOp",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m14_SL_simple_upload_L1600",
+   "op": "SL",
+   "line": 1600,
+   "col": 10,
+   "kind": "Constant",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m15_SD__rm_files_L926",
+   "op": "SD",
+   "line": 926,
+   "col": 12,
+   "kind": "Assign",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m16_SL__rm_files_L938",
+   "op": "SL",
+   "line": 938,
+   "col": 34,
+   "kind": "Constant",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m17_SL_discard_L1468",
+   "op": "SL",
+   "line": 1468,
+   "col": 33,
+   "kind": "Constant",
+   "function": "discard"
+  },
+  {
+   "id": "m18_SD_url_L772",
+   "op": "SD",
+   "line": 772,
+   "col": 8,
+   "kind": "Assign",
+   "function": "url"
+  },
+  {
+   "id": "m19_SL_initiate_upload_L1558",
+   "op": "SL",
+   "line": 1558,
+   "col": 9,
+   "kind": "Constant",
+   "function": "initiate_upload"
+  },
+  {
+   "id": "m20_NC__rm_files_L950",
+   "op": "NC",
+   "line": 950,
+   "col": 12,
+   "kind": "If",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m21_SL__rm_files_L930",
+   "op": "SL",
+   "line": 930,
+   "col": 39,
+   "kind": "Constant",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m22_SD_simple_upload_L1590",
+   "op": "SD",
+   "line": 1590,
+   "col": 8,
+   "kind": "Assign",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m23_SL_simple_upload_L1608",
+   "op": "SL",
+   "line": 1608,
+   "col": 33,
+   "kind": "Constant",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m24_CR__rm_files_L951",
+   "op": "CR",
+   "line": 951,
+   "col": 21,
+   "kind": "Compare",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m25_NC_discard_L1463",
+   "op": "NC",
+   "line": 1463,
+   "col": 8,
+   "kind": "If",
+   "function": "discard"
+  },
+  {
+   "id": "m26_SL_url_L770",
+   "op": "SL",
+   "line": 770,
+   "col": 8,
+   "kind": "Constant",
+   "function": "url"
+  },
+  {
+   "id": "m27_SL_simple_upload_L1599",
+   "op": "SL",
+   "line": 1599,
+   "col": 10,
+   "kind": "Constant",
+   "function": "simple_upload"
+  },
+  {
+   "id": "m28_SD__rm_files_L956",
+   "op": "SD",
+   "line": 956,
+   "col": 16,
+   "kind": "Expr",
+   "function": "_rm_files"
+  },
+  {
+   "id": "m29_SL_initiate_upload_L1567",
+   "op": "SL",
+   "line": 1567,
+   "col": 17,
+   "kind": "Constant",
+   "function": "initiate_upload"
+  }
+ ]
+}

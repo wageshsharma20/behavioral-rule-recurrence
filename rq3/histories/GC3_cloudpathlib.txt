@@ -1,0 +1,47 @@
+Issue: S3Path.exists() returns True on partial matches
+S3Path.exists() is returning True for anything that begins with the same as a real file. For instance, if we have a file named `foobar`, we get a false positive when querying for `foo`.
+
+```
+>>> S3Path('s3://my-bucket/foobar').exists()  # This file is really there
+True
+>>> S3Path('s3://my-bucket/foo').exists()  # This file does NOT exist
+True
+```
+
+Pull request: Make prefix not being recognised as dirs anymore
+Fixes #208
+
+Comment: Looks like this is a bug in `S3Client._s3_file_query`.
+
+[link]
+
+This branch of logic is too permissive and needs to also check if there's a `/`. 
+
+Also a blind spot in our tests that this isn't caught.
+
+Comment: > This branch of logic is too permissive and needs to also check if there's a /.
+
+I think append a `/` to the key if there isn't one in this fallback path—that said, we'll need to double check if that handles the fake directory scenario as well.
+
+Comment: Whoops, closed this by accident.
+
+Comment: Hi. Looking for some eyes on #244 if anybody has the time. We stumbled upon the same problem and fixed it by patching it but wanted to submit a fix.
+
+> I think append a / to the key if there isn't one in this fallback path—that said, we'll need to double check if that handles the fake directory scenario as well.
+
+It is also checking that condition as well.
+
+Comment: @user, thanks for your review!
+
+Now testing for mocked backend and using already uploaded files.
+
+Let me know if there is anything else that needs to be adjusted 👍 
+
+Feel free to push this to a local branch 👍
+
+Comment: Thanks @user! Once CI passes here, I'll pull over to a local branch to run the tests against live servers
+
+Comment: Actually, would you mind adding a note in the HISTORY.md as well? I believe you need to start a new "unreleased" section. Here's an old one for reference:
+[link]
+
+Comment: @user feel free to update the message in the `HISTORY.md` if you want

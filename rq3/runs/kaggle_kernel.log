@@ -1,0 +1,149 @@
+[{"stream_name":"stderr","time":6.426879596,"data":"0.02s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.426941732,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.4269487,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.426952909,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":6.9792906089999995,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.979329587,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.97933497,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.979338858,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":8.292043141,"data":"name, memory.total [MiB]\n"}
+,{"stream_name":"stdout","time":8.292092227,"data":"Tesla T4, 15360 MiB\n"}
+,{"stream_name":"stdout","time":8.292097652,"data":"Tesla T4, 15360 MiB\n"}
+,{"stream_name":"stdout","time":8.292101362,"data":"\n"}
+,{"stream_name":"stdout","time":31.196938564,"data":"\u001b[1m\u001b[31mWARNING:\u001b[m systemd is not running\n"}
+,{"stream_name":"stdout","time":31.197009342,"data":" ####################   99.9%\n"}
+,{"stream_name":"stdout","time":31.197017605,"data":"######################################################################## 100.0%\n"}
+,{"stream_name":"stdout","time":31.197023191,"data":"\u003e\u003e\u003e Creating ollama user...\n"}
+,{"stream_name":"stdout","time":31.197029365,"data":"\u003e\u003e\u003e Adding ollama user to video group...\n"}
+,{"stream_name":"stdout","time":31.197035001,"data":"\u003e\u003e\u003e Adding current user to ollama group...\n"}
+,{"stream_name":"stdout","time":31.197040361,"data":"\u003e\u003e\u003e Creating ollama systemd service...\n"}
+,{"stream_name":"stdout","time":31.197046392,"data":"\u003e\u003e\u003e NVIDIA GPU installed.\n"}
+,{"stream_name":"stdout","time":31.197052211,"data":"\u003e\u003e\u003e The Ollama API is now available at 127.0.0.1:11434.\n"}
+,{"stream_name":"stdout","time":31.197057807,"data":"\u003e\u003e\u003e Install complete. Run \"ollama\" from the command line.\n"}
+,{"stream_name":"stdout","time":31.197073579,"data":"\n"}
+,{"stream_name":"stdout","time":38.821369611,"data":"ollama {'version': '0.34.4'}\n"}
+,{"stream_name":"stdout","time":38.861602276,"data":"78 prompts; plan f5de6779689e8c4c\n"}
+,{"stream_name":"stdout","time":202.676351052,"data":"qwen3-coder:30b pull rc 0 25h\u001b[?2026l\u001b[?2026h\u001b[?25l\u001b[A\u001b[A\u001b[A\u001b[1Gpulling manifest \u001b[K\n"}
+,{"stream_name":"stdout","time":202.676408773,"data":"pulling 1194192cf2a1: 100% ▕██████████████████▏  18 GB                         \u001b[K\n"}
+,{"stream_name":"stdout","time":202.676417801,"data":"pulling 69aa441ea44f: 100% ▕██████████████████▏  148 B                         \u001b[K\n"}
+,{"stream_name":"stdout","time":202.676424048,"data":"verifying sha256 digest \u001b[K\n"}
+,{"stream_name":"stdout","time":202.676429789,"data":"writing manifest \u001b[K\n"}
+,{"stream_name":"stdout","time":202.676434544,"data":"success \u001b[K\u001b[?25h\u001b[?2026l\n"}
+,{"stream_name":"stdout","time":202.676439682,"data":"\n"}
+,{"stream_name":"stdout","time":317.637713363,"data":"gpt-oss:20b pull rc 0 █████████████████▏  13 GB                         \u001b[K\n"}
+,{"stream_name":"stdout","time":317.637786186,"data":"verifying sha256 digest ⠋ \u001b[K\u001b[?25h\u001b[?2026l\u001b[?2026h\u001b[?25l\u001b[A\u001b[A\u001b[1Gpulling manifest \u001b[K\n"}
+,{"stream_name":"stdout","time":317.637793638,"data":"pulling e7b273f96360: 100% ▕██████████████████▏  13 GB                         \u001b[K\n"}
+,{"stream_name":"stdout","time":317.637802578,"data":"verifying sha256 digest \u001b[K\n"}
+,{"stream_name":"stdout","time":317.637806047,"data":"writing manifest \u001b[K\n"}
+,{"stream_name":"stdout","time":317.637809366,"data":"success \u001b[K\u001b[?25h\u001b[?2026l\n"}
+,{"stream_name":"stdout","time":317.637812648,"data":"\n"}
+,{"stream_name":"stdout","time":317.637816088,"data":"ACTIVE ['qwen3-coder:30b', 'gpt-oss:20b']\n"}
+,{"stream_name":"stdout","time":317.852412391,"data":"qwen3-coder:30b phase 0 todo 78\n"}
+,{"stream_name":"stdout","time":489.983514875,"data":"qwen3-coder:30b 0 0 / 78 GC1|pyarrow|bad|B1 DEFECT label DEFECT 172.3s\n"}
+,{"stream_name":"stdout","time":507.636685474,"data":"qwen3-coder:30b 0 10 / 78 GC1|s3fs|bad|B4 DEFECT label DEFECT 2.3s\n"}
+,{"stream_name":"stdout","time":527.867267049,"data":"qwen3-coder:30b 0 20 / 78 GC2a|gcsfs|good|B1 DEFECT label CORRECT 2.2s\n"}
+,{"stream_name":"stdout","time":545.315182801,"data":"qwen3-coder:30b 0 30 / 78 GC2a|obstore|good|B4 CORRECT label CORRECT 0.8s\n"}
+,{"stream_name":"stdout","time":562.824279462,"data":"qwen3-coder:30b 0 40 / 78 GC2b|obstore|bad|B1 CORRECT label DEFECT 1.8s\n"}
+,{"stream_name":"stdout","time":583.864054775,"data":"qwen3-coder:30b 0 50 / 78 GC2b|pyarrow|good|B4 DEFECT label CORRECT 1.4s\n"}
+,{"stream_name":"stdout","time":604.236993473,"data":"qwen3-coder:30b 0 60 / 78 GC3|opendal|bad|B4 DEFECT label DEFECT 3.1s\n"}
+,{"stream_name":"stdout","time":623.71098377,"data":"qwen3-coder:30b 0 70 / 78 PV1|s3path|good|B3gcsfs DEFECT label CORRECT 1.8s\n"}
+,{"stream_name":"stdout","time":634.02974407,"data":"gpt-oss:20b phase 0 todo 78\n"}
+,{"stream_name":"stdout","time":751.748585716,"data":"gpt-oss:20b 0 0 / 78 GC1|pyarrow|bad|B1 DEFECT label DEFECT 117.9s\n"}
+,{"stream_name":"stdout","time":1240.619367445,"data":"gpt-oss:20b 0 10 / 78 GC1|s3fs|bad|B4 DEFECT label DEFECT 15.9s\n"}
+,{"stream_name":"stdout","time":1637.924061718,"data":"gpt-oss:20b 0 20 / 78 GC2a|gcsfs|good|B1 UNPARSED label CORRECT 84.1s\n"}
+,{"stream_name":"stdout","time":2198.024885352,"data":"gpt-oss:20b 0 30 / 78 GC2a|obstore|good|B4 DEFECT label CORRECT 34.9s\n"}
+,{"stream_name":"stdout","time":2543.126342006,"data":"gpt-oss:20b 0 40 / 78 GC2b|obstore|bad|B1 UNPARSED label DEFECT 84.4s\n"}
+,{"stream_name":"stdout","time":3108.557764437,"data":"gpt-oss:20b 0 50 / 78 GC2b|pyarrow|good|B4 DEFECT label CORRECT 18.2s\n"}
+,{"stream_name":"stdout","time":3738.162217029,"data":"gpt-oss:20b 0 60 / 78 GC3|opendal|bad|B4 UNPARSED label DEFECT 84.5s\n"}
+,{"stream_name":"stdout","time":4223.172335519,"data":"gpt-oss:20b 0 70 / 78 PV1|s3path|good|B3gcsfs UNPARSED label CORRECT 83.6s\n"}
+,{"stream_name":"stdout","time":4565.912727601,"data":"qwen3-coder:30b phase 1 todo 390\n"}
+,{"stream_name":"stdout","time":4640.367214336,"data":"qwen3-coder:30b 1 0 / 390 GC1|pyarrow|bad|B1 DEFECT label DEFECT 74.7s\n"}
+,{"stream_name":"stdout","time":4658.345293938,"data":"qwen3-coder:30b 1 10 / 390 GC1|s3fs|bad|B4 CORRECT label DEFECT 1.6s\n"}
+,{"stream_name":"stdout","time":4679.142587215,"data":"qwen3-coder:30b 1 20 / 390 GC2a|gcsfs|good|B1 DEFECT label CORRECT 2.3s\n"}
+,{"stream_name":"stdout","time":4697.021278225,"data":"qwen3-coder:30b 1 30 / 390 GC2a|obstore|good|B4 CORRECT label CORRECT 0.9s\n"}
+,{"stream_name":"stdout","time":4715.045437647,"data":"qwen3-coder:30b 1 40 / 390 GC2b|obstore|bad|B1 CORRECT label DEFECT 1.8s\n"}
+,{"stream_name":"stdout","time":4735.707814286,"data":"qwen3-coder:30b 1 50 / 390 GC2b|pyarrow|good|B4 DEFECT label CORRECT 1.4s\n"}
+,{"stream_name":"stdout","time":4754.360173626,"data":"qwen3-coder:30b 1 60 / 390 GC3|opendal|bad|B4 DEFECT label DEFECT 3.0s\n"}
+,{"stream_name":"stdout","time":4774.133036804,"data":"qwen3-coder:30b 1 70 / 390 PV1|s3path|good|B3gcsfs DEFECT label CORRECT 2.0s\n"}
+,{"stream_name":"stdout","time":4788.641906366,"data":"qwen3-coder:30b 1 80 / 390 GC1|pyarrow|bad|B4 DEFECT label DEFECT 1.4s\n"}
+,{"stream_name":"stdout","time":4802.295439566,"data":"qwen3-coder:30b 1 90 / 390 GC1|s3fs|good|B1 CORRECT label CORRECT 0.7s\n"}
+,{"stream_name":"stdout","time":4819.972555881,"data":"qwen3-coder:30b 1 100 / 390 GC2a|gcsfs|good|B4 CORRECT label CORRECT 1.7s\n"}
+,{"stream_name":"stdout","time":4834.938618662,"data":"qwen3-coder:30b 1 110 / 390 GC2a|s3path|bad|B1 DEFECT label DEFECT 1.4s\n"}
+,{"stream_name":"stdout","time":4850.689936602,"data":"qwen3-coder:30b 1 120 / 390 GC2b|obstore|bad|B4 CORRECT label DEFECT 2.0s\n"}
+,{"stream_name":"stdout","time":4866.27332148,"data":"qwen3-coder:30b 1 130 / 390 GC3|cloudpathlib|bad|B1 DEFECT label DEFECT 1.5s\n"}
+,{"stream_name":"stdout","time":4881.901042973,"data":"qwen3-coder:30b 1 140 / 390 GC3|opendal|good|B3 DEFECT label CORRECT 1.7s\n"}
+,{"stream_name":"stdout","time":4899.796933873,"data":"qwen3-coder:30b 1 150 / 390 M|GC3|cloudpathlib|m00_BD__s3_file_query_L159|B1 DEFECT label DEFECT 2.0s\n"}
+,{"stream_name":"stdout","time":4914.336428367,"data":"qwen3-coder:30b 1 160 / 390 GC1|pyarrow|good|B1 DEFECT label CORRECT 1.5s\n"}
+,{"stream_name":"stdout","time":4928.080417138,"data":"qwen3-coder:30b 1 170 / 390 GC1|s3fs|good|B4 DEFECT label CORRECT 1.5s\n"}
+,{"stream_name":"stdout","time":4947.043263139,"data":"qwen3-coder:30b 1 180 / 390 GC2a|obstore|bad|B1 DEFECT label DEFECT 1.5s\n"}
+,{"stream_name":"stdout","time":4960.621898365,"data":"qwen3-coder:30b 1 190 / 390 GC2a|s3path|bad|B4 DEFECT label DEFECT 1.4s\n"}
+,{"stream_name":"stdout","time":4976.675764314,"data":"qwen3-coder:30b 1 200 / 390 GC2b|obstore|good|B3 DEFECT label CORRECT 2.7s\n"}
+,{"stream_name":"stdout","time":4991.914014439,"data":"qwen3-coder:30b 1 210 / 390 GC3|cloudpathlib|bad|B5 DEFECT label DEFECT 1.7s\n"}
+,{"stream_name":"stdout","time":5008.677234204,"data":"qwen3-coder:30b 1 220 / 390 PV1|s3path|bad|B1 DEFECT label DEFECT 1.5s\n"}
+,{"stream_name":"stdout","time":5025.407676144,"data":"qwen3-coder:30b 1 230 / 390 M|GC3|cloudpathlib|m00_BD__s3_file_query_L159|B5 DEFECT label DEFECT 1.5s\n"}
+,{"stream_name":"stdout","time":5040.100085353,"data":"qwen3-coder:30b 1 240 / 390 GC1|pyarrow|good|B4 DEFECT label CORRECT 1.7s\n"}
+,{"stream_name":"stdout","time":5053.254878749,"data":"qwen3-coder:30b 1 250 / 390 GC2a|gcsfs|bad|B1 DEFECT label DEFECT 1.1s\n"}
+,{"stream_name":"stdout","time":5071.835977769,"data":"qwen3-coder:30b 1 260 / 390 GC2a|obstore|bad|B4 CORRECT label DEFECT 0.8s\n"}
+,{"stream_name":"stdout","time":5087.042465278,"data":"qwen3-coder:30b 1 270 / 390 GC2a|s3path|good|B1 DEFECT label CORRECT 1.5s\n"}
+,{"stream_name":"stdout","time":5103.426212227,"data":"qwen3-coder:30b 1 280 / 390 GC2b|pyarrow|bad|B1 DEFECT label DEFECT 1.3s\n"}
+,{"stream_name":"stdout","time":5118.091664156,"data":"qwen3-coder:30b 1 290 / 390 GC3|cloudpathlib|good|B4 DEFECT label CORRECT 1.7s\n"}
+,{"stream_name":"stdout","time":5135.403527794,"data":"qwen3-coder:30b 1 300 / 390 PV1|s3path|bad|B3gcsfs DEFECT label DEFECT 1.5s\n"}
+,{"stream_name":"stdout","time":5151.227322555,"data":"qwen3-coder:30b 1 310 / 390 M|GC3|cloudpathlib|m04_SL__s3_file_query_L159|B4 DEFECT label DEFECT 1.4s\n"}
+,{"stream_name":"stdout","time":5164.86657557,"data":"qwen3-coder:30b 1 320 / 390 GC1|s3fs|bad|B1 CORRECT label DEFECT 0.7s\n"}
+,{"stream_name":"stdout","time":5179.049687502,"data":"qwen3-coder:30b 1 330 / 390 GC2a|gcsfs|bad|B4 CORRECT label DEFECT 1.7s\n"}
+,{"stream_name":"stdout","time":5196.083377482,"data":"qwen3-coder:30b 1 340 / 390 GC2a|obstore|good|B1 DEFECT label CORRECT 1.5s\n"}
+,{"stream_name":"stdout","time":5211.035365272,"data":"qwen3-coder:30b 1 350 / 390 GC2a|s3path|good|B4 DEFECT label CORRECT 1.4s\n"}
+,{"stream_name":"stdout","time":5227.922266385,"data":"qwen3-coder:30b 1 360 / 390 GC2b|pyarrow|bad|B5 DEFECT label DEFECT 1.5s\n"}
+,{"stream_name":"stdout","time":5243.591621968,"data":"qwen3-coder:30b 1 370 / 390 GC3|opendal|bad|B1 DEFECT label DEFECT 1.8s\n"}
+,{"stream_name":"stdout","time":5261.602424373,"data":"qwen3-coder:30b 1 380 / 390 PV1|s3path|good|B1 DEFECT label CORRECT 1.9s\n"}
+,{"stream_name":"stdout","time":5275.75770172,"data":"gpt-oss:20b phase 1 todo 390\n"}
+,{"stream_name":"stdout","time":5356.529334014,"data":"gpt-oss:20b 1 0 / 390 GC1|pyarrow|bad|B1 DEFECT label DEFECT 81.0s\n"}
+,{"stream_name":"stdout","time":5796.830326873,"data":"gpt-oss:20b 1 10 / 390 GC1|s3fs|bad|B4 DEFECT label DEFECT 48.6s\n"}
+,{"stream_name":"stdout","time":6144.023945856,"data":"gpt-oss:20b 1 20 / 390 GC2a|gcsfs|good|B1 UNPARSED label CORRECT 84.1s\n"}
+,{"stream_name":"stdout","time":6507.853589402,"data":"gpt-oss:20b 1 30 / 390 GC2a|obstore|good|B4 DEFECT label CORRECT 27.6s\n"}
+,{"stream_name":"stdout","time":6808.490248592,"data":"gpt-oss:20b 1 40 / 390 GC2b|obstore|bad|B1 UNPARSED label DEFECT 84.4s\n"}
+,{"stream_name":"stdout","time":7212.269894527,"data":"gpt-oss:20b 1 50 / 390 GC2b|pyarrow|good|B4 DEFECT label CORRECT 20.3s\n"}
+,{"stream_name":"stdout","time":7626.937484357,"data":"gpt-oss:20b 1 60 / 390 GC3|opendal|bad|B4 DEFECT label DEFECT 28.5s\n"}
+,{"stream_name":"stdout","time":7939.949505575,"data":"gpt-oss:20b 1 70 / 390 PV1|s3path|good|B3gcsfs DEFECT label CORRECT 28.9s\n"}
+,{"stream_name":"stdout","time":8310.813513,"data":"gpt-oss:20b 1 80 / 390 GC1|pyarrow|bad|B4 DEFECT label DEFECT 35.4s\n"}
+,{"stream_name":"stdout","time":8594.615693729,"data":"gpt-oss:20b 1 90 / 390 GC1|s3fs|good|B1 DEFECT label CORRECT 25.1s\n"}
+,{"stream_name":"stdout","time":8945.921721201,"data":"gpt-oss:20b 1 100 / 390 GC2a|gcsfs|good|B4 CORRECT label CORRECT 55.3s\n"}
+,{"stream_name":"stdout","time":9247.705699117,"data":"gpt-oss:20b 1 110 / 390 GC2a|s3path|bad|B1 DEFECT label DEFECT 53.8s\n"}
+,{"stream_name":"stdout","time":9532.648231615,"data":"gpt-oss:20b 1 120 / 390 GC2b|obstore|bad|B4 CORRECT label DEFECT 21.5s\n"}
+,{"stream_name":"stdout","time":9869.203242695,"data":"gpt-oss:20b 1 130 / 390 GC3|cloudpathlib|bad|B1 DEFECT label DEFECT 31.9s\n"}
+,{"stream_name":"stdout","time":10278.342064506,"data":"gpt-oss:20b 1 140 / 390 GC3|opendal|good|B3 DEFECT label CORRECT 30.0s\n"}
+,{"stream_name":"stdout","time":10649.116356984,"data":"gpt-oss:20b 1 150 / 390 M|GC3|cloudpathlib|m00_BD__s3_file_query_L159|B1 DEFECT label DEFECT 66.8s\n"}
+,{"stream_name":"stdout","time":10993.464817044,"data":"gpt-oss:20b 1 160 / 390 GC1|pyarrow|good|B1 DEFECT label CORRECT 58.8s\n"}
+,{"stream_name":"stdout","time":11320.534174004,"data":"gpt-oss:20b 1 170 / 390 GC1|s3fs|good|B4 DEFECT label CORRECT 21.9s\n"}
+,{"stream_name":"stdout","time":11801.911635753,"data":"gpt-oss:20b 1 180 / 390 GC2a|obstore|bad|B1 DEFECT label DEFECT 12.3s\n"}
+,{"stream_name":"stdout","time":12030.368459793,"data":"gpt-oss:20b 1 190 / 390 GC2a|s3path|bad|B4 DEFECT label DEFECT 16.9s\n"}
+,{"stream_name":"stdout","time":12378.941554432,"data":"gpt-oss:20b 1 200 / 390 GC2b|obstore|good|B3 CORRECT label CORRECT 18.6s\n"}
+,{"stream_name":"stdout","time":12771.619734386,"data":"gpt-oss:20b 1 210 / 390 GC3|cloudpathlib|bad|B5 DEFECT label DEFECT 12.4s\n"}
+,{"stream_name":"stdout","time":13169.023532456,"data":"gpt-oss:20b 1 220 / 390 PV1|s3path|bad|B1 DEFECT label DEFECT 31.8s\n"}
+,{"stream_name":"stdout","time":13488.700550446,"data":"gpt-oss:20b 1 230 / 390 M|GC3|cloudpathlib|m00_BD__s3_file_query_L159|B5 DEFECT label DEFECT 13.1s\n"}
+,{"stream_name":"stdout","time":13855.080572176,"data":"gpt-oss:20b 1 240 / 390 GC1|pyarrow|good|B4 DEFECT label CORRECT 41.6s\n"}
+,{"stream_name":"stdout","time":14201.114596824,"data":"gpt-oss:20b 1 250 / 390 GC2a|gcsfs|bad|B1 DEFECT label DEFECT 34.4s\n"}
+,{"stream_name":"stdout","time":14527.63598115,"data":"gpt-oss:20b 1 260 / 390 GC2a|obstore|bad|B4 CORRECT label DEFECT 14.6s\n"}
+,{"stream_name":"stdout","time":14733.966736845,"data":"gpt-oss:20b 1 270 / 390 GC2a|s3path|good|B1 DEFECT label CORRECT 33.2s\n"}
+,{"stream_name":"stdout","time":15175.151086518,"data":"gpt-oss:20b 1 280 / 390 GC2b|pyarrow|bad|B1 UNPARSED label DEFECT 83.1s\n"}
+,{"stream_name":"stdout","time":15460.221856651,"data":"gpt-oss:20b 1 290 / 390 GC3|cloudpathlib|good|B4 DEFECT label CORRECT 22.9s\n"}
+,{"stream_name":"stdout","time":15854.292661087,"data":"gpt-oss:20b 1 300 / 390 PV1|s3path|bad|B3gcsfs DEFECT label DEFECT 14.9s\n"}
+,{"stream_name":"stdout","time":16209.882026076,"data":"gpt-oss:20b 1 310 / 390 M|GC3|cloudpathlib|m04_SL__s3_file_query_L159|B4 UNPARSED label DEFECT 83.6s\n"}
+,{"stream_name":"stdout","time":16590.602675107,"data":"gpt-oss:20b 1 320 / 390 GC1|s3fs|bad|B1 DEFECT label DEFECT 36.1s\n"}
+,{"stream_name":"stdout","time":16871.279125052,"data":"gpt-oss:20b 1 330 / 390 GC2a|gcsfs|bad|B4 DEFECT label DEFECT 24.7s\n"}
+,{"stream_name":"stdout","time":17227.785492125,"data":"gpt-oss:20b 1 340 / 390 GC2a|obstore|good|B1 DEFECT label CORRECT 46.1s\n"}
+,{"stream_name":"stdout","time":17437.606358095,"data":"gpt-oss:20b 1 350 / 390 GC2a|s3path|good|B4 DEFECT label CORRECT 40.6s\n"}
+,{"stream_name":"stdout","time":17794.546722692,"data":"gpt-oss:20b 1 360 / 390 GC2b|pyarrow|bad|B5 DEFECT label DEFECT 18.9s\n"}
+,{"stream_name":"stdout","time":18207.542796241,"data":"gpt-oss:20b 1 370 / 390 GC3|opendal|bad|B1 DEFECT label DEFECT 56.5s\n"}
+,{"stream_name":"stdout","time":18600.81548502,"data":"gpt-oss:20b 1 380 / 390 PV1|s3path|good|B1 DEFECT label CORRECT 43.9s\n"}
+,{"stream_name":"stdout","time":18959.46633943,"data":"ollama_qwen3-coder_30b.jsonl 468 calls\n"}
+,{"stream_name":"stdout","time":18959.466411223,"data":"ollama_gpt-oss_20b.jsonl 468 calls\n"}
+,{"stream_name":"stderr","time":18964.708029254,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":18964.70808239,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":18964.949666748,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":18964.949708956,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":18965.684064161,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":18965.983833768,"data":"[NbConvertApp] Writing 74898 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":18968.278728463,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":18969.330824515,"data":"[NbConvertApp] Writing 378759 bytes to __results__.html\n"}
+]

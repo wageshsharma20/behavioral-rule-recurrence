@@ -1,0 +1,31 @@
+# file: s3path.py
+    def open(self, path, *, mode='r', buffering=-1, encoding=None, errors=None, newline=None):
+        resource, config = self.configuration_map.get_configuration(path)
+
+        smart_open_kwargs = {
+            'uri': "s3:/" + str(path),
+            'mode': mode,
+            'buffering': buffering,
+            'encoding': encoding,
+            'errors': errors,
+            'newline': newline,
+        }
+        transport_params = {'defer_seek': True}
+        dummy_object = self._s3.Object('bucket', 'key')
+        if smart_open.__version__ >= '5.0.0':
+            self._smart_open_new_version_kwargs(
+                dummy_object,
+                resource,
+                config,
+                transport_params,
+                smart_open_kwargs)
+        else:
+            self._smart_open_old_version_kwargs(
+                dummy_object,
+                resource,
+                config,
+                transport_params,
+                smart_open_kwargs)
+
+        file_object = smart_open.open(**smart_open_kwargs)
+        return file_object

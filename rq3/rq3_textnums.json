@@ -1,0 +1,20 @@
+{
+ "ci_T0": {
+  "ollama:gpt-oss:20b": [
+   0.0,
+   0.375
+  ],
+  "ollama:qwen3-coder:30b": [
+   0.0,
+   0.3
+  ]
+ },
+ "paired_n": {
+  "ollama:gpt-oss:20b": 14,
+  "ollama:qwen3-coder:30b": 14
+ },
+ "paired_n_B5": {
+  "ollama:gpt-oss:20b": 10,
+  "ollama:qwen3-coder:30b": 10
+ }
+}

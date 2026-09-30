@@ -1,0 +1,42 @@
+Issue: [Python][C++] S3FileSystem delete_dir() regression in PyArrow 14
+I think I have found a regression for S3FileSystem in PyArrow 14. Using the delete_dir() method with PyArrow 13 will remove a "directory" object and all its children, i.e. it will delete everything with the directory prefix. However when I switch to PyArrow 14 this no longer works, after calling delete_dir() the object still exists (I am checking with get_file_info() != FileType.NotFound). The issue also seems to affect delete_dir_contents(). The delete_dir() method still works on empty directories, and if I remove all the objects inside a directory and then call delete_dir() it will also work.
+
+Could this be something to do with the AWS call for removing objects by prefix? In the native APIs for GCP / Azure this is not possible and objects need to be listed and deleted in batches, but for S3 delete by prefix is available so I'm guessing the S3 FileSystem implementation uses this feature? These low level details are hidden by the Arrow FS abstraction though, so while delete_dir() is not working there is no effective way to work around without writing an implementation in the native AWS SDK - I'd prefer not to do that for the sake of one call!
+
+I have seen this issue on macOS with Python 3.12 and 3.10, also on Ubuntu with Python 3.11. In all cases the Arrow 13 version worked and the Arrow 14 version didn't. I haven't tried Arrow 14 on Windows but I do know Arrow 13 used to work on Windows. Also I'm assuming this is in the C implementation so it could affect more than just the Python component, but I have only tested with Python.
+
+Please let me know if there's anything I can do to help diagnose this issue. If it is a regression and it's possible to fix with a 14.0.1 that would be amazing but I don't know how possible that is.
+
+Python
+
+Pull request: GH-38618: [C++] S3FileSystem: fix regression in deleting explicitly created sub-directories
+See [link] and below for the analysis. When deleting the dir contents, we use a GetFileInfo with recursive FileSelector to list all objects to delete, but when doing that the file paths for directories don't end in a trailing `/`, so for deleting explicitly created directories we need to add the `kSep` here as well to properly delete the object.
+
+
+I tested them manually with an actual S3 bucket. The problem is that MinIO doesn't have the same problem, and so it's not actually tested with the test I added using our MinIO testing setup.
+
+
+Fixes the regression
+* Closes: #38618
+
+Comment: Could you provide a minimal script to reproduce this problem?
+
+If you can build PyArrow on local, could you try `git bisect` to detect the commit that is related to this problem?
+See also: [link]
+
+Comment: I have created a script to reproduce the problem, the script and outputs for both version 13 and version 14 are below which show the differences. It appears to be an issue when the parent dir contains explicit sub dir objects.
+
+In version 14, an empty dir is deleted ok and so is a dir containing blobs, but a dir containing other dirs is not. It only seems to be an issue when the sub dirs are created explicitly - if you put a blob in the dir with extra slashes in the blob name, the dir and content is deleted fine. Also if you explicitly delete the problematic sub dirs, then you can delete the parent dir.
+
+I also had a look into the code. It does seem the S3 implementation is listing dir contents and then deleting batches of objects in DoDeleteDirContentsAsync(). So I guess either the listing part of the deleting part isn't working right when the dir contains explicit sub dir objects.
+
+That's as far as I got before breakfast! Script and results are below. Is this enough for you to find and fix the issue or do you still need the bisection? Realistically I won't have time to set up all the tooling etc for that until the weekend. 
+
+  ```
+  import pyarrow.fs as pa_fs
+  import uuid
+  
+  s3_args = {
+      "region": "<region>",
+      "access_key":
+[... truncated at 700 words]
