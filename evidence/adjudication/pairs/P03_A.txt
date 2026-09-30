@@ -1,0 +1,251 @@
+glob with `**` leads to incorrect listings_cache state (missing and duplicated directories listings)
+It seems that usage of `**` in `glob` can lead to incorrect listings cache state so that subsequent commands like `glob` or `ls` produce incorrect results.
+
+I have two examples.
+
+### Missing directories
+
+```
+import [LIB]
+
+print([LIB].__version__)
+s3 = [LIB].S3FileSystem()
+s3.glob("s3://<redacted bucket>/<redacted directory>/*/<redacted>/**/*.txt")
+print(s3.ls("s3://<redacted bucket>/<redacted directory>"))
+```
+
+Here `s3.ls` misses several directories that are contained in `<redacted directory>`. If I comment `s3.glob` out, or replace `**` with `*` (the output of `glob` does not change, as there is only one subdirectory level in `<redacted>`), no missed folders in `ls` output.
+
+### Duplicated directories
+
+I tried to reproduce the previous example with a simpler directory structure, and encountered different problem.
+
+I have a very simple structure inside my bucket:
+
+```
+a/
+b/somefile.pdf
+c/
+```
+
+Then I do
+
+```
+import [LIB]
+
+print([LIB].__version__)
+s3 = [LIB].S3FileSystem()
+
+s3.glob("s3://<test bucket>/**/*.pdf")
+print(s3.ls("s3://<test bucket>/"))
+```
+The output:
+
+```
+2025.9.0
+['<test bucket>/a/', '<test bucket>/b', '<test bucket>/b', '<test bucket>/b/', '<test bucket>/c/']
+```
+
+So directory `b` is present three times (one with a leading `/`, the other two without).
+
+If I replace `**` with `*`, I get different output:
+
+```
+2025.9.0
+['<test bucket>/a', '<test bucket>/b', '<test bucket>/c']
+```
+
+In all cases, if I initialize the filesystem with `s3 = [LIB].S3FileSystem(use_listings_cache=False)`, the problems disappear. So I believe the problem is the interaction between `**` in glob and the cache.
+
+I am using 2025.9.0 version of [LIB] (also reproduces with 2025.9.0+3.g2ccadeb), Python 3.12.9 on Mac OS.
+Thanks for posting.
+Can you check, please, if `find()`alone causes this behaviour?
+Yes `find()` also causes the same problems. For example:
+
+```
+import [LIB]
+
+print([LIB].__version__)
+s3 = [LIB].S3FileSystem(use_listings_cache=True)
+
+s3.find("s3://<test bucket>/")
+print(s3.ls("s3://<test bucket>//"))
+```
+
+Output:
+
+```
+2025.9.0
+['<test bucket>/a/', '<test bucket>/b', '<test bucket>/b', '<test bucket>/b/', '<test bucket>/c/']
+```
+If you do `ls(.., detail=True)`, do the entries ending with "/" show up as type="file"?
+Yes:
+
+```
+[{'ChecksumAlgorithm': ['CRC64NVME'],
+  'ChecksumType': 'FULL_OBJECT',
+  'ETag': '"d41d8cd98f00b204e9800998ecf8427e"',
+  'Key': '<test bucket>/a/',
+  'LastModified': datetime.datetime(2025, 10, 6, 12, 50, 36, tzinfo=tzutc()),
+  'Size': 0,
+  'StorageClass': 'STANDARD',
+  'name': '<test bucket>/a/',
+  'size': 0,
+  'type': 'file'},
+ {'ChecksumAlgorithm': ['CRC64NVME'],
+  'ChecksumType': 'FULL_OBJECT',
+  'ETag': '"d41d8cd98f00b204e9800998ecf8427e"',
+  'Key': '<test bucket>/b/',
+  'LastModified': datetime.datetime(2025, 10, 6, 12, 50, 41, tzinfo=tzutc()),
+  'Size': 0,
+  'StorageClass': 'STANDARD',
+  'name': '<test bucket>/b/',
+  'size': 0,
+  'type': 'file'},
+ {'Key': 'b',
+  'Size': 0,
+  'StorageClass': 'DIRECTORY',
+  'name': '<test bucket>/b',
+  'size': 0,
+  'type': 'directory'},
+ {'ChecksumAlgorithm': ['CRC64NVME'],
+  'ChecksumType': 'FULL_OBJECT',
+  'ETag': '"d41d8cd98f00b204e9800998ecf8427e"',
+  'Key': '<test bucket>/c/',
+  'LastModified': datetime.datetime(2025, 10, 6, 12, 50, 44, tzinfo=tzutc()),
+  'Size': 0,
+  'StorageClass': 'STANDARD',
+  'name': '<test bucket>/c/',
+  'size': 0,
+  'type': 'file'},
+ {'Key': 'b',
+  'Size': 0,
+  'StorageClass': 'DIRECTORY',
+  'name': '<test bucket>/b',
+  'size': 0,
+  'type': 'directory'}]
+```
+Unfortunately, it is possible for a directory and a file to share the same name in S3. (Note that the directory does not have the "/" terminating character)
+The S3 console, in particular, uses these zero-length-files as placeholders for empty directories, since S3 doesn't have a native directory entity. I think that the listign is correct in this sense.
+
+However, there is also some duplication of directories, which I will investigate. 
+
+Have you also observer missing entries?
+Yes, with `find()`, I also see missing directories in the first example, just like with `glob("…**…)`
+> I also see missing directories in the first example
+
+Sorry, I don't see this from your example
+
+```
+['<test bucket>/a/', '<test bucket>/b', '<test bucket>/b', '<test bucket>/b/', '<test bucket>/c/']
+```
+
+"b" is the only directory here, because it has children.
+I mean the first example in my initial post (*Missing directories*). I encountered it in my production setting, but didn't have a chance to reproduce in a more controlled / minimal way yet. Though, I believe that it is possible that two effects (duplicated and missing directories) are related, so maybe if we understand what causes the duplicates, we will also solve the missing directories.
+Here is a reproduction of the behavior similar to my "first example":
+
+```
+import [LIB]
+
+print(f"{[LIB].__version__=}")
+BUCKET = "<test bucket>"
+BASE_PREFIX = "disappearing-folders/"
+BASE = f"s3://{BUCKET}/{BASE_PREFIX}"
+
+# Cached client (default cache on) and a fresh, no-cache client
+s3_with_cache = [LIB].S3FileSystem(anon=False, use_listings_cache=True)
+s3_no_cache = [LIB].S3FileSystem(anon=False, use_listings_cache=False)
+
+if s3_with_cache.exists(BASE):
+    s3_with_cache.rm(BASE, recursive=True)
+
+keys = [
+    f"{BASE}folder/foo/1.txt",
+    f"{BASE}bar.txt",
+]
+
+for k in keys:
+    s3_with_cache.touch(k)
+
+s3_with_cache.find(BASE)
+listed_cached = s3_with_cache.ls(BASE)
+listed_no_cache = s3_no_cache.ls(BASE)
+
+assert set(listed_cached) == set(listed_no_cache), (
+    f"Listings are different: {set(listed_cached)=}, {set(listed_no_cache)=}".replace(
+        BUCKET, "<test bucket>"
+    )
+)
+```
+
+I have the following output:
+
+```
+(1) $ uv run python notebooks/[LIB]_test.py
+[LIB].__version__='2024.10.0+35.g9a911bb'
+Traceback (most recent call last):
+  File "~/omnifold/meater_demand/notebooks/[LIB]_test.py", line 27, in <module>
+    assert set(listed_cached) == set(listed_no_cache), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Listings are different: set(listed_cached)={'<test bucket>/disappearing-folders/bar.txt'}, set(listed_no_cache)={'<test bucket>/disappearing-folders/folder', '<test bucket>/disappearing-folders/bar.txt'}
+```
+I have added the failing reproducer.
+Prevent duplicated entries in find() in presence of directory placeholders
+Fixes #988 
+
+  , can you try this?
+Now I have this output (for the same example as [here]( 
+
+```
+[LIB].__version__='2024.10.0+31.ge8f64a8'
+['<test bucket>/a/', '<test bucket>/b', '<test bucket>/b/', '<test bucket>/c/']
+```
+
+Note that the output still differs from what I see if I do not invoke `s3.find` before `s3.ls`:
+
+```
+[LIB].__version__='2024.10.0+31.ge8f64a8'
+['<test bucket>/a', '<test bucket>/b', '<test bucket>/c']
+```
+
+I don't know whether it is expected behavior or not.
+
+Also, my initial problem with missing directories is still present.
+Hmm, I'll try again when I have the time. I agree the two outputs should be the same... Whether ls() should show the placeholders, I'm not sure, since there're not "within" the listed directory (i.e., "<listed_path>/..."). I should definitely have tests around this!
+  , the latest commit is my reproducer, so now I should have something concrete I can fix. Part of the problem, is that [LIB] will not create any file ending in "/". That seems like a sane, if accidental, safeguard, but also inconvenient for some people.
+  : I think I have it. Can you please test for your usecase?
+Now I have this output if I have `s3.find` before `s3.ls`:
+
+```
+[LIB].__version__='2024.10.0+33.g3ade880'
+['<test bucket>/a', '<test bucket>/b']
+```
+
+As before, if I do not have `s3.find` before `s3.ls`, the output is this:
+
+```
+[LIB].__version__='2024.10.0+33.g3ade880'
+['<test bucket>/a', '<test bucket>/b', '<test bucket>/c']
+```
+
+So, duplication seems to be fixed, but my initial problem (disappearing directory) now reproduces in this settings (where we didn't see it previously).
+
+Here is the directory bucket contents:
+
+```
+(0) $ aws s3 ls s3://<test bucket>/ --recursive
+2025-10-06 14:50:36          0 a/
+2025-10-08 19:56:42         29 a/hello.txt
+2025-10-06 14:50:41          0 b/
+2025-10-06 14:51:53     980388 b/Introductie pinda en ei bij baby's.pdf
+2025-10-06 14:50:44          0 c/
+```
+
+One possible reason for disappearing of `c/` in this case is that it is empty folder, though, we still see it if don't have `s3.find` before `s3.ls`, and also in my initial incident (in production settings) also non-empty folders disappeared.
+OK, I've updated the test, so that if fails in the way you specify - I'll have to look again.
+I tried again :) 
+Thanks! Now my second testcase passes, but the initial one (where I first noticed that directory disappears) still fails. So my expectation that there should be the same cause is incorrect, and I need to make a clean repro of my initial testcase so it can be debugged
+Added [the testcase](  reproduces at 9a911bb.
+Thanks, I'll incorporate that as an additional test here and then fix it. But probably I won't work on it now until Monday, if someone else wants to try a fix.
+  test again?
+Confirming that all my tests (including the initial testcase in the production settings) pass now. Thanks a lot,  !

@@ -1,0 +1,53 @@
+obs.copy (and obs.rename) fails on non-ASCII filenames (e.g. with accented characters)
+obs.copy() percent-encodes the source path internally ("café.txt" → "caf%C3%A9.txt", as we see in the traceback). Consequently it raises FileNotFoundError because the file is actually stored as "café.txt".
+obs.rename() does the same, causing the same error. The other methods such as obs.head or obs.list work.
+
+Here is a minimal reproduction for obs.copy that you can run:
+
+```python
+import tempfile
+
+import [LIB] as obs
+from [LIB].store import LocalStore
+
+with tempfile.TemporaryDirectory() as tmpdir:
+    store = LocalStore(tmpdir)
+
+    store.put("café.txt", b"hello")
+
+    # Sanity check: head() finds the file just fine.
+    assert obs.head(store, "café.txt")["path"] == "café.txt"
+
+    # Bug: copy() percent-encodes the source path and raises FileNotFoundError.
+    obs.copy(store, "café.txt", "new.txt")
+```
+
+The error is the following:
+
+```
+FileNotFoundError: Object at location /tmp/tmpnsnnqrot/caf%C3%A9.txt not found: No such file or directory (os error 2)
+
+Debug source:
+NotFound {
+    path: "/tmp/tmpnsnnqrot/caf%C3%A9.txt",
+    source: Os {
+        code: 2,
+        kind: NotFound,
+        message: "No such file or directory",
+    },
+}
+```
+The primary change to avoid auto-percent-encoding of paths was done in   but it looks like we missed path inputs for copy/rename.
+
+  should fix this for copy and rename. I'm not sure why CI is failing though
+Published 0.9.4  
+fix: Fix path parsing for copy, rename
+
+- Use `PyPath` instead of `String` as parameter input for `copy`, `list`, and `rename`
+- Add tests
+- Bump pyo3 version from 0.28.2 to 0.28.3 to fix CI
+
+Closes  
+
+The primary change to avoid auto-percent-encoding of paths was done in   but it looks like we missed path inputs for copy/rename.
+Since the main breaking change was in #524 , I think this can be considered a bugfix and go in a patch release.

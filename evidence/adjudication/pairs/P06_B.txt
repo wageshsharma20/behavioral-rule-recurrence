@@ -1,0 +1,45 @@
+prevent find from corrupting dircache
+Calling `find` corrupts the `dircache` by adding found objects to each directory, thus when calling `ls` after find, wrong results will be returned.
+
+Here's a script to reproduce this:
+```from pprint import pprint
+
+from [LIB] import GCSFileSystem
+
+fs = GCSFileSystem()
+
+bucket_name = "dircache_corruption"
+fs.rm(f"{bucket_name}", recursive=True)
+fs.mkdir(f"{bucket_name}", exists_ok=True)
+fs.touch(f"{bucket_name}/file")
+fs.touch(f"{bucket_name}/anotherfile")
+fs.touch(f"{bucket_name}/afolder/afile")
+fs.clear_instance_cache()
+
+print("Calling ls")
+first_ls = fs.ls(bucket_name)
+print(f"{first_ls=}\n")
+
+print("Calling find")
+find = fs.find(bucket_name)
+print(f"{find=}\n")
+
+print("Calling ls (again)")
+second_ls = fs.ls(bucket_name)
+print(f"{second_ls=}\n")
+
+print(f"new items: {set(second_ls)-set(first_ls)}")
+print(f"removed items: {set(first_ls)-set(second_ls)}")
+
+dircache = {
+    path: [obj["name"] for obj in objs] for path, objs in fs.dircache.items()
+}
+
+pprint(dircache)
+
+assert sorted(first_ls) == sorted(second_ls)
+
+```
+
+
+Thanks for the work here

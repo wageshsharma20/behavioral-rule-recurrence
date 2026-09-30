@@ -1,0 +1,193 @@
+rm does not delete the directory if its input is a directory with recursive True
+As stated in the title, it seems to me, that the API `rm` does not remove the directory itself if the input path its a directory and the `recursive `flag is set to `True`:
+```
+  await self.fs._rm(
+      path=f"{self.bucket_name}/{remote_path}",
+      recursive=True,
+      **kwargs,
+  )
+```
+
+I checked by s3 bucket from the dashboard and the directory does still exists, while its content does not. The [documentation ](  says that:
+
+> recursive (bool) – If file(s) are directories, recursively delete contents and then also remove the directory
+
+I guess the implementation does not follow the documentation and a direct `rmdir` API call is needed in order to delete also the directory.
+
+In the debugger I saw that:
+```
+    async def _rm(self, path, recursive=False, **kwargs):
+        if recursive and isinstance(path, str):
+            bucket, key, _ = self.split_path(path)
+            if not key and await self._is_bucket_versioned(bucket):
+                # special path to completely remove versioned bucket
+                await self._rm_versioned_bucket_contents(bucket)
+        paths = await self._expand_path(path, recursive=recursive)
+        files = [p for p in paths if self.split_path(p)[1]]
+        dirs = [p for p in paths if not self.split_path(p)[1]]
+```
+In this code, all the paths (real dirs and files) are detected in the `files `variable hwile the `dirs `variable is an empty list
+It seems expand_path is not recovering the zero-length directory placeholder with "/" suffix. We could arbitarily add it here, since attempting to remove it if it doesn't exist shouldn't have an cost, or fix expand_path. I think I prefer the former: "path/" isn't really a member of "path".
+If I try a direct call to the empy dir:
+```
+await self.fs._rmdir(
+   path=f"{self.bucket_name}/{remote_path}",
+)
+```
+
+There is the exception "FileExistsError". The path is empty though.
+It is 
+```
+await self.fs._rm_file(
+   path=f"{self.bucket_name}/{remote_path}/",
+)
+```
+(with the "/" suffix) that you want. This is a **FILE**, which is exactly the problem.
+> It is
+> 
+> ```
+> await self.fs._rm_file(
+>    path=f"{self.bucket_name}/{remote_path}/",
+> )
+> ```
+> 
+> (with the "/" suffix) that you want. This is a **FILE**, which is exactly the problem.
+
+I tried without success. If I use as value for the path either a "file path" as `.../remote_path` or a "dir path" as `.../remote_path/` using either the `_rm` or the `_rm_file` API, the folder is not deleted, only its content is.
+Is there a workaround to force the deletion of the folder itself too? Should I use aiobotocore directly?
+
+Thanks
+> I tried without success. If I use as value for the path either a "file path" as .../remote_path or a "dir path" as .../remote_path/ using either the _rm or the _rm_file API, the folder is not deleted, only its content is.
+Is there a workaround to force the deletion of the folder itself too? Should I use aiobotocore directly?
+
+  it seems like the real issue/bug is that `rm_file()` doesn't remove an empty prefix whether you include the trailing `/` or not.
+
+It would make sense if `self.fs.rm(path, recursive=True)` would delete everything under that prefix and also the prefix itself.
+Would love to see a fix for this!
+> It would make sense if self.fs.rm(path, recursive=True) would delete everything under that prefix and also the prefix itself.
+Would love to see a fix for this!
+
+but you don't mean "prefix", but rather "file with the same name", no?
+Maybe I got the terms wrong but when you call:
+`self.fs.rm("s3://my-bucket/logs", recursive=True)`
+I would expect:
+`self.fs.exists("s3://my-bucket/logs")`
+to return `False`
+
+Do you consider it a bug that empty "directories" are not removed by by `rm(recursive=True)` currently?
+fs.isdir(path) is False, right?
+
+You may still have a point, but it is not a completely clear situation.
+No `fs.isdir(path)` returns `True` after `rm()`.
+OK, that should not be so. A concrete reproducer in the form of a test we can add to the codebase would be very useful. Ideally, we should add `rm()` to the set of abstract bulk op tests in   to ensure consistent behaviour across backends.
+I have a small reproducible example here:
+
+```python
+import [LIB]
+import boto3
+
+bucket = "my-bucket" # replace with your bucket name
+prefix = "logs/" # must end with "/"
+
+# Create empty "directory" in S3
+s3 = boto3.client("s3")
+s3.put_object(
+    Bucket=bucket,
+    Key=prefix,
+    Body=b""
+)
+
+# List path
+fs = [LIB].S3FileSystem()
+logs_path = f"s3://{bucket}/{prefix}"
+print("ls before", fs.ls(logs_path))
+
+# Try to remove
+fs.rm(logs_path, recursive=True)
+
+# Check if it exists
+print("exists", fs.exists(logs_path))
+print("isdir", fs.isdir(logs_path))
+print("ls after", fs.ls(logs_path))
+```
+
+returns:
+
+```
+ls before ['my-bucket/logs/']
+exists True
+isdir True
+ls after ['my-bucket/logs/']
+```
+
+If the prefix does not end in `/` then it is correctly deleted. So something is going wrong when it ends with `/`.
+I created   with your failing test, and welcome suggestions on a fix. 
+  thank for creating the test and assisting me!
+
+I am pretty sure I have found the root problem.
+[Here](  the trailing `/` is stripped from the path in the function `_strip_protocol`. This function used used by the `split_path` function in [LIB] which is used in the `rm` function.
+By stripping the trailing `/` the `delete_objects` call with boto3 fails to delete these "directory" objects.
+
+A simple fix fix would be removing the line that strips the trailing `/` but I am not sure if that would break things. Should I make a PR on the [LIB]/filesystem_spec repo?
+We definitely can't mess with _strip_protocol upstream, it's used in far too many places, and some other filesystems really _can't_ have files ending with a "/".
+I understand. I think I could also fix it on the [LIB] side.
+I am pretty new to open source development, how would I submit my fix?
+Should I create a new PR with the fix targeting main or your PR branch?
+I actually don't mind at all. If you have an idea, you could comment it here, PR to my PR, open a new PR or whatever feels easiest for you. The commit credit doesn't matter to me at all, but getting things working best for the most people is.
+I have made a PR. We can maybe continue the discussion on how to fix this there.
+Don't remove trailing `/` with `split_path`. Keys with a trailing `/` are now properly removed.
+`[LIB]` and `[LIB]` currently remove trailing `/` from a path while a S3 object key ending with a `/` is a valid key.
+This causes problems when using `S3FileSystem.rm_file()` or `S3FileSystem.rm(path, recursive=True)` with keys that end with a `/`. 
+
+There are 3 different places where this behaviour could be fixed:
+1. The problem starts in `AbstractFileSystem._strip_protocol()` from `[LIB]` where all trailing `/`s are removed using `rstrip("/")`.
+2. `AbstractFileSystem._strip_protocol()` is used by `S3FileSystem.split_path()` to get the bucket, key and version_id from an S3 path.
+3. `S3FileSystem.rm_file()` and `S3FileSystem.rm()` use `S3FileSystem.split_path()` to get the key which will be deleted with `boto3`.
+
+I have tried creating a custom version of `_strip_protocol` for `S3FileSystem` that doesn't delete the trailing `/` but this seems to break many of the `S3FileSystem` functions. `glob` being one for example. I have decided not the implement the fix in `_strip_protocol` for that reason. Handling keys with a trailing `/` complicated topic which has been discussed before in these issues:      and   
+
+I think fixing it in `S3FileSystem.split_path()` is the correct choice for the following reasons:
+1. `split_path` already doesn't remove the trailing `/` if the path contains a `version_id`. For example passing `"s3://mybucket/path/to/versioned_object/?versionId=some_version_id"` to `split_path` would not remove the trailing `/` from the key. My fix makes the behaviour consistent to now also keep the trailing `/` when there is no `version_id` in the path. If anything breaks because of my fix it would also have broken if it was a versioned object.
+2. If we would not want the key to have a trailing `/` it should be removed after `split_path`. `split_path` should not change valid keys into non existing keys. If a function calls `split_path` and doesn't want a trailing `/` in the key for any reason then it should call `rstrip("/")` on the key. If my fix breaks any function we should add an `rstrip("/")` inside that function.
+
+I have verified that the following examples now work correctly where they didn't before.
+
+```python
+import [LIB]
+import boto3
+
+bucket = "my-bucket"
+
+client = boto3.client("s3")
+fs = [LIB].S3FileSystem()
+
+def create_test_keys():
+    client.put_object(Bucket=bucket, Key="test/", Body=b"")
+    client.put_object(Bucket=bucket, Key="test///", Body=b"")
+    client.put_object(Bucket=bucket, Key="test/nested/", Body=b"")
+
+create_test_keys()
+print(fs.glob(f"s3://{bucket}/test/**"))
+
+# Delete key with single trailing /
+fs.rm_file(f"s3://{bucket}/test/")
+print(fs.glob(f"s3://{bucket}/test/**"))
+
+# Delete key with multiple trailing /
+fs.rm_file(f"s3://{bucket}/test///")
+print(fs.glob(f"s3://{bucket}/test/**"))
+
+create_test_keys()
+# Delete a "directory" containing keys with trailing /
+fs.rm(f"s3://{bucket}/test/", recursive=True)
+print(fs.glob(f"s3://{bucket}/test/**"))
+```
+
+`split_path` is used in many places across `S3FileSystem` and I have not yet checked if some function might be broken because of this change. I do believe that if a function breaks because of this we should change the behaviour in the broken function.
+
+fixes  
+fixes  
+Let's add in the test from   . I'll close that one.
+  I have added the test from the other PR. Could you run the workflow again?
+All the test seem to pass :)
+Happy to hear if you think it is ready to merge.

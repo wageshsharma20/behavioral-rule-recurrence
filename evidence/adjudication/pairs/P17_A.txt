@@ -1,0 +1,76 @@
+Doesn't work for a file path containing a hashtag (`#`)
+The lib cannot read a file with the file path containing `#`. Weird thing is that it has no error too, just nothing is read. A silent bug.
+
+```python
+fs = [LIB].GCSFileSystem()
+
+# Nothing printed out
+data = fs.open("gs://sample_project/my_folder/#this_is_file.json")
+print(data.read())
+data.close()
+
+# Then I change the file name to remove `#`
+# This works
+data = fs.open("gs://sample_project/my_folder/this_is_file.json")
+print(data.read())
+data.close()
+```
+
+Not sure if there is an easy way to fix?
+[LIB] could choose to url-encode (quote) the "#", I think [LIB] does this. You can work around it by encoding the character ourself, "%23".
+
+"#" is a special character for [LIB], it is used to select the version of a particular file, if the bucket supports versioning.
+
+  Thank you! I didn't notice it is a special characters for `[LIB]`. Now it makes sense.
+Actually is special for all HTTP in general, and in many cases anything after and including the "#" would simply be stripped. Maybe that's what happened and you, effectively, printed the "contents" of the directory (zero bytes).
+I see. I was trying `from google.cloud import storage` instead and it works so I was very confused. I hope [LIB] would do as [LIB] does in the future but for now we may need to work around ourself. Thank you again for your help!   
+  could you point me to the spot in `[LIB]` where the `#` is used for versioning? I would say that even if it is used for versioning, there should be a way to include it in object names. After all, it's only [discouraged](  but not forbidden to use in object names.
+I would like to do the escaping in [LIB] the same way that it's done in the Google Cloud Storage client library [here](  where all characters are escaped. I will submit a PR for this.
+Escape all special characters in URL paths
+Filenames including `#` and possibly other special characters are currently not supported.
+I would like to change the escaping which is done to use object names in URL paths to be closer to the implementation in `google-cloud-storage` [here]( 
+
+Closes #447, #270
+Can we add some tests with special characters in the keys? Can you also have special characters in the bucket names - if yes, we should test that too. Also, obviously, we should test these in the presence of versioning.
+I will add those 👌🏼 I will also check the naming rules for buckets.
+
+Could you point me to where versioning is done in [LIB]?
+> Could you point me to where versioning is done in [LIB]?
+
+It seems I was thinking of [LIB], and [LIB] does not support versioning :) GCS does have this feature though (   ), which I think can in theory be used with the current [LIB] interface by entering the generation number in some of the methods (untested).
+> > Could you point me to where versioning is done in [LIB]?
+> 
+> It seems I was thinking of [LIB], and [LIB] does not support versioning :) GCS does have this feature though (   ), which I think can in theory be used with the current [LIB] interface by entering the generation number in some of the methods (untested).
+
+Yes, but the notation with # is not used for the REST API. For the REST API, the generation is specified using a query parameter, see [here](  I'm not sure whether that's somehow supported by [LIB], but I guess it's not part of this PR.
+Bucket names may not contain any characters which need to be URL-escaped, see [here]( 
+Please add `importlib-metadata<5.0` to the py37 environment, as the recent release breaks flake 8. We will likely drop py37 sometime soon, but for now...
+> Please add `importlib-metadata<5.0` to the py37 environment, as the recent release breaks flake 8. We will likely drop py37 sometime soon, but for now...
+
+Thanks for the hint! Could you point me to how to do that? I've tried [without success](  😅
+Oh, it's automatically installed by pre-commit. Please try to following:
+
+```diff
+--- a/.[LIB]/workflows/ci.yml
++++ b/.[LIB]/workflows/ci.yml
+@@ -41,8 +41,10 @@ jobs:
+             export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/[LIB]/tests/fake-secret.json
+             py.test -vv [LIB]
+
+-      - name: Run pre-commit hooks
+-        shell: bash -l {0}
+-        run: |
+-          pip install pre-commit
+-          pre-commit run --all-file
++  lint:
++    name: lint
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout 
++      - uses: actions/setup-python 
++      - uses: pre-commit/action .0.0
+```
+That worked, thanks!
+Thanks for following this through.
+Ofc! Could you turn this into a release? We could really use this 😅
+I am behind on releases, will get to it :)

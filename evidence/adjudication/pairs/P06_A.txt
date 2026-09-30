@@ -1,0 +1,65 @@
+Cache invalidation has unintended side effects
+It seems that an invalidated cache starts caching any search, and that cache affects separate instances of `S3FileSystem`:
+
+```python
+Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 27 2018, 04:59:51) [MSC v.1914 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import [LIB]
+>>> fs1 = [LIB].S3FileSystem()
+>>> fs = [LIB].S3FileSystem()
+>>> before = fs1.ls('s3://very-public-bucket-dask/')
+>>> fs.invalidate_cache('s3://very-public-bucket-dask/alpha')
+>>> fs.find('s3://very-public-bucket-dask/alpha')
+['very-public-bucket-dask/alpha/']
+>>> after = fs1.ls('s3://very-public-bucket-dask/')
+>>> before
+['very-public-bucket-dask/alpha', 'very-public-bucket-dask/beta', 'very-public-bucket-dask/gamma']
+>>> after
+['very-public-bucket-dask/alpha/']
+>>> [LIB].__version__
+'2021.06.0'
+>>>
+```
+
+I would expect `before == after` - unless I'm missing something important.
+Note that `fs is fs1` - [LIB] caches instances in order not to have to recreate connection pools and authenticate when not necessary. You can use `skip_instance_cache=True` if you want t make sure instances are independent.
+
+What version of [LIB] is this? I seem to recall fixing a similar issue some time ago.
+It's `2021.06.0`; instances-wise, I could not initially reproduce with a single instance; probably just a dirty session, reproduces now:
+
+```python
+Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 27 2018, 04:59:51) [MSC v.1914 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import [LIB]
+>>>
+>>> fs = [LIB].S3FileSystem()
+>>> before = fs.ls('s3://very-public-bucket-dask/')
+>>> before
+['very-public-bucket-dask/alpha', 'very-public-bucket-dask/beta', 'very-public-bucket-dask/gamma']
+>>> fs.invalidate_cache('s3://very-public-bucket-dask/alpha')
+>>> fs.find('s3://very-public-bucket-dask/alpha')
+['very-public-bucket-dask/alpha/']
+>>> after = fs.ls('s3://very-public-bucket-dask/')
+>>> after
+['very-public-bucket-dask/alpha/']
+>>>
+```
+Hm, I don't seem to be able to reproduce. Any chance you can formulate it in the style of the tests and show it fails?
+Sure, let me try
+That'll do:
+
+```python
+def test_cache_invalidate(s3):
+    before = s3.ls("s3://test")
+    s3.invalidate_cache("s3://test/2014-01-01.csv")
+    s3.find("s3://test/2014-01-01.csv")
+    after = s3.ls("s3://test")
+    assert before == after
+```
+
+It is important that the file (or prefix/directory) we invalidate and then find is an existing one; non-existent files don't seem to break the cache.
+Thank you, I can work with that.
+Thank you! I'm happy to dig further; my local PC is Windows 10, but initial repro was on a Linux box. I needed to adjust the test requirements a bit, adding `flask-cors` - but I take it it should not be relevant.
+Works like charm, thank you   !
+Don't pollute parent dirs in find()
+Fixes #492

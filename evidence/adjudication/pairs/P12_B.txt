@@ -1,0 +1,43 @@
+URLencoding breakes S3 key
+When uploading a file to S3 like this:
+
+```
+>>> from [LIB] import [LIB]
+>>> s=[LIB]('/my-bucket/tmp/foo=bar/objname')
+>>> s.write_text("foobar")
+/path/to/my/venv/lib64/python3.8/site-packages/smart_open/s3.py:220: UserWarning: ignoring the following deprecated transport parameters: ['multipart_upload_kwargs', 'object_kwargs', 'resource_kwargs', 'session']. See <  for details
+  warnings.warn(message, UserWarning)
+6
+```
+
+The location is transformed and the `=` is urlencoded by a `as_uri()` call. In S3 I now have a `tmp/foo%3Dbar/` prefix. But I expected an `tmp/foo=bar/` prefix.
+
+The `as_uri()` call in [LIB].py leads to unexpected behaviour and breakes the behaviour of [LIB] <=v0.3
+Maybe related to  
+I think there is a good discussion to be had regarding the precise meaning of [RFC2396](  and what smart_open and boto3 mean specifically by "URI", and what the `.as_uri()` method should return.
+
+It might be that there are upstream "bugs" in smart_open and/or boto3 regarding the escaping and lack of escaping of URIs. However, I don't yet understand the exact conditions outlined in the RFC for when it's okay to not escape characters in a URI.
+
+In my first reading, it appears that the encoding of a URI is context-dependent, and characters only need to be escaped when not escaping them would lead to ambiguity. Thus it may be acceptable behavior to have a URI which is not url-encoded.
+
+Some passages from the RFC which support this view:
+* > If the data for a URI component would conflict with the reserved purpose, then the conflicting data must be escaped before forming the URI.
+* > Characters in the "reserved" set are not reserved in all contexts. The set of characters actually reserved within any given URI component is defined by that component. In general, a character is reserved if the semantics of the URI changes if the character is replaced with its escaped US-ASCII encoding.
+
+In smart_open, they provide [the following](  S3 URI template:
+
+> `[secret:key@][host[:port]@]bucket/object`
+
+I'm not sure to what extent [LIB]  handles the optional components of this URI.
+
+In the meantime, I have a patch incoming, which should "fix" the bug so that it gets smart_open working again...
+Thanks   for the merge!!!
+Deployed
+Version: 0.3.02
+It looks like #78 broke `[LIB].exists()` whenever the URL contains special characters. The problem is that `[LIB].key` is used for the existence check, which still does URI encoding.
+  can you please send me an example?
+I think this is OK actually, sorry for the false alarm. We had a workaround in place for the URL encoding issue, and that workaround is subtly broken by #78, but that's fine because #78 lets us remove the workaround. 🎉
+Don't encode as URI for smart_open
+This should resolve #77 for most cases.
+
+See the discussion in #77 for further thoughts. This isn't intended to be a final fix, since I think we need to decide what is the proper behavior of the `.as_uri()` method. But I think it might be suitable for the next release. Thoughts?

@@ -1,0 +1,45 @@
+_get_file: fix makedirs call when the lpath is relative and in the working directory
+Let's say if `lpath` is `file` literal, a relative path and to be downloaded to
+the current working directory, `_get_file` currently fails with `FileNotFoundError`
+during `os.makedirs` call.
+```python
+await fs._get_file('gs://bucket/file', 'file')
+```
+    
+This happens because `os.path.dirname()` returns an empty string, which when passed to `os.makedirs()`,
+it raises a `FileNotFoundError`.
+
+```py
+>>> os.path.dirname('file')
+''
+>>> os.makedirs('')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+```
+
+The following is a part of a traceback that I get.
+
+```pytb
+File "~/dev/solutions/checkpoints-gcp/.venv/lib/python3.11/site-packages/[LIB]/asyn.py", line 118, in wrapper
+    return sync(self.loop, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "~/dev/solutions/checkpoints-gcp/.venv/lib/python3.11/site-packages/[LIB]/asyn.py", line 103, in sync
+    raise return_result
+File "~/dev/solutions/checkpoints-gcp/.venv/lib/python3.11/site-packages/[LIB]/asyn.py", line 56, in _runner
+    result[0] = await coro
+                ^^^^^^^^^^
+File "~/dev/solutions/checkpoints-gcp/.venv/lib/python3.11/site-packages/[LIB]/core.py", line 1491, in _get_file
+    await self._get_file_request(u2, lpath, callback=callback, **kwargs)
+File "~/dev/solutions/checkpoints-gcp/.venv/lib/python3.11/site-packages/decorator.py", line 221, in fun
+    return await caller(func, *(extras + args), **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "~/dev/solutions/checkpoints-gcp/.venv/lib/python3.11/site-packages/[LIB]/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "~/dev/solutions/checkpoints-gcp/.venv/lib/python3.11/site-packages/[LIB]/core.py", line 1472, in _get_file_request
+    os.makedirs(os.path.dirname(lpath), exist_ok=True)
+File "<frozen os>", line 225, in makedirs
+
+FileNotFoundError: [Errno 2] No such file or directory: ''
+```
+
+The fix here is to fallback to `os.curdir` on an empty string.

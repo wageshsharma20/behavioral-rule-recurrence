@@ -1,0 +1,108 @@
+info(path) returns kind:storage#object on a directory the first time it's run
+Running the below returns information as if the directory were a file:
+```
+import [LIB]
+file_path = "MyBucket/path/Name_of_parquet.parquet/"
+fs = [LIB].GCSFileSystem()
+print(fs.info(flle_path)) #results in kind:storage#object
+
+## restart kernel, run again
+from [LIB].fs import PyFileSystem, [LIB]Handler
+pa_fs = PyFileSystem([LIB]Handler(fs))
+print(pa_fs.get_file_info(file_path)) #results in type=Filetype.File
+```
+
+fs.info:
+```
+{'kind': 'storage#object', 'id': 'MyBucket/path/name_of_parquet.parquet//1646930508287024', 'selfLink': '  'mediaLink': '  'name': 'MyBucket/path/name_of_parquet.parquet/', 'bucket': 'MyBucket', 'generation': '1646930508287024', 'metageneration': '1', 'contentType': 'application/octet-stream', 'storageClass': 'STANDARD', 'size': 0, 'md5Hash': '1B2M2Y8AsgTpgAmY7PhCfg==', 'crc32c': 'AAAAAA==', 'etag': 'CLCYqp/+u/YCEAE=', 'timeCreated': '2022-03-10T16:41:48.428Z', 'updated': '2022-03-10T16:41:48.428Z', 'timeStorageClassUpdated': '2022-03-10T16:41:48.428Z', 'type': 'file'}
+```
+
+from pa_fs.get_file_info(file_path)) the first time
+```
+<FileInfo for 'myBucket/features/MyParquet.parquet/': type=FileType.File, size=0>
+```
+
+see issue opened with [LIB] here for more information:  
+It seems likely that you have a zero-length key with the given path as it's name at the location that is also a directory (i.e., there are keys with that name as a prefix). Some tools such as the GCS console create these when you choose to "create a directory", because GCS doesn't actually support directories. In such a case, I'm not sure what the correct result of `info` ought to be. 
+
+(note that the "kind" field is not important, it's the "type" that matters)
+The strangest part of this is that it returns correctly as "Directory" when it is run a second time. (I realize now that I left that out of the initial ticket). 
+
+This particular structure is set up as:
+```
+MyBucket/path/name_of_parquet.parquet/
+├─ yearmo=202203/
+│  ├─ part-000-12345.snappy.parquet
+│  ├─ part-00067890.snappy.parqeut
+│  ├─ _SUCCESS
+```
+Are you sure it is not, in fact
+```
+MyBucket/path/name_of_parquet.parquet/
+|─ "yearmo=202203/"  <- this is a regular key
+|─ yearmo=202203/
+│  ├─ part-000-12345.snappy.parquet
+│  ├─ part-00067890.snappy.parqeut
+│  ├─ _SUCCESS
+```
+
+nevertheless, I agree that [LIB] should at least be consistent.
+It's indeed the inconsistency between a first and subsequent call (without any other action in between) that is the issue here. 
+
+Another example with a public bucket and purely using [LIB]:
+
+```
+In [1]: import [LIB]
+
+In [2]: fs = [LIB].GCSFileSystem(token="anon")
+
+In [3]: fs.info("global-radiosondes/hires-sonde")
+Out[3]:
+{'kind': 'storage#object',
+ 'id': 'global-radiosondes/hires-sonde//1644725282206197',
+ 'selfLink': ' 
+ 'mediaLink': ' 
+ 'name': 'global-radiosondes/hires-sonde/',
+ 'bucket': 'global-radiosondes',
+ 'generation': '1644725282206197',
+ 'metageneration': '1',
+ 'contentType': 'text/plain',
+ 'storageClass': 'STANDARD',
+ 'size': 0,
+ 'md5Hash': '1B2M2Y8AsgTpgAmY7PhCfg==',
+ 'crc32c': 'AAAAAA==',
+ 'etag': 'CPXjy5Hn+/UCEAE=',
+ 'temporaryHold': False,
+ 'eventBasedHold': False,
+ 'timeCreated': '2022-02-13T04:08:02.226Z',
+ 'updated': '2022-02-13T04:08:02.226Z',
+ 'timeStorageClassUpdated': '2022-02-13T04:08:02.226Z',
+ 'type': 'file'}
+
+In [4]: fs.info("global-radiosondes/hires-sonde")
+Out[4]:
+{'bucket': 'global-radiosondes',
+ 'name': 'global-radiosondes/hires-sonde',
+ 'size': 0,
+ 'storageClass': 'DIRECTORY',
+ 'type': 'directory'}
+```
+
+So the above should either twice return that it is a empty file or twice that it is a directory.  
+(twice a directory would make it possible to read it as a partitioned dataset)
+Now, the above was the behaviour a few weeks ago, and I can't reproduce that anymore (it now consistently returns that it is a directory from the first time). So probably _something_ on the actual bucket changed? (cc   (in case you are the correct Kelton))
+I have written the following test, and find it is failing, so I have something specific to fix:
+```python
+def test_dir_marker(gcs):
+    gcs.touch(f"{TEST_BUCKET}/placeholder/")
+    gcs.touch(f"{TEST_BUCKET}/placeholder/inner")
+    out = gcs.find(TEST_BUCKET)
+    assert f"{TEST_BUCKET}/placeholder/" in out
+    gcs.invalidate_cache()
+    out2 = gcs.info(f"{TEST_BUCKET}/placeholder/")
+    out3 = gcs.info(f"{TEST_BUCKET}/placeholder/")
+    assert out2 == out3
+    assert out2["type"] == "directory"
+```
+Explicitly cope with dir+dirmarker combination
+Fixes #458

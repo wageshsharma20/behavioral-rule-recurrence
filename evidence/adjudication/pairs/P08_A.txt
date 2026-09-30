@@ -1,0 +1,26 @@
+Fix SFTPFileSystem.makedirs to properly handle relative paths
+In SFTPFileSystem, there is a difference in the behavior of `mkdir` and `mkdirs`.
+`mkdirs` converts relative paths to absolute paths.
+
+The code to reproduce is below.
+
+```
+import [LIB]
+
+fs = [LIB].filesystem(
+    "ssh",
+    host="localhost",
+    port=9200,
+    username="root",
+    password="pass"
+)
+
+fs.mkdir("test_dir1")  # /root/test_dir1
+fs.mkdirs("test_dir2")  # /test_dir2
+```
+
+I've pushed code that addresses this issue.
+
+I don't think I really realised we supported relative paths at all :)
+
+Thanks for this.

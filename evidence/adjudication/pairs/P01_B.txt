@@ -1,0 +1,35 @@
+idea: Make List return the path itself
+In [RFC 3243: List Prefix](  we make it clear that list won't return itself. 
+
+However, this behavior does not align with either local file systems or AWS S3 services, which can confuse users. Furthermore, this behavior makes it impossible to list versions of a path expected to be supported at  
+
+So I propose to change the current behavior to always return `path` itself if exists.
+I'd like to work on this issue and other tasks about `Object Versioning` from tomorrow
+This issue is complex; we need to review the behavior of all services and ensure they are aligned. We can start by changing the behavior test.
+similar issue:  
+is this a mistake ? `list file` returns itself
+<img width="828" alt="image" src=" 
+
+It appears that our implementation does not align well with the RFC. We want list to the the path itself no matter it's file or dir.
+feat(core)!: make list return path itself
+
+Closes  
+
+
+
+
+hi,   I have finished the work for FS and S3, but I’m not sure if the implementation is elegant, especially for S3. Do you have any advice? If you think it’s okay, I’ll continue to complete the others.
+The HDFS tests seem flaky. In the latest commit, they failed, but the changes aren’t related to them.
+> The HDFS tests seem flaky. In the latest commit, they failed, but the changes aren’t related to them.
+
+Yes. The ASF download CDN returns 502. Please ignore it. Maybe we can try cache them if you are interested.
+> > The HDFS tests seem flaky. In the latest commit, they failed, but the changes aren’t related to them.
+> 
+> Yes. The ASF download CDN returns 502. Please ignore it. Maybe we can try cache them if you are interested.
+
+not this one.   here only `test_list_empty_dir` failed
+> not this one. [[LIB]/[LIB]/actions/runs/10486150908/job/29043772467](  here only `test_list_empty_dir` failed
+
+No idea so far. The test and the code seems correct.
+Thank you very much for this PR. I will take a review tomorrow.
+This PR looks good to me overall. We will merge it after the release of version 0.49.2.

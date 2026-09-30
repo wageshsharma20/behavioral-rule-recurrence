@@ -99,4 +99,11 @@ authorship is itself evidence (lineage checks).
   the knowledge-flow check through people. It gives the participants of every fix, shared participants per pair, and
   contacts with the other project between the two fixes, with a term scan and hand-inspection notes. Needs the `gh`
   CLI (read-only GitHub API). Results: `evidence/participants*.json`.
+- `evidence/RULE_VALIDATION.md` (paper Definition 3, §5.1): the rule-validation table. For each Golden Case it gives
+  the rule statement, both historical sources, the external specification, the client API promise, the observable
+  violation, the oracle, the request-level evidence, the alternative interpretation considered and why it was
+  rejected, the lineage and the final proposition. For the contested rule, it shows why normative agreement fails.
+- `evidence/adjudication/`: a blinded kit for an independent reader to judge rule identity on 17 thread pairs, with
+  names removed: 8 same-rule pairs (6 Golden, 2 shared-origin) and 9 different-rule pairs. `score.py` reports
+  agreement and Cohen's kappa. The answer key is withheld until an adjudication is complete.
 
