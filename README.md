@@ -58,7 +58,7 @@ s3path 0.3.x requires CPython <= 3.9.
 - `PROBE_CATALOG.md` — every probe with the historical artifact it was derived from.
 - `rq3/runs/*.jsonl` — every model call (raw output, verdict, plan hash, model digest, GPU); `rq3/runs/run_meta.json`.
   `rq3/runs/protocol.md` is the plan file the Kaggle run hashed (identical to `protocol/BEHAVIORAL_ABSTRACTION_PROTOCOL.md`).
-- `rq3/analyze.py`, `rq3/results_to_latex.py`, `rq3/exploratory.py` — reproduce Tables 6–8 and all RQ3 numbers:
+- `rq3/analyze.py`, `rq3/results_to_latex.py`, `rq3/exploratory.py` — reproduce Tables 7 and 8 and all RQ3 numbers:
   `python rq3/results_to_latex.py rq3/runs/ollama_qwen3-coder_30b.jsonl rq3/runs/ollama_gpt-oss_20b.jsonl`
 - `protocol/PLAN_AMENDMENTS_POSTFREEZE.md` — exploratory analyses defined before results (A1, A2) and post hoc ones (P1).
 - `rq2_baseline/` — post hoc text-similarity baseline (Table 6): `python rq2_baseline/topic_similarity.py`
