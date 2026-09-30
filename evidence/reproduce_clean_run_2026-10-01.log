@@ -1,0 +1,41 @@
+building envs/gcsfs-2022.8.2 (python 3.11)
+building envs/gcsfs-2023.1.0 (python 3.11)
+building envs/gcsfs-2023.6.0 (python 3.10)
+building envs/gcsfs-2023.9.0 (python 3.11)
+building envs/obstore-0.6.0 (python 3.12)
+building envs/obstore-0.8.2 (python 3.12)
+building envs/obstore-0.9.3 (python 3.12)
+building envs/obstore-0.9.4 (python 3.12)
+building envs/pyarrow-14.0.1 (python 3.11)
+building envs/pyarrow-14.0.2 (python 3.11)
+building envs/pyarrow-4.0.1 (python cpython-3.9-macos-x86_64)
+building envs/pyarrow-5.0.0 (python cpython-3.9-macos-x86_64)
+building envs/s3fs-2026.9.0 (python 3.12)
+building envs/s3fs-good (python 3.12)
+building envs/s3path-0.3.1 (python 3.9)
+building envs/s3path-0.3.2 (python 3.9)
+building envs/s3path-0.6.5 (python 3.10)
+fetching fake-gcs-server 1.56.1 (Darwin_arm64)
+oracle files match the frozen hashes
+GC1-delete-markers             pyarrow-14.0.1         v-nested:A_nothing_under_d                   got=False expect=False  OK
+GC1-delete-markers             pyarrow-14.0.2         v-nested:A_nothing_under_d                   got=True  expect=True  OK
+GC1-delete-markers             s3fs-good              v-nested:A_nothing_under_d                   got=False expect=False  OK
+GC1-delete-markers             s3fs-2026.9.0          v-nested:A_nothing_under_d                   got=True  expect=True  OK
+GC2a-key-putget                s3path-0.3.1           F3_write_key_exact[café]                     got=False expect=False  OK
+GC2a-key-putget                s3path-0.3.2           F3_write_key_exact[café]                     got=True  expect=True  OK
+GC2a-key-putget                gcsfs-2022.8.2         F3_read[hash#]                               got=False expect=False  OK
+GC2a-key-putget                gcsfs-2023.1.0         F3_read[hash#]                               got=True  expect=True  OK
+GC2a-key-putget                obstore-0.6.0          F3_write_key_exact[café]                     got=False expect=False  OK
+GC2a-key-putget                obstore-0.8.2          F3_write_key_exact[café]                     got=True  expect=True  OK
+GC2b-key-copy                  pyarrow-4.0.1          F3b_copy[café]                               got=False expect=False  OK
+GC2b-key-copy                  pyarrow-5.0.0          F3b_copy[café]                               got=True  expect=True  OK
+GC2b-key-copy                  obstore-0.9.3          F3b_copy[café]                               got=False expect=False  OK
+GC2b-key-copy                  obstore-0.9.4          F3b_copy[café]                               got=True  expect=True  OK
+GC3-exists-boundary            cloudpathlib-0.9.0     F1_stat_string_prefix_notfound[very/similar/prefix] got=False expect=False  OK
+GC3-exists-boundary            cloudpathlib-0.10.0    F1_stat_string_prefix_notfound[very/similar/prefix] got=True  expect=True  OK
+GC3-exists-boundary            opendal-0.45.9         F1_stat_string_prefix_notfound[very/similar/prefix] got=False expect=False  OK
+GC3-exists-boundary            opendal-0.45.10        F1_stat_string_prefix_notfound[very/similar/prefix] got=True  expect=True  OK
+PV1-move-boundary              gcsfs-2023.6.0         F15b_move_dir_sibling_untouched[implicit]    got=False expect=False  OK
+PV1-move-boundary              gcsfs-2023.9.0         F15b_move_dir_sibling_untouched[implicit]    got=True  expect=True  OK
+PV1-move-boundary              s3path-0.6.5           F15b_move_dir_sibling_untouched[implicit]    got=False expect=False  OK
+exit 0
