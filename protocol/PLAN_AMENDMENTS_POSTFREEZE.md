@@ -152,7 +152,7 @@ Verification: on macOS arm64 (the frozen-run host), from a clean unzip of the pa
 experiment. His host check ran before his environment fix, so it is invalid.
 
 ## W9: Independent adjudication of rule identity: result (1 Oct 2026)
-Reader: Rishikant (co-author). He did not derive the probes, but he had worked with the same threads in the automated
+Reader: a co-author. He did not derive the probes, but he had worked with the same threads in the automated
 probe-derivation experiment (A3). He took 53 minutes in total. Scored with `evidence/adjudication/score.py`.
 
 Result:
